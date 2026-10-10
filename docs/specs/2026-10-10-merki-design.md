@@ -119,13 +119,13 @@ merki/
 
 ## 5. Package and React API
 
-One package, **`merki`**:
+One package, **`merki-icons`** (npm blocked plain `merki` as too similar to `merge`/`mri`):
 - main export: React components. ESM-only, `sideEffects: false`, tree-shakeable. Peer dependency `react >= 18`.
 - `merki/svg/<name>.svg`: raw optimized SVGs, for non-React users.
 - Each GitHub release also attaches a zip of the SVGs.
 
 ```tsx
-import { CalendarIcon } from 'merki'
+import { CalendarIcon } from 'merki-icons'
 
 <CalendarIcon />                               // 16px, currentColor
 <CalendarIcon size={20} />
@@ -183,7 +183,7 @@ import { CalendarIcon } from 'merki'
 - Inactive items in light gray, the active one near-black with a small dot.
 
 **Home (`/`), top to bottom**
-1. **Statement + install.** One plain sentence. Draft: *"145 icons for software people use all day."* plus *"16px grid. One stroke. MIT."* A copy button for `npm i merki`, and GitHub with its star count.
+1. **Statement + install.** One plain sentence. Draft: *"145 icons for software people use all day."* plus *"16px grid. One stroke. MIT."* A copy button for `npm i merki-icons`, and GitHub with its star count.
 2. **The set.** All icons at 16px, visible without scrolling. Search is focused on load. Category chips. A 16/20/24 size switch.
 3. **Craft cards.** Six live mini-demos in the gustavo/interior style. Each has a title and one plain sentence, and links to its Craft article:
    1. **Keylines:** toggle the construction shapes over an icon
