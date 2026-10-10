@@ -11,6 +11,7 @@
   },
   "scripts": {
     "build": "npm run build:icons && npm run build -w merki",
+    "dev:lab": "npm run dev -w site",
     "build:icons": "tsx scripts/build.ts",
     "lint:icons": "tsx scripts/lint.ts",
     "test": "vitest run",
