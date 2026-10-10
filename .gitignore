@@ -6,3 +6,4 @@ packages/merki/src/index.ts
 site/src/data/icons.json
 *.log
 .DS_Store
+sheets/
