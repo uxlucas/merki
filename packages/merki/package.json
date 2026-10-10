@@ -1,0 +1,24 @@
+{
+  "name": "merki",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Icons for software people use all day. 16px grid, one stroke.",
+  "license": "MIT",
+  "author": "Lucas Lima",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./svg/*": "./svg/*"
+  },
+  "files": ["dist", "svg"],
+  "scripts": {
+    "build": "tsup"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  }
+}
