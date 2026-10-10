@@ -10,6 +10,7 @@
     "node": ">=22"
   },
   "scripts": {
+    "build:icons": "tsx scripts/build.ts",
     "lint:icons": "tsx scripts/lint.ts",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json"
