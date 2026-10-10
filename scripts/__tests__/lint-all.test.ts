@@ -32,6 +32,19 @@ describe('lintAll', () => {
     expect(violations.map((v) => `${v.icon}:${v.rule}`).sort()).toEqual(['bad:grid', 'broken:parse', 'lonely:orphan']);
   });
 
+  it('reports two icons that generate the same component name', async () => {
+    await writeFile(join(dir, 'arrow-2.svg'), HOME_SVG);
+    await writeFile(join(dir, 'arrow-2.json'), meta('navigation'));
+    await writeFile(join(dir, 'arrow2.svg'), HOME_SVG);
+    await writeFile(join(dir, 'arrow2.json'), meta('navigation'));
+
+    const { icons, violations } = await lintAll(dir);
+
+    expect(violations.map((v) => `${v.icon}:${v.rule}`)).toEqual(['arrow-2:collision', 'arrow2:collision']);
+    expect(violations[0].detail).toMatch(/Arrow2Icon/);
+    expect(icons).toEqual([]);
+  });
+
   it('formats violations as name: rule: detail', () => {
     expect(formatViolation({ icon: 'bell', rule: 'grid', detail: '<path> #1: 2.1 not on the 0.25 grid' })).toBe(
       'bell: grid: <path> #1: 2.1 not on the 0.25 grid',

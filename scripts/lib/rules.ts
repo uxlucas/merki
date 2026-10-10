@@ -15,7 +15,9 @@ export type RuleId =
   | 'color'
   | 'grid'
   | 'handles'
-  | 'bounds';
+  | 'bounds'
+  | 'manifest'
+  | 'collision';
 
 export interface Violation {
   icon: string;
@@ -46,6 +48,17 @@ const HALF_STROKE = 0.75;
 const LIMIT_MIN = 1;
 const LIMIT_MAX = 15;
 const EPSILON = 1e-6;
+
+const REQUIRED_SIZES: Record<string, readonly string[]> = { circle: ['r'], rect: ['width', 'height'] };
+
+function checkSizes(el: SvgElement): void {
+  for (const key of REQUIRED_SIZES[el.tag] ?? []) {
+    const raw = el.attrs[key];
+    if (raw === undefined) throw new Error(`<${el.tag}> needs ${key}`);
+    const value = Number(raw);
+    if (raw.trim() !== '' && Number.isFinite(value) && value <= 0) throw new Error(`<${el.tag}> ${key} must be positive`);
+  }
+}
 
 const fmt = (n: number): string => String(Math.round(n * 1000) / 1000);
 
@@ -122,6 +135,7 @@ export function lintSvg(name: string, root: SvgElement): Violation[] {
     let values;
     let box;
     try {
+      checkSizes(child);
       values = geometryValues(child);
       box = elementBBox(child);
     } catch (error) {

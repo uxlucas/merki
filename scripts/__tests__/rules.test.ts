@@ -92,6 +92,14 @@ describe('lintSvg', () => {
   it('reports unreadable geometry instead of throwing', async () => {
     expect(rules(await lint('<path d="M2 2 Q"/>'))).toEqual(['parse']);
   });
+
+  it('reports shapes with missing or non-positive size', async () => {
+    expect(rules(await lint('<circle cx="8" cy="8"/>'))).toEqual(['parse']);
+    expect(rules(await lint('<circle cx="8" cy="8" r="0"/>'))).toEqual(['parse']);
+    expect(rules(await lint('<rect x="2" y="2" height="4"/>'))).toEqual(['parse']);
+    expect(rules(await lint('<rect x="2" y="2" width="-4" height="4"/>'))).toEqual(['parse']);
+    expect((await lint('<circle cx="8" cy="8"/>'))[0].detail).toMatch(/needs r/);
+  });
 });
 
 describe('lintName', () => {
