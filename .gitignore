@@ -1,0 +1,8 @@
+node_modules/
+dist/
+packages/merki/svg/
+packages/merki/src/icons/
+packages/merki/src/index.ts
+site/src/data/icons.json
+*.log
+.DS_Store
