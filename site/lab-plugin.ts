@@ -59,15 +59,17 @@ export function merkiLab({ iconsDir }: { iconsDir: string }): Plugin {
           res.setHeader('Content-Type', 'application/json');
           res.end(JSON.stringify(body));
         };
-        let current: ReviewFile;
-        try {
-          current = parseReviewFile(existsSync(reviewFile) ? readFileSync(reviewFile, 'utf8') : null);
-        } catch (error) {
+        const readCurrent = () =>
+          parseReviewFile(existsSync(reviewFile) ? readFileSync(reviewFile, 'utf8') : null);
+        const unreadable = (error: unknown) =>
           send(500, { error: `icons/_review.json is unreadable, fix it by hand: ${(error as Error).message}` });
-          return;
-        }
+
         if (req.method === 'GET') {
-          send(200, current);
+          try {
+            send(200, readCurrent());
+          } catch (error) {
+            unreadable(error);
+          }
           return;
         }
         if (req.method !== 'POST') {
@@ -79,13 +81,27 @@ export function merkiLab({ iconsDir }: { iconsDir: string }): Plugin {
           body += chunk;
         });
         req.on('end', () => {
+          let current: ReviewFile;
           try {
-            const next = applyReview(current, JSON.parse(body) as ReviewUpdate, new Date());
-            writeFileSync(reviewFile, `${JSON.stringify(next, null, 2)}\n`);
-            send(200, next);
+            current = readCurrent();
+          } catch (error) {
+            unreadable(error);
+            return;
+          }
+          let next: ReviewFile;
+          try {
+            next = applyReview(current, JSON.parse(body) as ReviewUpdate, new Date());
           } catch (error) {
             send(400, { error: (error as Error).message });
+            return;
           }
+          try {
+            writeFileSync(reviewFile, `${JSON.stringify(next, null, 2)}\n`);
+          } catch (error) {
+            send(500, { error: (error as Error).message });
+            return;
+          }
+          send(200, next);
         });
       });
     },
