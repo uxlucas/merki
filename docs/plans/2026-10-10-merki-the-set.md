@@ -24,6 +24,7 @@
 - Anchors on the 0.25 grid. Handles at most 2 decimals. Ink stays within 1–15 including the 0.75 half-stroke. Allowed elements are path, circle, rect, line. Colors are only `currentColor` or `none`. No transforms, masks, groups or ids.
 - Categories (exact ids): `navigation, actions, status, people, objects, data, communication, system, text, billing`.
 - **Never trace or reuse paths from Linear, Lucide, Heroicons, Phosphor or any other set.** Draw from the construction notes and the shared parts below.
+- **Never run Python** (`python`, `python3`) for edits or checks. Use node/tsx or the Edit tool. A stuck python3 stdin helper blocked Lucas's machine for hours. Before reporting, make sure no process you started is still running.
 - A batch is not "done" until every icon in it is `ok` in `icons/_review.json`. The next batch does not start before that.
 
 ### Drawing guidance (Lucas's review of batch 1, 2026-10-10)
