@@ -278,5 +278,85 @@
     "status": "ok",
     "note": "approved in chat after fix round 2",
     "updatedAt": "2026-10-10T22:44:30.189Z"
+  },
+  "history": {
+    "status": "needs-work",
+    "note": "The top-left arrowhead creates a heavy junction where the curved stroke meets two perpendicular segments.\nIt has a similar issue to the earlier Refresh design: the arrowhead feels like a hook attached to a curve.\nI'd:\n- Reduce the arrowhead's visual mass slightly.\n- Make the direction of the tip more apparent.\n- Preserve a smoother transition into the circular stroke.",
+    "updatedAt": "2026-10-10T23:28:54.738Z"
+  },
+  "circle-check": {
+    "status": "ok",
+    "note": "approved in chat",
+    "updatedAt": "2026-10-10T23:41:13.672Z"
+  },
+  "circle-alert": {
+    "status": "ok",
+    "note": "approved in chat",
+    "updatedAt": "2026-10-10T23:41:13.672Z"
+  },
+  "triangle-alert": {
+    "status": "ok",
+    "note": "approved in chat",
+    "updatedAt": "2026-10-10T23:41:13.672Z"
+  },
+  "info": {
+    "status": "ok",
+    "note": "approved in chat",
+    "updatedAt": "2026-10-10T23:41:13.672Z"
+  },
+  "help": {
+    "status": "ok",
+    "note": "approved in chat",
+    "updatedAt": "2026-10-10T23:41:13.672Z"
+  },
+  "ban": {
+    "status": "ok",
+    "note": "approved in chat",
+    "updatedAt": "2026-10-10T23:41:13.672Z"
+  },
+  "status-empty": {
+    "status": "ok",
+    "note": "approved in chat",
+    "updatedAt": "2026-10-10T23:41:13.672Z"
+  },
+  "status-half": {
+    "status": "ok",
+    "note": "approved in chat",
+    "updatedAt": "2026-10-10T23:41:13.672Z"
+  },
+  "loader": {
+    "status": "ok",
+    "note": "approved in chat",
+    "updatedAt": "2026-10-10T23:41:13.672Z"
+  },
+  "clock": {
+    "status": "ok",
+    "note": "approved in chat",
+    "updatedAt": "2026-10-10T23:41:13.672Z"
+  },
+  "bell-off": {
+    "status": "ok",
+    "note": "approved in chat",
+    "updatedAt": "2026-10-10T23:41:13.672Z"
+  },
+  "eye": {
+    "status": "ok",
+    "note": "approved in chat",
+    "updatedAt": "2026-10-10T23:41:13.672Z"
+  },
+  "eye-off": {
+    "status": "ok",
+    "note": "approved in chat",
+    "updatedAt": "2026-10-10T23:41:13.672Z"
+  },
+  "lock": {
+    "status": "ok",
+    "note": "approved in chat",
+    "updatedAt": "2026-10-10T23:41:13.672Z"
+  },
+  "unlock": {
+    "status": "ok",
+    "note": "approved in chat",
+    "updatedAt": "2026-10-10T23:41:13.672Z"
   }
 }
