@@ -29,7 +29,8 @@ Keyline is an open-source icon library for SaaS products, dashboards, productivi
 
 **Canvas**
 - ⚙️ `viewBox="0 0 16 16"`. Nothing drawn outside 1–15 (1px padding), stroke width included. Stroke centerlines stay within 1.75–14.25.
-- ⚙️ Every coordinate (path data, cx/cy/r, x/y/width/height/rx) snaps to a **0.25** grid.
+- ⚙️ Every anchor snaps to a **0.25** grid: path endpoints, arc radii, cx/cy/r, x/y/width/height/rx, line ends.
+- ⚙️ Bézier handles (curve control points) use at most 2 decimals. Smooth curves need finer handles than the anchor grid allows.
 
 **Stroke**
 - ⚙️ `stroke-width="1.5"`, `stroke-linecap="round"`, `stroke-linejoin="round"`. No other weights.
@@ -56,6 +57,7 @@ Keyline is an open-source icon library for SaaS products, dashboards, productivi
 - Flat and front-facing. Prefer 0/45/90° angles. The only 3D allowed is a 30° isometric cube (`package`).
 - One metaphor per icon. No letters except text icons (`type`, `bold`, `italic`…).
 - ⚙️ No `transform`, `<g>`, `id`, `class`, `style`, `<mask>`, `<clipPath>`, `<defs>`, `<use>`. Allowed elements: `path`, `circle`, `rect`, `line`.
+- ⚙️ Allowed attributes. path: `d fill stroke fill-rule`. circle: `cx cy r fill stroke stroke-dasharray stroke-dashoffset` (dashes are for `status-dashed`). rect: `x y width height rx fill stroke`. line: `x1 y1 x2 y2`. Root `<svg>`: `xmlns` plus the required `viewBox fill stroke stroke-width stroke-linecap stroke-linejoin`.
 
 **Naming and metadata**
 - ⚙️ kebab-case. Object first, then modifier: `user-plus`, `calendar-check`, `arrow-up-right`.
@@ -106,7 +108,7 @@ keyline/
 3. **Generate:** optimized SVGs (`packages/keyline/svg/`), one React component per icon, and `site/src/data/icons.json` (name, category, tags, aliases, svg markup).
 4. **Test (vitest):** linter fixtures (must-pass and must-fail SVGs per rule), snapshots of the generated components, and a check that metadata and SVG files pair up 1:1.
 
-**Tooling:** pnpm workspaces, TypeScript, tsx for scripts, tsup for the package, vitest. GitHub Actions runs lint + build + test on every PR and on pushes to `main`.
+**Tooling:** npm workspaces (pnpm isn't installed, and npm keeps setup to zero steps), TypeScript, tsx for scripts, tsup for the package, vitest. GitHub Actions runs lint + build + test on every PR and on pushes to `main`.
 
 **`/lab`** is the review tool, a hidden route on the site that reloads live from `icons/`:
 - every icon at 16/20/24, light and dark
@@ -134,8 +136,8 @@ import { CalendarIcon } from 'keyline'
 
 **Props**
 - `size?: number | string`, default `16`. Sets width and height.
-- `color?: string`, default `'currentColor'`.
-- `absoluteStrokeWidth?: boolean`, default `false`. Stroke becomes `1.5 * 16 / size` in viewBox units, so it renders at 1.5 screen px. Documented: solid accents still scale.
+- `color?: string`, default `'currentColor'`. Set as the SVG `color` attribute, so solid accents (`fill="currentColor"`) follow it as well as strokes.
+- `absoluteStrokeWidth?: boolean`, default `false`. Adds `vector-effect="non-scaling-stroke"` to every shape, so the stroke renders at 1.5 screen px at any size, including CSS sizes like `"2rem"`. Documented: solid accents still scale.
 - `title?: string`, see accessibility.
 - All other `SVGProps<SVGSVGElement>` go onto the `<svg>`. Refs are forwarded with `forwardRef` (React 18 compatible).
 
@@ -235,9 +237,9 @@ import { CalendarIcon } from 'keyline'
 
 ## 9. Build order
 
-1. **Foundation:** repo, linter with fixtures, build script, `/lab`. Redraw the 15 spike icons to these rules as the first real batch.
+1. **Foundation:** repo, linter with fixtures, build script, the React package runtime and generator, `/lab`. Redraw the spike icons to these rules as the first real batch (16 icons).
 2. **The set:** draw the remaining icons in category batches. Each batch is reviewed in `/lab` before the next starts.
-3. **Package:** React components, types, raw SVG export, tests.
+3. **Package polish:** README, docs comments, package checks before publishing.
 4. **Site:** home, icon panel, craft cards and articles, guide.
 5. **Figma:** sync script and file.
 6. **1.0:** release checklist, launch.
