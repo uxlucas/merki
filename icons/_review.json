@@ -2,12 +2,12 @@
   "bell": {
     "status": "ok",
     "note": "",
-    "updatedAt": "2026-10-10T18:55:25.608Z"
+    "updatedAt": "2026-10-10T20:31:22.521Z"
   },
   "calendar": {
     "status": "ok",
     "note": "",
-    "updatedAt": "2026-10-10T18:58:54.254Z"
+    "updatedAt": "2026-10-10T20:31:25.885Z"
   },
   "flag": {
     "status": "ok",
@@ -78,5 +78,90 @@
     "status": "ok",
     "note": "",
     "updatedAt": "2026-10-10T19:51:26.459Z"
+  },
+  "arrow-down": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T20:31:02.999Z"
+  },
+  "arrow-left-right": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T20:31:07.305Z"
+  },
+  "arrow-left": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T20:31:12.522Z"
+  },
+  "arrow-right": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T20:31:14.630Z"
+  },
+  "arrow-up-right": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T20:31:16.891Z"
+  },
+  "arrow-up": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T20:31:19.628Z"
+  },
+  "chevron-down": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T20:31:30.526Z"
+  },
+  "chevron-left": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T20:31:32.152Z"
+  },
+  "chevron-right": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T20:31:33.628Z"
+  },
+  "chevron-up": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T20:31:35.901Z"
+  },
+  "chevrons-up-down": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T20:31:37.389Z"
+  },
+  "layout-grid": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T20:55:19.136Z"
+  },
+  "layout-list": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T20:56:12.353Z"
+  },
+  "menu": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T20:56:54.424Z"
+  },
+  "more-horizontal": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T20:56:57.493Z"
+  },
+  "more-vertical": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T20:56:59.627Z"
+  },
+  "sidebar": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T20:57:06.563Z"
   }
 }
