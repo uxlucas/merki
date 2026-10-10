@@ -9,7 +9,7 @@ import {
 export type IconTag = 'path' | 'circle' | 'rect' | 'line';
 export type IconNode = ReadonlyArray<readonly [IconTag, Readonly<Record<string, string>>]>;
 
-export interface IconProps extends Omit<SVGProps<SVGSVGElement>, 'ref' | 'color'> {
+export interface IconProps extends Omit<SVGProps<SVGSVGElement>, 'ref' | 'color' | 'strokeWidth'> {
   /** Width and height. Number (px) or any CSS length. Default 16. */
   size?: number | string;
   /** Sets the SVG `color`, which strokes and solid accents both follow. Default currentColor. */
@@ -48,13 +48,13 @@ export function createIcon(name: string, node: IconNode): MerkiIcon {
         viewBox: '0 0 16 16',
         fill: 'none',
         stroke: 'currentColor',
-        strokeWidth: 1.5,
         strokeLinecap: 'round',
         strokeLinejoin: 'round',
         ...(color === 'currentColor' ? {} : { color }),
         className: ['merki', `merki-${name}`, className].filter(Boolean).join(' '),
         ...a11y,
         ...rest,
+        strokeWidth: 1.5,
       } as SVGProps<SVGSVGElement>,
       title ? createElement('title', null, title) : null,
       ...node.map(([tag, attrs], index) =>

@@ -67,6 +67,12 @@ describe('createIcon', () => {
     expect(svg.getAttribute('stroke-width')).toBe('1.5');
   });
 
+  it('stroke width cannot be overridden', () => {
+    const extra = { strokeWidth: 3 } as Record<string, unknown>;
+    const svg = svgOf(createElement(CalendarIcon, { ...extra }));
+    expect(svg.getAttribute('stroke-width')).toBe('1.5');
+  });
+
   it('merges className and passes other props through', () => {
     const extra = { 'data-testid': 'cal' } as Record<string, string>;
     const svg = svgOf(createElement(CalendarIcon, { className: 'text-muted', style: { opacity: 0.5 }, ...extra }));
