@@ -17,7 +17,7 @@ export const hasAtMostTwoDecimals = (v: number): boolean => Math.abs(v * 100 - M
 function num(el: SvgElement, key: string): number {
   const raw = el.attrs[key];
   if (raw === undefined) return 0;
-  const value = Number(raw);
+  const value = raw.trim() === '' ? Number.NaN : Number(raw);
   if (!Number.isFinite(value)) throw new Error(`<${el.tag}> ${key}="${raw}" is not a number`);
   return value;
 }
@@ -30,6 +30,7 @@ interface ParsedPath {
 }
 
 function checkedPath(d: string): ParsedPath {
+  if (d.trim() === '') throw new Error('invalid path data: empty');
   const path = svgpath(d) as unknown as ParsedPath;
   if (path.err) throw new Error(`invalid path data: ${path.err}`);
   return path;

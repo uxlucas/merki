@@ -19,6 +19,10 @@ describe('elementBBox', () => {
   it('throws on broken path data', () => {
     expect(() => elementBBox(el('path', { d: 'M2 2 Q' }))).toThrow(/path data/);
   });
+
+  it('throws on missing or blank path data', () => {
+    expect(() => elementBBox(el('path', {}))).toThrow(/invalid path data: empty/);
+  });
 });
 
 describe('geometryValues', () => {
@@ -42,6 +46,15 @@ describe('geometryValues', () => {
 
   it('throws on non-numeric attributes', () => {
     expect(() => geometryValues(el('circle', { cx: 'abc', cy: '8', r: '2' }))).toThrow(/not a number/);
+  });
+
+  it('throws on blank attributes instead of reading them as 0', () => {
+    expect(() => geometryValues(el('circle', { cx: '', cy: '8', r: '2' }))).toThrow(/not a number/);
+    expect(() => geometryValues(el('circle', { cx: ' ', cy: '8', r: '2' }))).toThrow(/not a number/);
+  });
+
+  it('throws on blank path data', () => {
+    expect(() => geometryValues(el('path', { d: '  ' }))).toThrow(/invalid path data: empty/);
   });
 });
 
