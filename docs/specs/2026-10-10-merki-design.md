@@ -8,7 +8,7 @@ Merki is an open-source icon library for SaaS products, dashboards, productivity
 
 - **Primary: craft showcase.** Three months after launch, people who see Merki should conclude the author has taste. The 16px polish and the site carry this.
 - **Secondary: adoption.** Downloads and stars are a bonus. We deal with them if they come; nothing in v1 is built for scale we don't have.
-- **v1 is small and polished:** 145 icons, one style, three outputs (SVG, React, Figma) and a site.
+- **v1 is small and polished:** 146 icons, one style, three outputs (SVG, React, Figma) and a site.
 
 ### Decisions
 
@@ -69,14 +69,14 @@ Merki is an open-source icon library for SaaS products, dashboards, productivity
 - Solid icons (circle-x, calendar) read heavier than open ones (search, link). Compare-mode review exists to catch this.
 - With the stroke scaled up, 24px reads a bit heavy and 32px reads chunky. Hence `absoluteStrokeWidth` and the "tuned for 16/20" promise.
 
-## 3. Icon set: 145 icons
+## 3. Icon set: 146 icons
 
 Checked against ~28 screens from 14 SaaS products on Mobbin (Linear, Notion, Stripe, Attio, Vercel, v0, Replit, Plain, Unify, Calendly, Square, DoorDash Merchant, Mintlify, AirOps). Items marked † came from that check.
 
 | category | # | icons |
 |---|---|---|
 | navigation | 20 | home, inbox, search, menu, sidebar, layout-grid, layout-list, chevron-up, chevron-down, chevron-left, chevron-right, chevrons-up-down, arrow-up, arrow-down, arrow-left, arrow-right, arrow-up-right, arrow-left-right†, more-horizontal, more-vertical |
-| actions | 24 | plus, minus, x, check, pencil, square-pen†, trash, copy, undo, redo, refresh, download, upload, share, link, filter, sort, expand, collapse, archive, pin, star, bookmark, send |
+| actions | 25 | plus, minus, x, check, pencil, square-pen†, trash, copy, undo, redo, refresh, sync†, download, upload, share, link, filter, sort, expand, collapse, archive, pin, star, bookmark, send |
 | status | 19 | circle-check, circle-x, circle-alert, triangle-alert, info, help, ban†, status-dashed, status-empty, status-half, loader, clock, history†, bell, bell-off, eye, eye-off, lock, unlock |
 | people | 11 | user, users, user-circle†, user-plus, user-check, user-arrow, building, log-in, log-out, shield, key |
 | objects | 16 | calendar, tag, flag, folder, folder-open, file, file-text, file-plus, book†, image, paperclip, package, layers, briefcase, target, diamond |
@@ -85,6 +85,8 @@ Checked against ~28 screens from 14 SaaS products on Mobbin (Linear, Notion, Str
 | system | 18 | settings, sliders, toggle, palette†, sun, moon, monitor, smartphone, globe, plug, zap, workflow†, command, keyboard, sparkle, code, terminal, git-branch |
 | text | 11 | type, bold, italic, underline, strikethrough, list-bullet, list-ordered, square-check, quote, hash, align-left |
 | billing | 4 | credit-card, receipt, wallet, circle-dollar |
+
+`sync` was split from `refresh` at Lucas's review on 2026-10-10: refresh became a single clockwise arrow, and the two-arrow form moved to its own icon. Its † marks it as an addition after the first list, not a Mobbin find.
 
 Out of v1: brand/logo icons (trademark risk), niche domains (medical, maps, weather), more than one AI icon (`sparkle` only).
 
@@ -183,7 +185,7 @@ import { CalendarIcon } from 'merki-icons'
 - Inactive items in light gray, the active one near-black with a small dot.
 
 **Home (`/`), top to bottom**
-1. **Statement + install.** One plain sentence. Draft: *"145 icons for software people use all day."* plus *"16px grid. One stroke. MIT."* A copy button for `npm i merki-icons`, and GitHub with its star count.
+1. **Statement + install.** One plain sentence. Draft: *"146 icons for software people use all day."* plus *"16px grid. One stroke. MIT."* A copy button for `npm i merki-icons`, and GitHub with its star count.
 2. **The set.** All icons at 16px, visible without scrolling. Search is focused on load. Category chips. A 16/20/24 size switch.
 3. **Craft cards.** Six live mini-demos in the gustavo/interior style. Each has a title and one plain sentence, and links to its Craft article:
    1. **Keylines:** toggle the construction shapes over an icon

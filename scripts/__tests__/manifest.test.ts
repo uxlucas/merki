@@ -5,11 +5,11 @@ import { manifestViolations, missingIcons, readManifest, type Manifest } from '.
 const small = { navigation: ['home', 'search'], objects: ['calendar'] } as unknown as Manifest;
 
 describe('manifest', () => {
-  it('the real manifest lists 145 unique names across the ten categories', async () => {
+  it('the real manifest lists 146 unique names across the ten categories', async () => {
     const manifest = await readManifest(fileURLToPath(new URL('../../icons', import.meta.url)));
     const names = Object.values(manifest).flat();
-    expect(names).toHaveLength(145);
-    expect(new Set(names).size).toBe(145);
+    expect(names).toHaveLength(146);
+    expect(new Set(names).size).toBe(146);
     expect(Object.keys(manifest).sort()).toEqual(
       ['actions', 'billing', 'communication', 'data', 'navigation', 'objects', 'people', 'status', 'system', 'text'],
     );

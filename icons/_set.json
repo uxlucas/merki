@@ -1,6 +1,6 @@
 {
   "navigation": ["home", "inbox", "search", "menu", "sidebar", "layout-grid", "layout-list", "chevron-up", "chevron-down", "chevron-left", "chevron-right", "chevrons-up-down", "arrow-up", "arrow-down", "arrow-left", "arrow-right", "arrow-up-right", "arrow-left-right", "more-horizontal", "more-vertical"],
-  "actions": ["plus", "minus", "x", "check", "pencil", "square-pen", "trash", "copy", "undo", "redo", "refresh", "download", "upload", "share", "link", "filter", "sort", "expand", "collapse", "archive", "pin", "star", "bookmark", "send"],
+  "actions": ["plus", "minus", "x", "check", "pencil", "square-pen", "trash", "copy", "undo", "redo", "refresh", "sync", "download", "upload", "share", "link", "filter", "sort", "expand", "collapse", "archive", "pin", "star", "bookmark", "send"],
   "status": ["circle-check", "circle-x", "circle-alert", "triangle-alert", "info", "help", "ban", "status-dashed", "status-empty", "status-half", "loader", "clock", "history", "bell", "bell-off", "eye", "eye-off", "lock", "unlock"],
   "people": ["user", "users", "user-circle", "user-plus", "user-check", "user-arrow", "building", "log-in", "log-out", "shield", "key"],
   "objects": ["calendar", "tag", "flag", "folder", "folder-open", "file", "file-text", "file-plus", "book", "image", "paperclip", "package", "layers", "briefcase", "target", "diamond"],
