@@ -23,7 +23,7 @@ export interface Violation {
   detail: string;
 }
 
-export const NAME_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+export const NAME_PATTERN = /^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;
 
 const REQUIRED_ROOT: Record<string, string> = {
   viewBox: '0 0 16 16',
@@ -52,7 +52,7 @@ const fmt = (n: number): string => String(Math.round(n * 1000) / 1000);
 export function lintName(name: string): Violation[] {
   return NAME_PATTERN.test(name)
     ? []
-    : [{ icon: name, rule: 'name', detail: `"${name}" must be kebab-case (lowercase letters, digits, single dashes)` }];
+    : [{ icon: name, rule: 'name', detail: `"${name}" must be kebab-case: start with a letter, then lowercase letters, digits and single dashes` }];
 }
 
 export function lintMeta(name: string, metaJson: string | null): { violations: Violation[]; meta: IconMeta | null } {

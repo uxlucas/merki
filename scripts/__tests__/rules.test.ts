@@ -86,7 +86,8 @@ describe('lintSvg', () => {
 describe('lintName', () => {
   it('accepts kebab-case and rejects everything else', () => {
     expect(lintName('arrow-up-right')).toEqual([]);
-    for (const bad of ['ArrowUp', 'arrow_up', 'arrow--up', '-x', 'x-', 'arrow up']) {
+    expect(lintName('arrow-up-2')).toEqual([]);
+    for (const bad of ['ArrowUp', 'arrow_up', 'arrow--up', '-x', 'x-', 'arrow up', '2fa', '3d-box']) {
       expect(lintName(bad).map((v) => v.rule)).toEqual(['name']);
     }
   });
