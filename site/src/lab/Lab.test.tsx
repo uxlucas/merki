@@ -91,6 +91,48 @@ describe('Lab', () => {
     expect(note.value).toBe('too wide');
   });
 
+  it('saves a typed note when the field loses focus, keeping the current status', async () => {
+    const fetchMock = vi.fn(async (_url: string, init?: RequestInit) =>
+      init?.method === 'POST'
+        ? reply({ home: { status: 'ok', note: 'door feels narrow', updatedAt: 'now' } })
+        : reply({ home: { status: 'ok', note: '', updatedAt: 'then' } }),
+    );
+    render(<Lab icons={ICONS} fetchImpl={fetchMock as unknown as typeof fetch} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'home at 16px' }));
+    const field = await screen.findByLabelText('Note');
+    fireEvent.change(field, { target: { value: 'door feels narrow' } });
+    fireEvent.blur(field);
+
+    await waitFor(() =>
+      expect(fetchMock).toHaveBeenCalledWith(
+        '/__lab/review',
+        expect.objectContaining({ body: JSON.stringify({ name: 'home', status: 'ok', note: 'door feels narrow' }) }),
+      ),
+    );
+  });
+
+  it('marks a new note as needs work when the icon had no review yet, and skips unchanged notes', async () => {
+    const fetchMock = vi.fn(async (_url: string, init?: RequestInit) =>
+      init?.method === 'POST' ? reply({ home: { status: 'needs-work', note: 'x', updatedAt: 'now' } }) : reply({}),
+    );
+    render(<Lab icons={ICONS} fetchImpl={fetchMock as unknown as typeof fetch} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'home at 16px' }));
+    const field = await screen.findByLabelText('Note');
+    fireEvent.blur(field);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+
+    fireEvent.change(field, { target: { value: 'x' } });
+    fireEvent.blur(field);
+    await waitFor(() =>
+      expect(fetchMock).toHaveBeenCalledWith(
+        '/__lab/review',
+        expect.objectContaining({ body: JSON.stringify({ name: 'home', status: 'needs-work', note: 'x' }) }),
+      ),
+    );
+  });
+
   it('says what to do when there are no icons yet', () => {
     render(<Lab icons={[]} fetchImpl={vi.fn(async () => reply({})) as unknown as typeof fetch} />);
     expect(screen.getByText(/No icons yet/)).toBeTruthy();

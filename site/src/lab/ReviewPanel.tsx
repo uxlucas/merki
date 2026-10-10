@@ -63,6 +63,11 @@ export function ReviewPanel({ name, entry, review, onSave }: Props) {
         value={note}
         placeholder="e.g. reads heavier than calendar at 16"
         onChange={(event) => setNote(event.target.value)}
+        onBlur={() => {
+          // Leaving the field (including clicking another icon) saves the note,
+          // so a note typed after picking a status is never lost.
+          if (state !== 'saving' && note.trim() !== (entry?.note ?? '')) save(entry?.status ?? 'needs-work');
+        }}
       />
       <div className="review-actions">
         <button type="button" disabled={state === 'saving'} onClick={() => save('needs-work')}>
