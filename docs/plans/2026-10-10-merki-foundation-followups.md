@@ -5,6 +5,7 @@ Items the task and final reviews deferred. Each later plan picks up the ones in 
 ## Before batch 2 (the remaining 129 icons)
 - /lab: the compare/review panel renders above the size ladder. Clicking in the 8× grid shifts the page and opens the panel off-screen. Move it to a sticky side panel.
 - /lab: switching icons discards an unsaved note. Keep a draft per icon.
+- One unidentified test failure on 2026-10-10 (1 in 13 runs, while the dev server was reloading). Most likely a `/lab` jsdom `waitFor` timing out at 1s under load. Run `vitest --reporter=verbose` in CI to catch the name next time.
 - Middleware test for `/__lab/review`: a broken `_review.json` returns 500 and never writes; a non-JSON POST returns 415.
 
 ## Linter hardening
