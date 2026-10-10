@@ -163,5 +163,120 @@
     "status": "ok",
     "note": "",
     "updatedAt": "2026-10-10T20:57:06.563Z"
+  },
+  "pin": {
+    "status": "ok",
+    "note": "approved in chat after fix round 2",
+    "updatedAt": "2026-10-10T22:44:30.189Z"
+  },
+  "upload": {
+    "status": "ok",
+    "note": "approved in chat after fix round 2",
+    "updatedAt": "2026-10-10T22:44:30.189Z"
+  },
+  "archive": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T22:01:24.384Z"
+  },
+  "bookmark": {
+    "status": "ok",
+    "note": "approved in chat after fix round 2",
+    "updatedAt": "2026-10-10T22:44:30.189Z"
+  },
+  "check": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T22:02:42.382Z"
+  },
+  "collapse": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T22:02:49.708Z"
+  },
+  "copy": {
+    "status": "ok",
+    "note": "approved in chat after fix round 2",
+    "updatedAt": "2026-10-10T22:44:30.189Z"
+  },
+  "download": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T22:09:35.415Z"
+  },
+  "expand": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T22:09:39.657Z"
+  },
+  "filter": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T22:10:48.456Z"
+  },
+  "minus": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T22:10:58.436Z"
+  },
+  "refresh": {
+    "status": "ok",
+    "note": "approved in chat after fix round 2",
+    "updatedAt": "2026-10-10T22:44:30.189Z"
+  },
+  "star": {
+    "status": "ok",
+    "note": "approved in chat after fix round 2",
+    "updatedAt": "2026-10-10T22:44:30.189Z"
+  },
+  "x": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T22:19:55.570Z"
+  },
+  "undo": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T22:20:01.181Z"
+  },
+  "square-pen": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T22:20:07.915Z"
+  },
+  "sort": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T22:20:10.223Z"
+  },
+  "share": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T22:20:13.092Z"
+  },
+  "send": {
+    "status": "ok",
+    "note": "approved in chat after fix round 2",
+    "updatedAt": "2026-10-10T22:44:30.189Z"
+  },
+  "redo": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T22:20:51.216Z"
+  },
+  "plus": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T22:20:55.835Z"
+  },
+  "pencil": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-10T22:21:00.132Z"
+  },
+  "sync": {
+    "status": "ok",
+    "note": "approved in chat after fix round 2",
+    "updatedAt": "2026-10-10T22:44:30.189Z"
   }
 }
