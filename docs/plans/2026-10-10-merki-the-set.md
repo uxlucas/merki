@@ -32,6 +32,10 @@
 - **Rounded ends.** Line ends are round (the cap does this). Cut-outs in solids get rounded ends too: arc caps of radius 0.75 (see `circle-x`).
 - **Soft over sharp.** Prefer curves and rounded joins to hard corners. Gears and badges should be scalloped, not blocky (see `settings`).
 - **Marks must read as what they are at 16px.** A 3px arrow reads as a dot. Modifier marks need about 4.5px length and 2px heads (see `user-arrow`).
+- **Partial outlines end with intent** (actions review). When a shape is partly hidden behind another (copy's back square, stacked bubbles), its visible part ends at the hidden shape's corner arcs, curling toward the front shape with ≥1px clear. Never a straight stub hanging in space.
+- **Arrowheads: the tip is the end of the stroke, and the legs trail behind it** (actions review). On straight arrows, the legs sit symmetric about the shaft (see `arrow-right`). On curved arrows (refresh, sync, undo, history), the curve must turn into a short straight 45° segment before the tip, and the head is the axis-aligned L at that tip, legs trailing up/left or down/right (see `refresh`). Never end a head on a still-curving stroke: the inner leg collides with the curve and reads as a hook or a bump. Never point legs forward.
+- **"Simplify" means fewer parts** (actions review). Name the parts first (pin: head, neck, flange, point), give each one clear shape, and use no overlapping or crossing strokes. One outline plus one line beats several overlapping shapes.
+- **Check against the references before reporting.** Compare every icon with how the approved ones handle the same problem: corners, ends, heads, partial shapes. If it looks odd at 4×, it is odd. Fix it before Lucas sees it.
 - **One solid element per icon, with a reason.** Solid shapes are for people's heads, header bands, markers, solid states and data bars.
 
 ### Shared parts (centerline coordinates; reuse them so the set stays consistent)
