@@ -30,7 +30,14 @@ export function merkiLab({ iconsDir }: { iconsDir: string }): Plugin {
   const reviewFile = join(iconsDir, '_review.json');
   const isIconFile = (file: string) => {
     const rel = relative(iconsDir, file);
-    return rel !== '' && !rel.startsWith('..') && !isAbsolute(rel) && !basename(file).startsWith('_');
+    const name = basename(file);
+    return (
+      rel !== '' &&
+      !rel.startsWith('..') &&
+      !isAbsolute(rel) &&
+      !name.startsWith('_') &&
+      (name.endsWith('.svg') || name.endsWith('.json'))
+    );
   };
 
   return {

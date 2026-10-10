@@ -137,4 +137,38 @@ describe('Lab', () => {
     render(<Lab icons={[]} fetchImpl={vi.fn(async () => reply({})) as unknown as typeof fetch} />);
     expect(screen.getByText(/No icons yet/)).toBeTruthy();
   });
+
+  it('filters every section by category', async () => {
+    render(<Lab icons={ICONS} fetchImpl={vi.fn(async () => reply({})) as unknown as typeof fetch} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'objects 1' }));
+
+    expect(screen.getAllByRole('button', { name: / at 16px$/ })).toHaveLength(1);
+    expect(screen.getByRole('button', { name: 'calendar at 16px' })).toBeTruthy();
+    expect(screen.queryByRole('button', { name: 'home at 16px' })).toBeNull();
+
+    fireEvent.click(screen.getByRole('button', { name: 'All 4' }));
+    expect(screen.getAllByRole('button', { name: / at 16px$/ })).toHaveLength(4);
+  });
+
+  it('keeps compare and review in a side panel', async () => {
+    const { container } = render(<Lab icons={ICONS} fetchImpl={vi.fn(async () => reply({})) as unknown as typeof fetch} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'home at 16px' }));
+
+    const aside = container.querySelector('aside.lab-aside');
+    expect(aside).not.toBeNull();
+    expect(aside!.querySelector('[aria-label="Compare home"]')).not.toBeNull();
+    expect(aside!.querySelector('[aria-label="Review home"]')).not.toBeNull();
+  });
+
+  it('compares against the whole set even when filtered', async () => {
+    render(<Lab icons={ICONS} fetchImpl={vi.fn(async () => reply({})) as unknown as typeof fetch} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'navigation 3' }));
+    fireEvent.click(screen.getByRole('button', { name: 'home at 16px' }));
+
+    const compare = screen.getByRole('region', { name: 'Compare home' });
+    expect(within(compare).getAllByText('calendar')).toHaveLength(2);
+  });
 });

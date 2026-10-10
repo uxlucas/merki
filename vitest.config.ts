@@ -11,5 +11,6 @@ export default defineConfig({
     ],
     exclude: ['**/node_modules/**', '**/dist/**'],
     environment: 'node',
+    setupFiles: ['site/src/test-setup.ts'],
   },
 });

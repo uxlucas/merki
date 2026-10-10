@@ -104,7 +104,6 @@ body {
 .menu[data-theme='dark'] { background: #18181b; color: #ececef; border-color: #27272a; }
 .menu li { display: flex; align-items: center; gap: 10px; height: 32px; padding: 0 14px; font-size: 13px; }
 
-.focus { display: grid; grid-template-columns: 1fr 320px; gap: 16px; }
 .compare-row { display: flex; flex-wrap: wrap; align-items: end; gap: 16px; margin-bottom: 12px; }
 .compare-row figure { display: flex; flex-direction: column; align-items: center; gap: 6px; margin: 0; font-size: 11px; color: var(--muted); }
 .compare-row figure[data-target] figcaption { color: var(--fg); }
@@ -127,7 +126,21 @@ body {
 .badge { padding: 1px 6px; font-size: 11px; border-radius: 6px; background: var(--bg); }
 .badge[data-status='needs-work'] { color: var(--flag); }
 
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: -8px 0 20px; }
+.lab .chips button { font-size: 12px; padding: 3px 9px; }
+.lab .chips button span { color: var(--muted); font-variant-numeric: tabular-nums; margin-left: 2px; }
+.lab .chips button[aria-pressed='true'] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.lab .chips button[aria-pressed='true'] span { color: inherit; opacity: 0.7; }
+
+.lab-body { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; align-items: start; }
+.lab-body:not(:has(.lab-aside)) { grid-template-columns: minmax(0, 1fr); }
+.lab-aside { position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow: auto; }
+
+@media (max-width: 900px) {
+  .lab-body { grid-template-columns: minmax(0, 1fr); }
+  .lab-aside { position: static; max-height: none; order: -1; }
+}
+
 @media (max-width: 760px) {
   .lab { padding: 16px; }
-  .focus { grid-template-columns: 1fr; }
 }

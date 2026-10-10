@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { CategoryChips } from './CategoryChips';
 import { Compare } from './Compare';
 import { GridView } from './GridView';
 import { Ladder } from './Ladder';
@@ -26,6 +27,7 @@ async function serverError(res: Response): Promise<string | null> {
 export function Lab({ icons, fetchImpl = globalThis.fetch }: Props) {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [selected, setSelected] = useState<string | null>(null);
+  const [category, setCategory] = useState<string | null>(null);
   const [reviews, setReviews] = useState<ReviewFile>({});
   const [review, setReview] = useState<ReviewState>({ kind: 'loading' });
 
@@ -63,6 +65,12 @@ export function Lab({ icons, fetchImpl = globalThis.fetch }: Props) {
     setReviews((await res.json()) as ReviewFile);
   };
 
+  const categoryOf = (icon: LabIcon) => icon.meta?.category ?? 'uncategorized';
+  const counts: Record<string, number> = {};
+  for (const icon of icons) counts[categoryOf(icon)] = (counts[categoryOf(icon)] ?? 0) + 1;
+  const categories = Object.keys(counts).sort();
+  const visible = category === null ? icons : icons.filter((icon) => categoryOf(icon) === category);
+
   const target = icons.find((icon) => icon.name === selected) ?? null;
   const flagged = Object.values(reviews).filter((entry) => entry.status === 'needs-work').length;
 
@@ -84,15 +92,20 @@ export function Lab({ icons, fetchImpl = globalThis.fetch }: Props) {
         <p className="muted">No icons yet. Add name.svg and name.json to icons/ and this page reloads.</p>
       ) : (
         <>
-          {target && (
-            <div className="focus">
-              <Compare target={target} icons={icons} />
-              <ReviewPanel name={target.name} entry={reviews[target.name]} review={review} onSave={saveReview} />
-            </div>
-          )}
-          <Ladder icons={icons} selected={selected} reviews={reviews} onSelect={setSelected} />
-          <GridView icons={icons} onSelect={setSelected} />
-          <MenuMock icons={icons} />
+          <CategoryChips categories={categories} selected={category} counts={counts} onSelect={setCategory} />
+          <div className="lab-body">
+            <main className="lab-main">
+              <Ladder icons={visible} selected={selected} reviews={reviews} onSelect={setSelected} />
+              <GridView icons={visible} onSelect={setSelected} />
+              <MenuMock icons={visible} />
+            </main>
+            {target && (
+              <aside className="lab-aside">
+                <Compare target={target} icons={icons} />
+                <ReviewPanel name={target.name} entry={reviews[target.name]} review={review} onSave={saveReview} />
+              </aside>
+            )}
+          </div>
         </>
       )}
     </div>
