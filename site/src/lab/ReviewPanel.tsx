@@ -1,36 +1,52 @@
 import { useEffect, useState } from 'react';
 import type { ReviewEntry, ReviewUpdate } from './review';
 
+export type ReviewState =
+  | { kind: 'loading' }
+  | { kind: 'ready' }
+  | { kind: 'unavailable' }
+  | { kind: 'error'; message: string };
+
 interface Props {
   name: string;
   entry: ReviewEntry | undefined;
-  available: boolean;
+  review: ReviewState;
   onSave: (update: ReviewUpdate) => Promise<void>;
 }
 
-export function ReviewPanel({ name, entry, available, onSave }: Props) {
+export function ReviewPanel({ name, entry, review, onSave }: Props) {
   const [note, setNote] = useState(entry?.note ?? '');
   const [state, setState] = useState<'idle' | 'saving' | 'error'>('idle');
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   useEffect(() => {
     setNote(entry?.note ?? '');
     setState('idle');
+    setSaveError(null);
   }, [name, entry?.note]);
 
-  if (!available) {
+  if (review.kind !== 'ready') {
+    const text =
+      review.kind === 'loading'
+        ? 'Loading notes…'
+        : review.kind === 'error'
+          ? `Review notes are unavailable: ${review.message}`
+          : 'Review notes only work in the dev server: npm run dev:lab.';
     return (
       <section className="lab-section review" aria-label={`Review ${name}`}>
-        <p className="muted">Review notes only work in the dev server: npm run dev:lab.</p>
+        <p className="muted">{text}</p>
       </section>
     );
   }
 
   const save = async (status: ReviewUpdate['status']) => {
     setState('saving');
+    setSaveError(null);
     try {
       await onSave({ name, status, note });
       setState('idle');
-    } catch {
+    } catch (error) {
+      setSaveError(error instanceof TypeError ? null : (error as Error).message);
       setState('error');
     }
   };
@@ -59,7 +75,11 @@ export function ReviewPanel({ name, entry, available, onSave }: Props) {
           Clear
         </button>
       </div>
-      {state === 'error' && <p role="alert">Couldn't save. Is the dev server running?</p>}
+      {state === 'error' && (
+        <p role="alert">
+          {saveError === null ? "Couldn't save. Is the dev server running?" : `Couldn't save: ${saveError}`}
+        </p>
+      )}
     </section>
   );
 }

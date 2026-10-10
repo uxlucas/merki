@@ -4,7 +4,7 @@ import { GridView } from './GridView';
 import { Ladder } from './Ladder';
 import { MenuMock } from './MenuMock';
 import type { ReviewFile, ReviewUpdate } from './review';
-import { ReviewPanel } from './ReviewPanel';
+import { ReviewPanel, type ReviewState } from './ReviewPanel';
 import type { LabIcon } from './types';
 
 interface Props {
@@ -12,24 +12,42 @@ interface Props {
   fetchImpl?: typeof fetch;
 }
 
+/** The dev endpoint answers failures with { error: string }. A static build's 404 has no such body. */
+async function serverError(res: Response): Promise<string | null> {
+  try {
+    const body: unknown = await res.json();
+    const message = (body as { error?: unknown } | null)?.error;
+    return typeof message === 'string' ? message : null;
+  } catch {
+    return null;
+  }
+}
+
 export function Lab({ icons, fetchImpl = globalThis.fetch }: Props) {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [selected, setSelected] = useState<string | null>(null);
   const [reviews, setReviews] = useState<ReviewFile>({});
-  const [reviewsAvailable, setReviewsAvailable] = useState(false);
+  const [review, setReview] = useState<ReviewState>({ kind: 'loading' });
 
   useEffect(() => {
     let cancelled = false;
-    fetchImpl('/__lab/review')
-      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(String(res.status)))))
-      .then((data: ReviewFile) => {
-        if (cancelled) return;
-        setReviews(data);
-        setReviewsAvailable(true);
-      })
-      .catch(() => {
-        if (!cancelled) setReviewsAvailable(false);
-      });
+    const load = async () => {
+      try {
+        const res = await fetchImpl('/__lab/review');
+        if (res.ok) {
+          const data = (await res.json()) as ReviewFile;
+          if (cancelled) return;
+          setReviews(data);
+          setReview({ kind: 'ready' });
+          return;
+        }
+        const message = await serverError(res);
+        if (!cancelled) setReview(message === null ? { kind: 'unavailable' } : { kind: 'error', message });
+      } catch {
+        if (!cancelled) setReview({ kind: 'unavailable' });
+      }
+    };
+    void load();
     return () => {
       cancelled = true;
     };
@@ -41,7 +59,7 @@ export function Lab({ icons, fetchImpl = globalThis.fetch }: Props) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(update),
     });
-    if (!res.ok) throw new Error(`save failed: ${res.status}`);
+    if (!res.ok) throw new Error((await serverError(res)) ?? `save failed: ${res.status}`);
     setReviews((await res.json()) as ReviewFile);
   };
 
@@ -55,7 +73,7 @@ export function Lab({ icons, fetchImpl = globalThis.fetch }: Props) {
           merki <span>/lab</span>
         </h1>
         <p>
-          {icons.length} icons{reviewsAvailable ? ` · ${flagged} need work` : ''}
+          {icons.length} icons{review.kind === 'ready' ? ` · ${flagged} need work` : ''}
         </p>
         <button type="button" onClick={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))}>
           {theme === 'light' ? 'Dark' : 'Light'}
@@ -69,7 +87,7 @@ export function Lab({ icons, fetchImpl = globalThis.fetch }: Props) {
           {target && (
             <div className="focus">
               <Compare target={target} icons={icons} />
-              <ReviewPanel name={target.name} entry={reviews[target.name]} available={reviewsAvailable} onSave={saveReview} />
+              <ReviewPanel name={target.name} entry={reviews[target.name]} review={review} onSave={saveReview} />
             </div>
           )}
           <Ladder icons={icons} selected={selected} reviews={reviews} onSelect={setSelected} />

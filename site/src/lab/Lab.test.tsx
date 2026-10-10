@@ -64,6 +64,33 @@ describe('Lab', () => {
     expect(await screen.findByText(/only work in the dev server/)).toBeTruthy();
   });
 
+  it('shows the real reason when the dev server refuses a broken review file', async () => {
+    const broken = {
+      ok: false,
+      status: 500,
+      json: async () => ({ error: 'icons/_review.json is unreadable, fix it by hand: Unexpected end' }),
+    } as Response;
+    render(<Lab icons={ICONS} fetchImpl={vi.fn(async () => broken) as unknown as typeof fetch} />);
+    fireEvent.click(screen.getByRole('button', { name: 'home at 16px' }));
+
+    expect(await screen.findByText(/unreadable, fix it by hand/)).toBeTruthy();
+    expect(screen.queryByText(/only work in the dev server/)).toBeNull();
+  });
+
+  it('shows the server reason when a save is rejected and keeps the typed note', async () => {
+    const rejected = { ok: false, status: 400, json: async () => ({ error: 'invalid status: maybe' }) } as Response;
+    const fetchMock = vi.fn(async (_url: string, init?: RequestInit) => (init?.method === 'POST' ? rejected : reply({})));
+    render(<Lab icons={ICONS} fetchImpl={fetchMock as unknown as typeof fetch} />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'home at 16px' }));
+    const note = (await screen.findByLabelText('Note')) as HTMLTextAreaElement;
+    fireEvent.change(note, { target: { value: 'too wide' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Needs work' }));
+
+    expect((await screen.findByRole('alert')).textContent).toMatch(/Couldn't save: invalid status: maybe/);
+    expect(note.value).toBe('too wide');
+  });
+
   it('says what to do when there are no icons yet', () => {
     render(<Lab icons={[]} fetchImpl={vi.fn(async () => reply({})) as unknown as typeof fetch} />);
     expect(screen.getByText(/No icons yet/)).toBeTruthy();
