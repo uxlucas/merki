@@ -1,12 +1,12 @@
-# Keyline — design spec
+# Merki — design spec
 
 *2026-10-10 · status: approved in conversation, awaiting written review*
 
-Keyline is an open-source icon library for SaaS products, dashboards, productivity tools, settings, forms and interactive applications. It is drawn on a 16px grid, in one style, inspired by Linear's icons and never copied from them.
+Merki is an open-source icon library for SaaS products, dashboards, productivity tools, settings, forms and interactive applications. It is drawn on a 16px grid, in one style, inspired by Linear's icons and never copied from them.
 
 ## 1. Goals
 
-- **Primary: craft showcase.** Three months after launch, people who see Keyline should conclude the author has taste. The 16px polish and the site carry this.
+- **Primary: craft showcase.** Three months after launch, people who see Merki should conclude the author has taste. The 16px polish and the site carry this.
 - **Secondary: adoption.** Downloads and stars are a bonus. We deal with them if they come; nothing in v1 is built for scale we don't have.
 - **v1 is small and polished:** 145 icons, one style, three outputs (SVG, React, Figma) and a site.
 
@@ -14,7 +14,7 @@ Keyline is an open-source icon library for SaaS products, dashboards, productivi
 
 | topic | decision |
 |---|---|
-| name | **Keyline**. npm `keyline` was free on 2026-10-10. Trademark/domain check pending (Lucas). |
+| name | **Merki**, Icelandic for "sign, mark, emblem". Renamed from Keyline on 2026-10-10: npm blocked `keyline` as too similar to `byline`, and Cambridge Intelligence sells a JS SDK called KeyLines. npm `merki` was free on 2026-10-10. If npm's similarity check blocks it at publish, the fallback is `merki-icons`. Trademark/domain check pending (Lucas). |
 | license | **MIT** for icons and code |
 | style | one style: outline with selective solid accents. No solid/duotone variant planned. |
 | grid | 16px master. Tuned for 16 and 20, supported at 24. 32+ works but isn't promised. |
@@ -91,12 +91,12 @@ Out of v1: brand/logo icons (trademark risk), niche domains (medical, maps, weat
 ## 4. Repo and build
 
 ```
-keyline/
+merki/
   icons/                 masters: name.svg + name.json
   scripts/
     lint.ts              rules from §2
     build.ts             optimize → package → site data
-  packages/keyline/      the npm package
+  packages/merki/      the npm package
   site/                  Vite + React: showcase, craft, guide, /lab
   figma/                 sync script (repo → Figma)
   docs/specs/
@@ -105,7 +105,7 @@ keyline/
 **Build pipeline**
 1. **Lint:** parse every SVG and check every ⚙️ rule. Bounds include the stroke: each element's geometric bounding box, expanded by 0.75 if the element is stroked. A failure stops the build and prints `icon-name: rule: detail`.
 2. **Optimize:** SVGO with a locked config. Keep round caps and joins, don't merge paths across elements, don't convert shapes in ways that break the 0.25 grid. A test checks that every optimized SVG still passes lint.
-3. **Generate:** optimized SVGs (`packages/keyline/svg/`), one React component per icon, and `site/src/data/icons.json` (name, category, tags, aliases, svg markup).
+3. **Generate:** optimized SVGs (`packages/merki/svg/`), one React component per icon, and `site/src/data/icons.json` (name, category, tags, aliases, svg markup).
 4. **Test (vitest):** linter fixtures (must-pass and must-fail SVGs per rule), snapshots of the generated components, and a check that metadata and SVG files pair up 1:1.
 
 **Tooling:** npm workspaces (pnpm isn't installed, and npm keeps setup to zero steps), TypeScript, tsx for scripts, tsup for the package, vitest. GitHub Actions runs lint + build + test on every PR and on pushes to `main`.
@@ -119,13 +119,13 @@ keyline/
 
 ## 5. Package and React API
 
-One package, **`keyline`**:
+One package, **`merki`**:
 - main export: React components. ESM-only, `sideEffects: false`, tree-shakeable. Peer dependency `react >= 18`.
-- `keyline/svg/<name>.svg`: raw optimized SVGs, for non-React users.
+- `merki/svg/<name>.svg`: raw optimized SVGs, for non-React users.
 - Each GitHub release also attaches a zip of the SVGs.
 
 ```tsx
-import { CalendarIcon } from 'keyline'
+import { CalendarIcon } from 'merki'
 
 <CalendarIcon />                               // 16px, currentColor
 <CalendarIcon size={20} />
@@ -155,7 +155,7 @@ import { CalendarIcon } from 'keyline'
 
 **Rendered output**
 ```html
-<svg class="keyline keyline-calendar" width="16" height="16" viewBox="0 0 16 16"
+<svg class="merki merki-calendar" width="16" height="16" viewBox="0 0 16 16"
      fill="none" stroke="currentColor" stroke-width="1.5"
      stroke-linecap="round" stroke-linejoin="round"
      aria-hidden="true" focusable="false">…</svg>
@@ -183,14 +183,14 @@ import { CalendarIcon } from 'keyline'
 - Inactive items in light gray, the active one near-black with a small dot.
 
 **Home (`/`), top to bottom**
-1. **Statement + install.** One plain sentence. Draft: *"145 icons for software people use all day."* plus *"16px grid. One stroke. MIT."* A copy button for `npm i keyline`, and GitHub with its star count.
+1. **Statement + install.** One plain sentence. Draft: *"145 icons for software people use all day."* plus *"16px grid. One stroke. MIT."* A copy button for `npm i merki`, and GitHub with its star count.
 2. **The set.** All icons at 16px, visible without scrolling. Search is focused on load. Category chips. A 16/20/24 size switch.
 3. **Craft cards.** Six live mini-demos in the gustavo/interior style. Each has a title and one plain sentence, and links to its Craft article:
    1. **Keylines:** toggle the construction shapes over an icon
    2. **One stroke:** a size slider; the stroke stays consistent
    3. **Looks right vs measures right:** circle and square, mathematically equal vs optically equal
    4. **Solid accents:** outline-only vs accented, side by side
-   5. **In context:** a Linear-like menu built entirely from Keyline icons
+   5. **In context:** a Linear-like menu built entirely from Merki icons
    6. **Points:** hover to reveal anchor points
 
 **Icon panel**
@@ -250,7 +250,7 @@ Vue/Svelte/other framework packages, icon font, solid or duotone variants, a `st
 
 ## 11. Open items (Lucas)
 
-- Trademark and domain check for "Keyline".
-- Claim npm `keyline` with a `0.0.1` placeholder (Claude can prepare it; Lucas publishes).
-- Rename the folder `~/Desktop/arkan-icons` → `~/Desktop/keyline` (between sessions, since this one runs inside it).
-- Create the GitHub repo `uxlucas/keyline` when ready to push. It stays private until launch.
+- Trademark and domain check for "Merki".
+- Claim npm `merki` with a `0.0.1` placeholder (Claude can prepare it; Lucas publishes).
+- Rename the folder `~/Desktop/arkan-icons` → `~/Desktop/merki` (between sessions, since this one runs inside it).
+- Create the GitHub repo `uxlucas/merki` when ready to push. It stays private until launch.

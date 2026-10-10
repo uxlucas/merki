@@ -1,14 +1,14 @@
-# Keyline Foundation Implementation Plan
+# Merki Foundation Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build the Keyline pipeline end to end: icon linter → optimizer → generated React package → `/lab` review page. Then prove it with the first 16 icons.
+**Goal:** Build the Merki pipeline end to end: icon linter → optimizer → generated React package → `/lab` review page. Then prove it with the first 16 icons.
 
-**Architecture:** SVG files in `icons/` are the only source. A Node pipeline in `scripts/` lints them against the spec's rules, optimizes them conservatively, and generates per-icon React modules plus site data. `packages/keyline` holds a small hand-written runtime (`createIcon`) and the generated modules, built per-file with tsup so they tree-shake. `site/` is a Vite + React app whose only real page in this plan is `/lab`. `/lab` reads `icons/` live through a dev-server plugin and stores review notes in `icons/_review.json`.
+**Architecture:** SVG files in `icons/` are the only source. A Node pipeline in `scripts/` lints them against the spec's rules, optimizes them conservatively, and generates per-icon React modules plus site data. `packages/merki` holds a small hand-written runtime (`createIcon`) and the generated modules, built per-file with tsup so they tree-shake. `site/` is a Vite + React app whose only real page in this plan is `/lab`. `/lab` reads `icons/` live through a dev-server plugin and stores review notes in `icons/_review.json`.
 
 **Tech Stack:** Node ≥ 22, npm workspaces, TypeScript 5.9, tsx, vitest 3 (+ jsdom, Testing Library), svgson, svgpath, svg-path-bbox, svgo 4, tsup 8, esbuild, React 19, Vite 7.
 
-**Spec:** `docs/specs/2026-10-10-keyline-design.md`. Read §2 (icon rules), §4 (repo and build) and §5 (React API) before starting. This plan covers spec build-order step 1 (foundation). Later plans cover the rest of the set, the site, Figma and release.
+**Spec:** `docs/specs/2026-10-10-merki-design.md`. Read §2 (icon rules), §4 (repo and build) and §5 (React API) before starting. This plan covers spec build-order step 1 (foundation). Later plans cover the rest of the set, the site, Figma and release.
 
 ## Global Constraints
 
@@ -21,8 +21,8 @@
 - Categories (exact ids): `navigation, actions, status, people, objects, data, communication, system, text, billing`.
 - Icon names are kebab-case: `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`. React exports are `<PascalName>Icon` (`arrow-up-right` → `ArrowUpRightIcon`, `x` → `XIcon`).
 - Component defaults: `size` 16, stroke `currentColor`, `aria-hidden="true"` and `focusable="false"` unless labelled. No hooks, no context, no generated ids. No `strokeWidth` prop and no dynamic `<Icon name>`.
-- Package: name `keyline`, ESM-only, `"sideEffects": false`, peer `react >= 18`, `"private": true` until the release plan flips it.
-- Generated files are never committed or hand-edited: `packages/keyline/src/icons/`, `packages/keyline/src/index.ts`, `packages/keyline/svg/`, `packages/keyline/dist/`, `site/src/data/icons.json`.
+- Package: name `merki`, ESM-only, `"sideEffects": false`, peer `react >= 18`, `"private": true` until the release plan flips it.
+- Generated files are never committed or hand-edited: `packages/merki/src/icons/`, `packages/merki/src/index.ts`, `packages/merki/svg/`, `packages/merki/dist/`, `site/src/data/icons.json`.
 - Files in `icons/` that start with `_` or `.` are not icons (`_review.json`, `.gitkeep`).
 - Every commit ends with the trailer `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
 
@@ -63,14 +63,14 @@ scripts/
   lib/build-all.ts                buildAll(paths)
   __tests__/fixtures.ts           shared SVG/JSON strings
   __tests__/*.test.ts
-packages/keyline/
+packages/merki/
   package.json, tsconfig.json, tsup.config.ts
   src/create-icon.ts              hand-written runtime
   test/create-icon.test.ts        jsdom
   test/treeshake.test.ts
 site/
   package.json, index.html, vite.config.ts
-  lab-plugin.ts                   virtual:keyline-icons + /__lab/review middleware
+  lab-plugin.ts                   virtual:merki-icons + /__lab/review middleware
   lab-plugin.test.ts
   src/main.tsx, src/virtual.d.ts
   src/lab/types.ts, review.ts, review.test.ts
@@ -99,7 +99,7 @@ site/
 `package.json`:
 ```json
 {
-  "name": "keyline-repo",
+  "name": "merki-repo",
   "private": true,
   "type": "module",
   "workspaces": ["packages/*", "site"],
@@ -128,7 +128,7 @@ site/
     "noEmit": true,
     "types": ["node", "vite/client"]
   },
-  "include": ["scripts", "packages/keyline/src", "packages/keyline/test", "site/src", "site/*.ts", "vitest.config.ts"]
+  "include": ["scripts", "packages/merki/src", "packages/merki/test", "site/src", "site/*.ts", "vitest.config.ts"]
 }
 ```
 
@@ -155,9 +155,9 @@ export default defineConfig({
 ```
 node_modules/
 dist/
-packages/keyline/svg/
-packages/keyline/src/icons/
-packages/keyline/src/index.ts
+packages/merki/svg/
+packages/merki/src/icons/
+packages/merki/src/index.ts
 site/src/data/icons.json
 *.log
 .DS_Store
@@ -236,7 +236,7 @@ import { loadIcons } from '../lib/load.js';
 let dir: string;
 
 beforeEach(async () => {
-  dir = await mkdtemp(join(tmpdir(), 'keyline-load-'));
+  dir = await mkdtemp(join(tmpdir(), 'merki-load-'));
 });
 
 afterEach(async () => {
@@ -974,7 +974,7 @@ import { HOME_SVG, meta, wrap } from './fixtures.js';
 let dir: string;
 
 beforeEach(async () => {
-  dir = await mkdtemp(join(tmpdir(), 'keyline-lint-'));
+  dir = await mkdtemp(join(tmpdir(), 'merki-lint-'));
 });
 
 afterEach(async () => {
@@ -1271,7 +1271,7 @@ describe('renderIndex', () => {
       [
         '// Generated by scripts/build.ts. Do not edit.',
         'export { createIcon } from "./create-icon.js";',
-        'export type { IconNode, IconProps, IconTag, KeylineIcon } from "./create-icon.js";',
+        'export type { IconNode, IconProps, IconTag, MerkiIcon } from "./create-icon.js";',
         'export { HomeIcon } from "./icons/home.js";',
         'export { SearchIcon } from "./icons/search.js";',
         '',
@@ -1342,7 +1342,7 @@ export function renderIndex(names: string[], createIconPath = './create-icon.js'
   return [
     HEADER,
     `export { createIcon } from ${JSON.stringify(createIconPath)};`,
-    `export type { IconNode, IconProps, IconTag, KeylineIcon } from ${JSON.stringify(createIconPath)};`,
+    `export type { IconNode, IconProps, IconTag, MerkiIcon } from ${JSON.stringify(createIconPath)};`,
     ...names.map((name) => `export { ${componentName(name)} } from ${JSON.stringify(`./icons/${name}.js`)};`),
     '',
   ].join('\n');
@@ -1389,7 +1389,7 @@ let root: string;
 let paths: BuildPaths;
 
 beforeEach(async () => {
-  root = await mkdtemp(join(tmpdir(), 'keyline-build-'));
+  root = await mkdtemp(join(tmpdir(), 'merki-build-'));
   paths = {
     iconsDir: join(root, 'icons'),
     packageDir: join(root, 'pkg'),
@@ -1510,7 +1510,7 @@ const at = (path: string) => fileURLToPath(new URL(path, import.meta.url));
 
 const { count, violations } = await buildAll({
   iconsDir: at('../icons'),
-  packageDir: at('../packages/keyline'),
+  packageDir: at('../packages/merki'),
   siteDataFile: at('../site/src/data/icons.json'),
 });
 
@@ -1541,29 +1541,29 @@ git commit -m "feat: optimizer, React and site generators, build command" -m "Co
 
 ---
 
-### Task 5: The `keyline` package runtime
+### Task 5: The `merki` package runtime
 
 **Files:**
-- Create: `packages/keyline/package.json`, `packages/keyline/tsconfig.json`, `packages/keyline/tsup.config.ts`, `packages/keyline/src/create-icon.ts`
+- Create: `packages/merki/package.json`, `packages/merki/tsconfig.json`, `packages/merki/tsup.config.ts`, `packages/merki/src/create-icon.ts`
 - Create: `.github/workflows/ci.yml`
 - Modify: `package.json` (add `build`)
-- Test: `packages/keyline/test/create-icon.test.ts`, `packages/keyline/test/treeshake.test.ts`
+- Test: `packages/merki/test/create-icon.test.ts`, `packages/merki/test/treeshake.test.ts`
 
 **Interfaces:**
 - Consumes: `renderIconModule`, `renderIndex` (Task 4) in the tree-shake test; the generated layout from Task 4.
-- Produces (exported from `packages/keyline/src/create-icon.ts`, re-exported by the generated index):
+- Produces (exported from `packages/merki/src/create-icon.ts`, re-exported by the generated index):
   - `type IconTag = 'path' | 'circle' | 'rect' | 'line'`
   - `type IconNode = ReadonlyArray<readonly [IconTag, Readonly<Record<string, string>>]>`
   - `interface IconProps extends Omit<SVGProps<SVGSVGElement>, 'ref' | 'color'> { size?: number | string; color?: string; absoluteStrokeWidth?: boolean; title?: string }`
-  - `type KeylineIcon = ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>`
-  - `createIcon(name: string, node: IconNode): KeylineIcon`
+  - `type MerkiIcon = ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>`
+  - `createIcon(name: string, node: IconNode): MerkiIcon`
 
 - [ ] **Step 1: Create the package files**
 
-`packages/keyline/package.json`:
+`packages/merki/package.json`:
 ```json
 {
-  "name": "keyline",
+  "name": "merki",
   "version": "0.0.0",
   "private": true,
   "description": "Icons for software people use all day. 16px grid, one stroke.",
@@ -1588,7 +1588,7 @@ git commit -m "feat: optimizer, React and site generators, build command" -m "Co
 }
 ```
 
-`packages/keyline/tsconfig.json`:
+`packages/merki/tsconfig.json`:
 ```json
 {
   "extends": "../../tsconfig.json",
@@ -1597,7 +1597,7 @@ git commit -m "feat: optimizer, React and site generators, build command" -m "Co
 }
 ```
 
-`packages/keyline/tsup.config.ts`:
+`packages/merki/tsup.config.ts`:
 ```ts
 import { defineConfig } from 'tsup';
 
@@ -1615,11 +1615,11 @@ export default defineConfig({
 ```
 
 Run: `npm install` (links the new workspace).
-Expected: no errors. `node_modules/keyline` is a link to `packages/keyline`.
+Expected: no errors. `node_modules/merki` is a link to `packages/merki`.
 
 - [ ] **Step 2: Write the failing runtime test**
 
-`packages/keyline/test/create-icon.test.ts`:
+`packages/merki/test/create-icon.test.ts`:
 ```ts
 // @vitest-environment jsdom
 import { cleanup, render } from '@testing-library/react';
@@ -1648,7 +1648,7 @@ describe('createIcon', () => {
     expect(svg.getAttribute('stroke-width')).toBe('1.5');
     expect(svg.getAttribute('stroke-linecap')).toBe('round');
     expect(svg.getAttribute('stroke-linejoin')).toBe('round');
-    expect(svg.getAttribute('class')).toBe('keyline keyline-calendar');
+    expect(svg.getAttribute('class')).toBe('merki merki-calendar');
     expect(svg.getAttribute('aria-hidden')).toBe('true');
     expect(svg.getAttribute('focusable')).toBe('false');
     expect(svg.getAttribute('color')).toBeNull();
@@ -1693,7 +1693,7 @@ describe('createIcon', () => {
   it('merges className and passes other props through', () => {
     const extra = { 'data-testid': 'cal' } as Record<string, string>;
     const svg = svgOf(createElement(CalendarIcon, { className: 'text-muted', style: { opacity: 0.5 }, ...extra }));
-    expect(svg.getAttribute('class')).toBe('keyline keyline-calendar text-muted');
+    expect(svg.getAttribute('class')).toBe('merki merki-calendar text-muted');
     expect(svg.getAttribute('data-testid')).toBe('cal');
     expect(svg.style.opacity).toBe('0.5');
   });
@@ -1717,10 +1717,10 @@ describe('createIcon', () => {
 
 - [ ] **Step 3: Run it to verify it fails**
 
-Run: `npx vitest run packages/keyline/test/create-icon.test.ts`
+Run: `npx vitest run packages/merki/test/create-icon.test.ts`
 Expected: FAIL, cannot find `../src/create-icon.js`.
 
-- [ ] **Step 4: Implement `packages/keyline/src/create-icon.ts`**
+- [ ] **Step 4: Implement `packages/merki/src/create-icon.ts`**
 
 ```ts
 import {
@@ -1745,7 +1745,7 @@ export interface IconProps extends Omit<SVGProps<SVGSVGElement>, 'ref' | 'color'
   title?: string;
 }
 
-export type KeylineIcon = ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>;
+export type MerkiIcon = ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>;
 
 const toPascal = (name: string): string =>
   name
@@ -1753,8 +1753,8 @@ const toPascal = (name: string): string =>
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join('');
 
-export function createIcon(name: string, node: IconNode): KeylineIcon {
-  const Icon = forwardRef<SVGSVGElement, IconProps>(function KeylineIconComponent(
+export function createIcon(name: string, node: IconNode): MerkiIcon {
+  const Icon = forwardRef<SVGSVGElement, IconProps>(function MerkiIconComponent(
     { size = 16, color = 'currentColor', absoluteStrokeWidth = false, title, className, children, ...rest },
     ref,
   ) {
@@ -1777,7 +1777,7 @@ export function createIcon(name: string, node: IconNode): KeylineIcon {
         strokeLinecap: 'round',
         strokeLinejoin: 'round',
         ...(color === 'currentColor' ? {} : { color }),
-        className: ['keyline', `keyline-${name}`, className].filter(Boolean).join(' '),
+        className: ['merki', `merki-${name}`, className].filter(Boolean).join(' '),
         ...a11y,
         ...rest,
       } as SVGProps<SVGSVGElement>,
@@ -1799,12 +1799,12 @@ export function createIcon(name: string, node: IconNode): KeylineIcon {
 
 - [ ] **Step 5: Run it to verify it passes**
 
-Run: `npx vitest run packages/keyline/test/create-icon.test.ts`
+Run: `npx vitest run packages/merki/test/create-icon.test.ts`
 Expected: PASS (10 tests). Expect no React warnings about unknown props. If one appears for `focusable`, it means React wants the string `'false'`, which is already what's passed.
 
 - [ ] **Step 6: Write the tree-shake test**
 
-`packages/keyline/test/treeshake.test.ts`:
+`packages/merki/test/treeshake.test.ts`:
 ```ts
 import { build } from 'esbuild';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
@@ -1818,7 +1818,7 @@ const createIconPath = fileURLToPath(new URL('../src/create-icon.ts', import.met
 let dir: string;
 
 beforeAll(async () => {
-  dir = await mkdtemp(join(tmpdir(), 'keyline-shake-'));
+  dir = await mkdtemp(join(tmpdir(), 'merki-shake-'));
   await mkdir(join(dir, 'icons'));
   await writeFile(join(dir, 'icons', 'alpha.ts'), renderIconModule('alpha', [['path', { d: 'M2 2h11.11' }]], createIconPath));
   await writeFile(join(dir, 'icons', 'beta.ts'), renderIconModule('beta', [['path', { d: 'M4 4h22.22' }]], createIconPath));
@@ -1847,14 +1847,14 @@ it('importing one icon does not ship the others', async () => {
 
 - [ ] **Step 7: Run it**
 
-Run: `npx vitest run packages/keyline/test/treeshake.test.ts`
+Run: `npx vitest run packages/merki/test/treeshake.test.ts`
 Expected: PASS. If it fails because beta is present, the `/* @__PURE__ */` annotation in `renderIconModule` is missing or misplaced. Fix the generator, not the test.
 
 - [ ] **Step 8: Add the build script and CI, then run the full pipeline**
 
 In root `package.json` `"scripts"`, add:
 ```json
-"build": "npm run build:icons && npm run build -w keyline",
+"build": "npm run build:icons && npm run build -w merki",
 ```
 
 `.github/workflows/ci.yml`:
@@ -1883,7 +1883,7 @@ jobs:
 ```
 
 Run: `npm run build`
-Expected: `Generated 0 icons.`, then tsup builds `packages/keyline/dist/index.js`, `create-icon.js` and `index.d.ts`.
+Expected: `Generated 0 icons.`, then tsup builds `packages/merki/dist/index.js`, `create-icon.js` and `index.d.ts`.
 
 Run: `npm run typecheck && npm test`
 Expected: both pass.
@@ -1891,8 +1891,8 @@ Expected: both pass.
 - [ ] **Step 9: Commit**
 
 ```bash
-git add packages/keyline/package.json packages/keyline/tsconfig.json packages/keyline/tsup.config.ts packages/keyline/src/create-icon.ts packages/keyline/test .github package.json package-lock.json
-git commit -m "feat: keyline React runtime, package build and CI" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+git add packages/merki/package.json packages/merki/tsconfig.json packages/merki/tsup.config.ts packages/merki/src/create-icon.ts packages/merki/test .github package.json package-lock.json
+git commit -m "feat: merki React runtime, package build and CI" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 ```
 
 ---
@@ -1910,8 +1910,8 @@ git commit -m "feat: keyline React runtime, package build and CI" -m "Co-Authore
   - `interface LabIcon { name: string; svg: string; meta: { category?: string; tags?: string[]; aliases?: string[] } | null }` and `SIZES = [16, 20, 24] as const`, `REFERENCE_NAMES = ['search', 'calendar', 'user', 'circle-x'] as const` (`site/src/lab/types.ts`)
   - `type ReviewStatus = 'needs-work' | 'ok'`, `interface ReviewEntry { status: ReviewStatus; note: string; updatedAt: string }`, `type ReviewFile = Record<string, ReviewEntry>`, `interface ReviewUpdate { name: string; status: ReviewStatus | 'clear'; note?: string }`
   - `parseReviewFile(text: string | null): ReviewFile` throws on invalid JSON; `applyReview(current: ReviewFile, update: ReviewUpdate, now: Date): ReviewFile` throws on an invalid update
-  - `readLabIcons(iconsDir: string): LabIcon[]`, `keylineLab(options: { iconsDir: string }): Plugin`
-  - Virtual module `virtual:keyline-icons` (default export `LabIcon[]`). HTTP `GET/POST /__lab/review`.
+  - `readLabIcons(iconsDir: string): LabIcon[]`, `merkiLab(options: { iconsDir: string }): Plugin`
+  - Virtual module `virtual:merki-icons` (default export `LabIcon[]`). HTTP `GET/POST /__lab/review`.
 
 - [ ] **Step 1: Write the failing review test**
 
@@ -2049,7 +2049,7 @@ import { readLabIcons } from './lab-plugin';
 let dir: string;
 
 beforeEach(async () => {
-  dir = await mkdtemp(join(tmpdir(), 'keyline-lab-'));
+  dir = await mkdtemp(join(tmpdir(), 'merki-lab-'));
 });
 
 afterEach(async () => {
@@ -2090,7 +2090,7 @@ import type { Plugin } from 'vite';
 import { applyReview, parseReviewFile, type ReviewFile, type ReviewUpdate } from './src/lab/review';
 import type { LabIcon } from './src/lab/types';
 
-const VIRTUAL_ID = 'virtual:keyline-icons';
+const VIRTUAL_ID = 'virtual:merki-icons';
 const RESOLVED_ID = `\0${VIRTUAL_ID}`;
 
 export function readLabIcons(iconsDir: string): LabIcon[] {
@@ -2112,7 +2112,7 @@ export function readLabIcons(iconsDir: string): LabIcon[] {
     });
 }
 
-export function keylineLab({ iconsDir }: { iconsDir: string }): Plugin {
+export function merkiLab({ iconsDir }: { iconsDir: string }): Plugin {
   const reviewFile = join(iconsDir, '_review.json');
   const isIconFile = (file: string) => {
     const rel = relative(iconsDir, file);
@@ -2120,7 +2120,7 @@ export function keylineLab({ iconsDir }: { iconsDir: string }): Plugin {
   };
 
   return {
-    name: 'keyline-lab',
+    name: 'merki-lab',
     resolveId(id) {
       return id === VIRTUAL_ID ? RESOLVED_ID : null;
     },
@@ -2202,10 +2202,10 @@ export function keylineLab({ iconsDir }: { iconsDir: string }): Plugin {
 import react from '@vitejs/plugin-react';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
-import { keylineLab } from './lab-plugin';
+import { merkiLab } from './lab-plugin';
 
 export default defineConfig({
-  plugins: [react(), keylineLab({ iconsDir: fileURLToPath(new URL('../icons', import.meta.url)) })],
+  plugins: [react(), merkiLab({ iconsDir: fileURLToPath(new URL('../icons', import.meta.url)) })],
 });
 ```
 
@@ -2216,7 +2216,7 @@ export default defineConfig({
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Keyline</title>
+    <title>Merki</title>
   </head>
   <body>
     <div id="root"></div>
@@ -2227,7 +2227,7 @@ export default defineConfig({
 
 `site/src/virtual.d.ts`:
 ```ts
-declare module 'virtual:keyline-icons' {
+declare module 'virtual:merki-icons' {
   const icons: Array<{
     name: string;
     svg: string;
@@ -2266,7 +2266,7 @@ git commit -m "feat: lab dev plugin with live icons and review notes" -m "Co-Aut
 - Test: `site/src/lab/Lab.test.tsx`
 
 **Interfaces:**
-- Consumes: `LabIcon`, `SIZES`, `REFERENCE_NAMES` (Task 6); `ReviewFile`, `ReviewEntry`, `ReviewUpdate` (Task 6); `virtual:keyline-icons` and `/__lab/review` (Task 6).
+- Consumes: `LabIcon`, `SIZES`, `REFERENCE_NAMES` (Task 6); `ReviewFile`, `ReviewEntry`, `ReviewUpdate` (Task 6); `virtual:merki-icons` and `/__lab/review` (Task 6).
 - Produces: `Lab({ icons, fetchImpl }: { icons: LabIcon[]; fetchImpl?: typeof fetch })`. Nothing later in this plan depends on it. The site plan replaces `main.tsx` routing.
 
 - [ ] **Step 1: Write the failing Lab test**
@@ -2643,7 +2643,7 @@ export function Lab({ icons, fetchImpl = globalThis.fetch }: Props) {
     <div className="lab" data-theme={theme}>
       <header className="lab-header">
         <h1>
-          keyline <span>/lab</span>
+          merki <span>/lab</span>
         </h1>
         <p>
           {icons.length} icons{reviewsAvailable ? ` · ${flagged} need work` : ''}
@@ -2684,7 +2684,7 @@ Expected: PASS (5 tests).
 ```tsx
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import icons from 'virtual:keyline-icons';
+import icons from 'virtual:merki-icons';
 import { Lab } from './lab/Lab';
 import './lab/lab.css';
 
@@ -2697,7 +2697,7 @@ createRoot(document.getElementById('root')!).render(
     ) : (
       <main className="lab">
         <p className="muted">
-          Keyline. The site comes in a later plan. <a href="/lab">Open /lab</a>
+          Merki. The site comes in a later plan. <a href="/lab">Open /lab</a>
         </p>
       </main>
     )}
@@ -2845,7 +2845,7 @@ body {
 - [ ] **Step 7: Check it in the browser**
 
 Run: `npm run dev:lab` (Vite prints a local URL, usually `http://localhost:5173`).
-Open `/lab`. Expected: header "keyline /lab · 0 icons", and the "No icons yet" message. Add any temporary icon from `scripts/__tests__/fixtures.ts` as `icons/home.svg` + `icons/home.json`. The page reloads by itself, and the icon shows in all sections. Click it: compare and review appear. Save a note, then check that `icons/_review.json` was written. Delete the temporary files and `_review.json` afterwards.
+Open `/lab`. Expected: header "merki /lab · 0 icons", and the "No icons yet" message. Add any temporary icon from `scripts/__tests__/fixtures.ts` as `icons/home.svg` + `icons/home.json`. The page reloads by itself, and the icon shows in all sections. Click it: compare and review appear. Save a note, then check that `icons/_review.json` was written. Delete the temporary files and `_review.json` afterwards.
 
 Run: `npm run typecheck && npm test`
 Expected: both pass.
@@ -2867,7 +2867,7 @@ git commit -m "feat: /lab review page" -m "Co-Authored-By: Claude Opus 5.5 <nore
 
 **Interfaces:**
 - Consumes: the whole pipeline (Tasks 1–7).
-- Produces: 16 linted icons, a built `keyline` package exporting `HomeIcon` … `PriorityHighIcon`, and a `/lab` page with real content for Lucas's review.
+- Produces: 16 linted icons, a built `merki` package exporting `HomeIcon` … `PriorityHighIcon`, and a `/lab` page with real content for Lucas's review.
 
 Every `.svg` uses exactly this root, with the listed children inside:
 ```html
@@ -2929,7 +2929,7 @@ Run: `npm run lint:icons`
 Expected: `16 icons pass.` If anything fails, the output names the icon and rule. Fix the SVG, not the rule.
 
 Run: `npm run build`
-Expected: `Generated 16 icons.`, then tsup succeeds. `packages/keyline/dist/icons/` has 16 `.js` files, and `dist/index.d.ts` declares `HomeIcon` … `PriorityHighIcon`.
+Expected: `Generated 16 icons.`, then tsup succeeds. `packages/merki/dist/icons/` has 16 `.js` files, and `dist/index.d.ts` declares `HomeIcon` … `PriorityHighIcon`.
 
 Run: `npm run typecheck && npm test`
 Expected: both pass. `repo-icons.test.ts` now covers 16 real icons.
@@ -2938,7 +2938,7 @@ Expected: both pass. `repo-icons.test.ts` now covers 16 real icons.
 
 ```bash
 git add icons
-git commit -m "feat: first 16 icons drawn to the keyline rules" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+git commit -m "feat: first 16 icons drawn to the merki rules" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 ```
 
 - [ ] **Step 5: Review gate (Lucas)**
