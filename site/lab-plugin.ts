@@ -76,7 +76,12 @@ export function merkiLab({ iconsDir }: { iconsDir: string }): Plugin {
           send(405, { error: 'use GET or POST' });
           return;
         }
+        if (!String(req.headers['content-type'] ?? '').startsWith('application/json')) {
+          send(415, { error: 'send JSON' });
+          return;
+        }
         let body = '';
+        req.setEncoding('utf8');
         req.on('data', (chunk) => {
           body += chunk;
         });

@@ -34,6 +34,7 @@ describe('buildAll', () => {
     expect(result).toEqual({ count: 2, violations: [] });
     const svg = await readFile(join(paths.packageDir, 'svg', 'home.svg'), 'utf8');
     expect(svg).toMatch(/^<svg width="16" height="16"/);
+    expect(svg).toContain('xmlns="http://www.w3.org/2000/svg"');
     const module = await readFile(join(paths.packageDir, 'src', 'icons', 'search.ts'), 'utf8');
     expect(module).toContain('export const SearchIcon = /* @__PURE__ */ createIcon("search", [');
     const index = await readFile(join(paths.packageDir, 'src', 'index.ts'), 'utf8');

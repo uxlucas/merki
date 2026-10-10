@@ -23,7 +23,12 @@ export function parseReviewFile(text: string | null): ReviewFile {
   if (typeof data !== 'object' || data === null || Array.isArray(data)) {
     throw new Error('_review.json must be an object of { name: { status, note, updatedAt } }');
   }
-  return data as ReviewFile;
+  const entries = Object.entries(data as Record<string, unknown>).filter(([, entry]) => {
+    if (typeof entry !== 'object' || entry === null) return false;
+    const status = (entry as { status?: unknown }).status;
+    return status === 'needs-work' || status === 'ok';
+  });
+  return Object.fromEntries(entries) as ReviewFile;
 }
 
 export function applyReview(current: ReviewFile, update: ReviewUpdate, now: Date): ReviewFile {

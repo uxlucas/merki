@@ -54,6 +54,7 @@ export function createIcon(name: string, node: IconNode): MerkiIcon {
         className: ['merki', `merki-${name}`, className].filter(Boolean).join(' '),
         ...a11y,
         ...rest,
+        ...(title ? { 'aria-label': title } : {}),
         strokeWidth: 1.5,
       } as SVGProps<SVGSVGElement>,
       title ? createElement('title', null, title) : null,

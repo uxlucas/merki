@@ -26,6 +26,7 @@ export interface Violation {
 export const NAME_PATTERN = /^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;
 
 const REQUIRED_ROOT: Record<string, string> = {
+  xmlns: 'http://www.w3.org/2000/svg',
   viewBox: '0 0 16 16',
   fill: 'none',
   stroke: 'currentColor',
@@ -33,7 +34,6 @@ const REQUIRED_ROOT: Record<string, string> = {
   'stroke-linecap': 'round',
   'stroke-linejoin': 'round',
 };
-const OPTIONAL_ROOT = new Set(['xmlns']);
 
 const ALLOWED_ATTRS: Record<string, ReadonlySet<string>> = {
   path: new Set(['d', 'fill', 'stroke', 'fill-rule']),
@@ -97,7 +97,7 @@ export function lintSvg(name: string, root: SvgElement): Violation[] {
     }
   }
   for (const key of Object.keys(root.attrs)) {
-    if (!(key in REQUIRED_ROOT) && !OPTIONAL_ROOT.has(key)) add('root-attrs', `<svg> has unexpected attribute "${key}"`);
+    if (!(key in REQUIRED_ROOT)) add('root-attrs', `<svg> has unexpected attribute "${key}"`);
   }
 
   if (root.children.length === 0) add('empty', 'the icon draws nothing');
@@ -130,9 +130,9 @@ export function lintSvg(name: string, root: SvgElement): Violation[] {
     }
 
     const offGrid = [...new Set(values.anchors.filter((v) => !onQuarterGrid(v)))];
-    if (offGrid.length) add('grid', `${label}: ${offGrid.map(fmt).join(', ')} not on the 0.25 grid`);
+    if (offGrid.length) add('grid', `${label}: ${offGrid.map(String).join(', ')} not on the 0.25 grid`);
     const fineHandles = [...new Set(values.handles.filter((v) => !hasAtMostTwoDecimals(v)))];
-    if (fineHandles.length) add('handles', `${label}: handles ${fineHandles.map(fmt).join(', ')} need at most 2 decimals`);
+    if (fineHandles.length) add('handles', `${label}: handles ${fineHandles.map(String).join(', ')} need at most 2 decimals`);
 
     const stroked = (child.attrs.stroke ?? root.attrs.stroke) !== 'none';
     const pad = stroked ? HALF_STROKE : 0;

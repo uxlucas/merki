@@ -46,6 +46,12 @@ describe('createIcon', () => {
     expect(svg.querySelector('title')!.textContent).toBe('Due date');
   });
 
+  it('title wins over a caller aria-label', () => {
+    const svg = svgOf(createElement(CalendarIcon, { title: 'A', 'aria-label': 'B' }));
+    expect(svg.getAttribute('aria-label')).toBe('A');
+    expect(svg.querySelector('title')!.textContent).toBe('A');
+  });
+
   it('aria-label alone still makes it visible to screen readers', () => {
     const svg = svgOf(createElement(CalendarIcon, { 'aria-label': 'Due date' }));
     expect(svg.getAttribute('role')).toBe('img');

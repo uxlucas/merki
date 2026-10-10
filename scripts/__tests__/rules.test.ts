@@ -21,6 +21,11 @@ describe('lintSvg', () => {
     expect(rules(await lint('<path d="M2 2h4"/>', `${ROOT_ATTRS} width="16"`))).toEqual(['root-attrs']);
   });
 
+  it('requires the exact xmlns on the root', async () => {
+    expect(rules(await lint('<path d="M2 2h4"/>', ROOT_ATTRS.replace('xmlns="http://www.w3.org/2000/svg" ', '')))).toEqual(['root-attrs']);
+    expect(rules(await lint('<path d="M2 2h4"/>', ROOT_ATTRS.replace('/svg"', '/svgx"')))).toEqual(['root-attrs']);
+  });
+
   it('reports an empty icon', async () => {
     expect(rules(await lint(''))).toEqual(['empty']);
   });
@@ -50,6 +55,12 @@ describe('lintSvg', () => {
     const violations = await lint('<path d="M2.1 2h4"/><circle cx="8" cy="8" r="4.6"/>');
     expect(rules(violations)).toEqual(['grid']);
     expect(violations.map((v) => v.detail).join(' ')).toMatch(/2\.1.*4\.6/);
+  });
+
+  it('prints raw values in grid messages, not rounded ones', async () => {
+    const violations = await lint('<path d="M2.0004 2h4"/>');
+    expect(rules(violations)).toEqual(['grid']);
+    expect(violations[0].detail).toContain('2.0004');
   });
 
   it('allows two-decimal handles and rejects finer ones', async () => {

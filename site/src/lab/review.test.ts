@@ -13,6 +13,11 @@ describe('parseReviewFile', () => {
     expect(() => parseReviewFile('{ "home": ')).toThrow();
     expect(() => parseReviewFile('[]')).toThrow(/must be an object/);
   });
+
+  it('drops malformed entries so a hand-edited file cannot crash the lab', () => {
+    const text = '{"bell":null,"home":{"status":"ok","note":"","updatedAt":"x"},"tag":5}';
+    expect(parseReviewFile(text)).toEqual({ home: { status: 'ok', note: '', updatedAt: 'x' } });
+  });
 });
 
 describe('applyReview', () => {
