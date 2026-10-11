@@ -280,9 +280,9 @@
     "updatedAt": "2026-10-10T22:44:30.189Z"
   },
   "history": {
-    "status": "needs-work",
-    "note": "The top-left arrowhead creates a heavy junction where the curved stroke meets two perpendicular segments.\nIt has a similar issue to the earlier Refresh design: the arrowhead feels like a hook attached to a curve.\nI'd:\n- Reduce the arrowhead's visual mass slightly.\n- Make the direction of the tip more apparent.\n- Preserve a smoother transition into the circular stroke.",
-    "updatedAt": "2026-10-10T23:28:54.738Z"
+    "status": "ok",
+    "note": "D1 chosen in chat",
+    "updatedAt": "2026-10-11T00:13:56.156Z"
   },
   "circle-check": {
     "status": "ok",
