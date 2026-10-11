@@ -21,7 +21,7 @@
   - Stroke width is locked at 1.5.
   - The npm package is `merki-icons`, not `merki`.
 - Root element of every icon, exactly: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">`
-- Anchors on the 0.25 grid. Handles at most 2 decimals. Ink stays within 1–15 including the 0.75 half-stroke. Allowed elements are path, circle, rect, line. Colors are only `currentColor` or `none`. No transforms, masks, groups or ids.
+- Anchors on the 0.25 grid. Handles at most 2 decimals. Ink stays within 1–15 including the 0.75 half-stroke. Allowed elements are path, circle, rect, line. Colors are only `currentColor` or `none`. `opacity="0.3"` is allowed on path, circle and rect, only on solid shapes (fill currentColor, stroke none), for inactive states such as priority bars (decided 2026-10-11). No transforms, masks, groups or ids.
 - Categories (exact ids): `navigation, actions, status, people, objects, data, communication, system, text, billing`.
 - **Never trace or reuse paths from Linear, Lucide, Heroicons, Phosphor or any other set.** Draw from the construction notes and the shared parts below.
 - **Never run Python** (`python`, `python3`) for edits or checks. Use node/tsx or the Edit tool. A stuck python3 stdin helper blocked Lucas's machine for hours. Before reporting, make sure no process you started is still running.

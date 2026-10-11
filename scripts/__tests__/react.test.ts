@@ -25,6 +25,15 @@ describe('toIconNode', () => {
   });
 });
 
+describe('toIconNode opacity', () => {
+  it('passes opacity through unchanged', async () => {
+    const root = await parseSvg(wrap('<rect x="2.5" y="9.5" width="2.5" height="4.25" rx=".75" fill="currentColor" stroke="none" opacity="0.3"/>'));
+    expect(toIconNode(root)).toEqual([
+      ['rect', { x: '2.5', y: '9.5', width: '2.5', height: '4.25', rx: '.75', fill: 'currentColor', stroke: 'none', opacity: '0.3' }],
+    ]);
+  });
+});
+
 describe('renderIconModule', () => {
   it('emits a pure, typed createIcon call', () => {
     const source = renderIconModule('search', [

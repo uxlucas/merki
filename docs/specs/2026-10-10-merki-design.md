@@ -57,7 +57,7 @@ Merki is an open-source icon library for SaaS products, dashboards, productivity
 - Flat and front-facing. Prefer 0/45/90° angles. The only 3D allowed is a 30° isometric cube (`package`).
 - One metaphor per icon. No letters except text icons (`type`, `bold`, `italic`…).
 - ⚙️ No `transform`, `<g>`, `id`, `class`, `style`, `<mask>`, `<clipPath>`, `<defs>`, `<use>`. Allowed elements: `path`, `circle`, `rect`, `line`.
-- ⚙️ Allowed attributes. path: `d fill stroke fill-rule`. circle: `cx cy r fill stroke stroke-dasharray stroke-dashoffset` (dashes are for `status-dashed`). rect: `x y width height rx fill stroke`. line: `x1 y1 x2 y2`. Root `<svg>`: `xmlns` plus the required `viewBox fill stroke stroke-width stroke-linecap stroke-linejoin`.
+- ⚙️ Allowed attributes. path: `d fill stroke fill-rule opacity`. circle: `cx cy r fill stroke stroke-dasharray stroke-dashoffset opacity` (dashes are for `status-dashed`). rect: `x y width height rx fill stroke opacity`. line: `x1 y1 x2 y2`. Root `<svg>`: `xmlns` plus the required `viewBox fill stroke stroke-width stroke-linecap stroke-linejoin`. `opacity="0.3"` is allowed only on solid shapes, for inactive states such as priority bars (decided 2026-10-11).
 
 **Naming and metadata**
 - ⚙️ kebab-case. Object first, then modifier: `user-plus`, `calendar-check`, `arrow-up-right`.

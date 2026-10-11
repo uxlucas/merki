@@ -51,6 +51,13 @@ describe('lintSvg', () => {
     expect(await lint('<circle cx="8" cy="8" r="2" fill="currentColor" stroke="none"/>')).toEqual([]);
   });
 
+  it('allows opacity 0.3 only on solid shapes', async () => {
+    expect(await lint('<rect x="2.5" y="9.5" width="2.5" height="4.25" rx=".75" fill="currentColor" stroke="none" opacity="0.3"/>')).toEqual([]);
+    expect(await lint('<circle cx="8" cy="8" r="2" fill="currentColor" stroke="none" opacity="0.3"/>')).toEqual([]);
+    expect(rules(await lint('<rect x="2.5" y="9.5" width="2.5" height="4.25" rx=".75" fill="currentColor" stroke="none" opacity="0.5"/>'))).toEqual(['color']);
+    expect(rules(await lint('<path d="M2 2h4" opacity="0.3"/>'))).toEqual(['attributes']);
+  });
+
   it('puts anchors on the quarter grid', async () => {
     const violations = await lint('<path d="M2.1 2h4"/><circle cx="8" cy="8" r="4.6"/>');
     expect(rules(violations)).toEqual(['grid']);

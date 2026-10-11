@@ -38,12 +38,13 @@ const REQUIRED_ROOT: Record<string, string> = {
 };
 
 const ALLOWED_ATTRS: Record<string, ReadonlySet<string>> = {
-  path: new Set(['d', 'fill', 'stroke', 'fill-rule']),
-  circle: new Set(['cx', 'cy', 'r', 'fill', 'stroke', 'stroke-dasharray', 'stroke-dashoffset']),
-  rect: new Set(['x', 'y', 'width', 'height', 'rx', 'fill', 'stroke']),
+  path: new Set(['d', 'fill', 'stroke', 'fill-rule', 'opacity']),
+  circle: new Set(['cx', 'cy', 'r', 'fill', 'stroke', 'stroke-dasharray', 'stroke-dashoffset', 'opacity']),
+  rect: new Set(['x', 'y', 'width', 'height', 'rx', 'fill', 'stroke', 'opacity']),
   line: new Set(['x1', 'y1', 'x2', 'y2']),
 };
 const COLOR_VALUES = new Set(['currentColor', 'none']);
+const DIMMED_OPACITY = '0.3';
 const HALF_STROKE = 0.75;
 const LIMIT_MIN = 1;
 const LIMIT_MAX = 15;
@@ -130,6 +131,14 @@ export function lintSvg(name: string, root: SvgElement): Violation[] {
     for (const key of ['fill', 'stroke']) {
       const value = child.attrs[key];
       if (value !== undefined && !COLOR_VALUES.has(value)) add('color', `${label}: ${key}="${value}" must be currentColor or none`);
+    }
+
+    const opacity = child.attrs.opacity;
+    if (opacity !== undefined) {
+      if (child.attrs.fill !== 'currentColor' || child.attrs.stroke !== 'none') {
+        add('attributes', `${label}: opacity is only allowed on solid shapes (fill currentColor, stroke none)`);
+      }
+      if (opacity !== DIMMED_OPACITY) add('color', `${label}: opacity must be ${DIMMED_OPACITY}`);
     }
 
     let values;
