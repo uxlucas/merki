@@ -4,6 +4,7 @@ packages/merki/svg/
 packages/merki/src/icons/
 packages/merki/src/index.ts
 site/src/data/icons.json
+site/dist-server/
 *.log
 .DS_Store
 sheets/

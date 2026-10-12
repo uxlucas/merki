@@ -17,5 +17,6 @@ jobs:
       - run: npm ci
       - run: npm run lint:icons
       - run: npm run build
+      - run: npm run build -w site
       - run: npm run typecheck
       - run: npm test
