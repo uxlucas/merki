@@ -89,7 +89,7 @@ Checked against ~28 screens from 14 SaaS products on Mobbin (Linear, Notion, Str
 
 `sync` was split from `refresh` at Lucas's review on 2026-10-10: refresh became a single clockwise arrow, and the two-arrow form moved to its own icon. Its † marks it as an addition after the first list, not a Mobbin find.
 
-Out of v1: brand/logo icons (trademark risk), niche domains (medical, maps, weather), more than one AI icon (`sparkle` only).
+Out of v1: brand/logo icons (trademark risk), niche domains (medical, mapping/navigation sets, weather; `map-pin` is in for addresses and locations), more than one AI icon (`sparkle` only).
 
 ## 4. Repo and build
 
