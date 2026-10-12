@@ -8,11 +8,12 @@
 .menu-btn { display: none; }
 
 .index { display: grid; grid-template-columns: 180px minmax(0, 760px); gap: 64px; max-width: 1068px; margin: 0 auto; padding: 0 24px 120px; }
-.sidebar { position: sticky; top: 0; align-self: start; max-height: 100vh; overflow-y: auto; padding: 40px 0; font-size: 12px; }
-.side-item { display: block; color: var(--fg3); line-height: 28px; }
+.sidebar { position: sticky; top: 0; align-self: start; max-height: 100vh; overflow-y: auto; scrollbar-width: none; padding: 40px 0; font-size: 12px; }
+.sidebar::-webkit-scrollbar { display: none; }
+.side-item { display: block; color: var(--fg-nav); line-height: 28px; }
 .side-item:hover { color: var(--fg2); }
 .side-item[aria-current='page'] { color: var(--fg); }
-.side-count { color: var(--fg3); margin-left: 4px; font-variant-numeric: tabular-nums; }
+.side-count { color: var(--fg-nav); margin-left: 4px; font-variant-numeric: tabular-nums; }
 .side-sec { margin-top: 24px; }
 .side-head { display: flex; gap: 8px; align-items: center; line-height: 28px; color: var(--fg); }
 .main { padding: 40px 0 0; min-width: 0; }
