@@ -21,17 +21,27 @@ describe('searchIcons', () => {
     expect(result).not.toContain('arrow-down');
   });
 
-  it('matches tags, aliases and component names', () => {
+  it('matches tags and aliases, and component names with or without hyphens', () => {
     expect(names('pulse')).toContain('activity');
     expect(names('CalendarIcon')).toEqual(['calendar']);
+    expect(names('ArrowUpRightIcon')).toEqual(['arrow-up-right']);
+    const dashed = names('arrow-up');
+    expect(dashed).toContain('arrow-up');
+    expect(dashed).toContain('arrow-up-right');
+  });
+
+  it('treats a standalone "icon" or "icons" as filler', () => {
+    expect(names('calendar icon')).toContain('calendar');
+    expect(names('icon')).toHaveLength(icons.length);
+    expect(names('icons')).toHaveLength(icons.length);
+    expect(names(' Icons icon ')).toHaveLength(icons.length);
   });
 
   it('does not match every icon on letters of the "Icon" suffix', () => {
-    for (const query of ['i', 'c', 'o', 'n', 'ic', 'co', 'on', 'con', 'icon']) {
+    for (const query of ['i', 'c', 'o', 'n', 'ic', 'co', 'on', 'con']) {
       expect(names(query).length, query).toBeLessThan(icons.length);
     }
     expect(names('con').length).toBeLessThan(157);
-    expect(names('icon').length).toBeLessThan(157);
     expect(names('on').length).toBeLessThan(157);
   });
 
