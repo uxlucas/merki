@@ -189,35 +189,36 @@ import { CalendarIcon } from 'merki-icons'
 
 ### Home (`/`), top to bottom
 
-1. **Top nav.** Merki logo (diamond glyph + "merki") on the left. Icons, Craft, Guide and the theme toggle (sun/moon) on the right.
+1. **Top nav.** The logo on the left: Lucas's mark + "merki-icons" set in JetBrains Mono. On hover it glitches once (~300ms): two same-ink slices of the wordmark jitter sideways and the mark twitches with them; no colour; off under reduced motion. Icons, Craft, Guide and the theme toggle (sun/moon) on the right.
 2. **Hero, centered.**
    - Byline: "Brought to you by" + Lucas's mark (`mark-ink.svg` from his brand kit, filled with `currentColor` so it follows the theme) + "Lucas Lima", linking to `https://lucaslima.design`.
-   - Headline: **"157 icons for software people use all day."** About 58px, weight 500, tracking −0.04em, broken after "software". The number comes from the icon data, not hardcoded.
+   - Headline: **"An icon library that obsesses over details"**, set in Host Grotesk, about 58px, weight 500, tracking −0.04em, broken after "that". (Revised 2026-10-12 from "157 icons for software people use all day.")
    - Two paragraphs, centered, max ~560px, verbatim:
      > I wanted a set of icons that felt familiar, but had a little more personality. So I started drawing my own.
      >
      > **merki-icons** is a growing collection of bold, rounded icons for Figma and code. Open source and free to use under the MIT License.
-   - Three equal links in a row: `npm i merki-icons` with a copy button · "Figma community file" ↗ · "GitHub" ↗.
+   - Three equal links in a row: `npm i merki-icons` with a copy button · the full-colour Figma logo + "Figma community file" ↗ · the GitHub mark + "GitHub" + a star-count chip ↗. The star count is fetched in the browser from the GitHub API (cached for the session, faded in once loaded); nothing renders on the server. While the repo is private, or if the request fails, the chip is absent and the link reads "GitHub".
    - "Crafted with **Claude Code** and **Figma**", small and grey.
 3. **Wall band.** A wide grid of the set at 24px with a few icons in the accent blue, fading out at the bottom. It's decoration with a purpose: the set, seen at once.
 4. **The index** (gustavo layout), which starts right under the wall band:
    - **Sidebar** (no logo, since the top nav carries it): Index, Changelog; **Icons** (blue `layout-grid` glyph): All 157 + the ten categories; **Craft** (orange `pencil` glyph): the six cards; **Guide** (pink `book` glyph): Install, React, SVG, Accessibility. Inactive items light grey, the active one near-black. The sidebar is sticky and its links scroll to their sections.
-   - **Icons section:** a toolbar with search ("Search 157 icons", `/` hint) and a 16/20/24 segmented size switch. Below it, one white card per category with its name, its count and a grid of its icons. Clicking an icon opens the drawer.
+   - **Icons section:** a toolbar with search ("Search 157 icons", `/` hint) and a 16/20/24 segmented size switch. Below it, each category gets a heading with its count and a grid of **big icon cards**, 4 across (2 on phones): a tall white card per icon with the icon centred at the chosen size and its name in JetBrains Mono underneath. The open icon's card is outlined in ink. Clicking a card opens the drawer.
+   - **Back to top:** a small round button, bottom right, shown once the hero is out of view; it scrolls to the top (instantly under reduced motion).
    - **Craft section:** the six live demo cards in a 2-column grid (below).
 
 ### Icon drawer and per-icon pages
 
 - **Desktop:** a floating rounded panel on the right (~430px wide, 12px off the viewport edges, radius ~20). The grid stays visible behind it. Opening it pushes `/icons/<name>` onto history; Esc or the close button returns to `/` at the same scroll position. Arrow keys keep moving through icons while it's open, and the drawer follows.
-- **Contents, top to bottom:**
-  - name + `16 × 16`, close button
-  - construction view: the icon large, over the 16px grid and the four keylines from §2, with Keylines and Points toggles. Points shows anchors (squares) and curve handles (dots and lines), parsed from the icon's own SVG.
-  - sizes: 16, 20, 24 in light, and the same three on a dark swatch
-  - in context: the icon in a menu row, a button and an input
-  - actions: **Copy SVG** (primary), **Copy JSX**, **Download**
-  - category chip and tags
-- **Mobile (< 768px):** the drawer becomes a bottom sheet with the name, the large icon, the three sizes and the actions (Copy SVG · JSX · Download). The full construction view and in-context demos live on the per-icon page.
+- **Contents, top to bottom** (revised 2026-10-12, "Tabs" layout):
+  - header: a small category crumb, the name in Host Grotesk, the tags right under it (mono chips), and the close button
+  - one stage shared by three tabs:
+    - **Preview** (default): the icon on a faint checker, with 8 colour swatches + the hex value and a 16–64px size slider
+    - **Construction:** the icon over the 16px grid and the four keylines from §2, with Keylines and Points toggles (anchors and curve handles parsed from the icon's own SVG)
+    - **In context:** the icon in a menu row, a button and an input
+  - actions pinned at the bottom: **Copy SVG** (primary), **Copy JSX**, **Download**, plus a reset button that appears once the colour or size has changed
+- **Mobile (< 768px):** the drawer becomes a bottom sheet with the header, the stage, the tabs and the actions.
 - **Per-icon pages:** every `/icons/<name>` is prerendered as the home page with that icon's drawer open, with its own `<title>` and description, so it can be shared and indexed. On mobile it renders as a full page.
-- **Copy output:** Copy SVG gives the exact optimized SVG the package ships. Copy JSX gives `<NameIcon />` with the export name the package uses. Download saves `<name>.svg`.
+- **Copy output:** with the Preview untouched, Copy SVG gives the exact optimized SVG the package ships, Copy JSX gives `<NameIcon />` with the package's export name, and Download saves `<name>.svg`. Once the colour or size has changed, all three use them: the SVG gets that width/height and its `currentColor` replaced by the hex; the JSX gets `size={…}` and `color="#…"` props.
 
 ### Craft cards (live demos)
 
@@ -246,12 +247,16 @@ Routes: `/guide/install`, `/guide/react`, `/guide/svg`, `/guide/accessibility`, 
 - Arrow keys move through the grid, Enter opens the drawer, Esc closes it.
 - Copy confirms inside the button: it shows ✓ for ~1.2s. No toasts.
 - Size and theme preferences are kept in `localStorage`, wrapped in try/catch, with sensible defaults when storage isn't available.
-- Motion only where something changes place (the drawer, the sheet, card demos on interaction). Fast and ease-out. Respects `prefers-reduced-motion`. Nothing on scroll.
+- **Motion** (revised 2026-10-12, following Emil Kowalski's interface-animation rules): only where something changes place or confirms an action. Transform and opacity only; interruptible CSS transitions for anything that opens and closes; exits ~25% faster and quieter than enters; enter easing `cubic-bezier(0.32, 0.72, 0, 1)`.
+  - Drawer: enters from 16px right with a fade over 240ms; closes with an 8px slide and fade over 180ms, then unmounts. Phone sheet: rises over 280ms, leaves over 200ms. The scrim shares the panel's timing.
+  - Cards: border change on hover (real hover devices only), 0.97 press scale. Copy: the icon cross-fades to ✓. Back-to-top: 200ms fade and rise in, 150ms out. Mobile menu: fades in.
+  - Never animated: arrow-key moves, tab switches, the first page load, theme switches (transitions are paused while the theme flips).
+  - `prefers-reduced-motion` turns all of it off. Nothing animates on scroll.
 
 ### Visual rules
 
 - Off-white page (`#fafafa`), white cards with a hairline border (`#ececef`) and barely any shadow, radius ~16–18. Demo cards use the double border: a 6px-padded outer card around an inner stage.
-- Inter, 16px body in the hero and 14–15px in the index. Hierarchy comes from weight and grey level. The hero headline is the one big size jump.
+- **Type** (revised 2026-10-12): Inter for text (16px body in the hero, 14–15px in the index); **Host Grotesk** for headings (hero headline, section titles, the drawer name, guide headings); **JetBrains Mono** for the wordmark, icon names, tags and code. All three self-hosted from npm (`@fontsource-variable/*`, SIL OFL 1.1, which allows use in a logo). Hierarchy comes from weight and grey level. The hero headline is the one big size jump.
 - **Blue means "how it's built":** construction overlays, keylines, points, and the highlighted icons in the wall band. Section glyphs in the sidebar are the only other color (blue, orange, pink).
 - **Themes:** light, and dark in **cool slate** (background `#0e0f13`, cards `#16181d`, borders `#25272e`, text `#e6e7eb`). Both designed through CSS variables, not inverted. The site follows the system theme by default; the toggle overrides it and remembers.
 - **Mobile:** the hero stacks and the three links go full width. The sidebar folds into a sticky bar with search and a row of category chips. Phone width has a 16px side gutter and no horizontal scroll.
