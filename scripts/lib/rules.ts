@@ -38,13 +38,14 @@ const REQUIRED_ROOT: Record<string, string> = {
 };
 
 const ALLOWED_ATTRS: Record<string, ReadonlySet<string>> = {
-  path: new Set(['d', 'fill', 'stroke', 'fill-rule', 'opacity']),
-  circle: new Set(['cx', 'cy', 'r', 'fill', 'stroke', 'stroke-dasharray', 'stroke-dashoffset', 'opacity']),
-  rect: new Set(['x', 'y', 'width', 'height', 'rx', 'fill', 'stroke', 'opacity']),
-  line: new Set(['x1', 'y1', 'x2', 'y2']),
+  path: new Set(['d', 'fill', 'stroke', 'fill-rule', 'stroke-width', 'opacity']),
+  circle: new Set(['cx', 'cy', 'r', 'fill', 'stroke', 'stroke-dasharray', 'stroke-dashoffset', 'stroke-width', 'opacity']),
+  rect: new Set(['x', 'y', 'width', 'height', 'rx', 'fill', 'stroke', 'stroke-width', 'opacity']),
+  line: new Set(['x1', 'y1', 'x2', 'y2', 'stroke-width']),
 };
 const COLOR_VALUES = new Set(['currentColor', 'none']);
 const DIMMED_OPACITY = '0.3';
+const INTERIOR_STROKE_WIDTH = '1.25';
 const HALF_STROKE = 0.75;
 const LIMIT_MIN = 1;
 const LIMIT_MAX = 15;
@@ -141,6 +142,15 @@ export function lintSvg(name: string, root: SvgElement): Violation[] {
       if (opacity !== DIMMED_OPACITY) add('color', `${label}: opacity must be ${DIMMED_OPACITY}`);
     }
 
+    const stroked = (child.attrs.stroke ?? root.attrs.stroke) !== 'none';
+    const strokeWidth = child.attrs['stroke-width'];
+    if (strokeWidth !== undefined) {
+      if (!stroked) add('attributes', `${label}: stroke-width on an unstroked shape`);
+      if (strokeWidth !== INTERIOR_STROKE_WIDTH) {
+        add('attributes', `${label}: stroke-width may only be ${INTERIOR_STROKE_WIDTH} (interior optical weight)`);
+      }
+    }
+
     let values;
     let box;
     try {
@@ -157,7 +167,6 @@ export function lintSvg(name: string, root: SvgElement): Violation[] {
     const fineHandles = [...new Set(values.handles.filter((v) => !hasAtMostTwoDecimals(v)))];
     if (fineHandles.length) add('handles', `${label}: handles ${fineHandles.map(String).join(', ')} need at most 2 decimals`);
 
-    const stroked = (child.attrs.stroke ?? root.attrs.stroke) !== 'none';
     const pad = stroked ? HALF_STROKE : 0;
     const [minX, minY, maxX, maxY] = [box[0] - pad, box[1] - pad, box[2] + pad, box[3] + pad];
     const edges: string[] = [];

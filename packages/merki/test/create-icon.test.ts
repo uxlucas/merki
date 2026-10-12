@@ -79,6 +79,17 @@ describe('createIcon', () => {
     expect(svg.getAttribute('stroke-width')).toBe('1.5');
   });
 
+  it('renders a 1.25 interior line weight while the root stays 1.5', () => {
+    const GlobeIcon = createIcon('globe-test', [
+      ['circle', { cx: '8', cy: '8', r: '6' }],
+      ['path', { d: 'M2 8h12', strokeWidth: '1.25' }],
+    ]);
+    const svg = svgOf(createElement(GlobeIcon));
+    expect(svg.getAttribute('stroke-width')).toBe('1.5');
+    expect(svg.querySelector('path')!.getAttribute('stroke-width')).toBe('1.25');
+    expect(svg.querySelector('circle')!.getAttribute('stroke-width')).toBeNull();
+  });
+
   it('merges className and passes other props through', () => {
     const extra = { 'data-testid': 'cal' } as Record<string, string>;
     const svg = svgOf(createElement(CalendarIcon, { className: 'text-muted', style: { opacity: 0.5 }, ...extra }));

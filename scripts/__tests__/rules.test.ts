@@ -38,8 +38,15 @@ describe('lintSvg', () => {
   it('rejects attributes outside the allow-list', async () => {
     expect(rules(await lint('<path d="M2 2h4" transform="rotate(45 8 8)"/>'))).toEqual(['attributes']);
     expect(rules(await lint('<path d="M2 2h4" id="a"/>'))).toEqual(['attributes']);
+    // stroke-width is allowed only as exactly 1.25 (see the optical weight test)
     expect(rules(await lint('<path d="M2 2h4" stroke-width="2"/>'))).toEqual(['attributes']);
     expect(rules(await lint('<path d="M2 2h4" stroke-dasharray="1 1"/>'))).toEqual(['attributes']);
+  });
+
+  it('allows the 1.25 optical weight on stroked interior lines only', async () => {
+    expect(await lint('<circle cx="8" cy="8" r="6"/><path d="M2 8h12" stroke-width="1.25"/>')).toEqual([]);
+    expect(rules(await lint('<path d="M2 8h12" stroke-width="1"/>'))).toEqual(['attributes']);
+    expect(rules(await lint('<circle cx="8" cy="8" r="2" fill="currentColor" stroke="none" stroke-width="1.25"/>'))).toEqual(['attributes']);
   });
 
   it('allows dashes on circles', async () => {

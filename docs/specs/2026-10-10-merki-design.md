@@ -35,6 +35,7 @@ Merki is an open-source icon library for SaaS products, dashboards, productivity
 **Stroke**
 - ⚙️ `stroke-width="1.5"`, `stroke-linecap="round"`, `stroke-linejoin="round"`. No other weights.
 - ⚙️ Only `currentColor` or `none` for fill and stroke. No other color values.
+- ⚙️ Interior detail lines (inside an enclosing shape) may use `stroke-width="1.25"` as an optical correction; outer silhouettes stay 1.5 (decided 2026-10-12, first used by globe).
 
 **Keylines** (centerline dimensions)
 - circle: diameter 12
@@ -57,7 +58,7 @@ Merki is an open-source icon library for SaaS products, dashboards, productivity
 - Flat and front-facing. Prefer 0/45/90° angles. The only 3D allowed is a 30° isometric cube (`package`).
 - One metaphor per icon. No letters except text icons (`type`, `bold`, `italic`…).
 - ⚙️ No `transform`, `<g>`, `id`, `class`, `style`, `<mask>`, `<clipPath>`, `<defs>`, `<use>`. Allowed elements: `path`, `circle`, `rect`, `line`.
-- ⚙️ Allowed attributes. path: `d fill stroke fill-rule opacity`. circle: `cx cy r fill stroke stroke-dasharray stroke-dashoffset opacity` (dashes are for `status-dashed`). rect: `x y width height rx fill stroke opacity`. line: `x1 y1 x2 y2`. Root `<svg>`: `xmlns` plus the required `viewBox fill stroke stroke-width stroke-linecap stroke-linejoin`. `opacity="0.3"` is allowed only on solid shapes, for inactive states such as priority bars (decided 2026-10-11).
+- ⚙️ Allowed attributes. path: `d fill stroke fill-rule stroke-width (1.25 only) opacity`. circle: `cx cy r fill stroke stroke-dasharray stroke-dashoffset stroke-width (1.25 only) opacity` (dashes are for `status-dashed`). rect: `x y width height rx fill stroke stroke-width (1.25 only) opacity`. line: `x1 y1 x2 y2 stroke-width (1.25 only)`. Root `<svg>`: `xmlns` plus the required `viewBox fill stroke stroke-width stroke-linecap stroke-linejoin`. `opacity="0.3"` is allowed only on solid shapes, for inactive states such as priority bars (decided 2026-10-11).
 
 **Naming and metadata**
 - ⚙️ kebab-case. Object first, then modifier: `user-plus`, `calendar-check`, `arrow-up-right`.
