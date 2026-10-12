@@ -19,7 +19,7 @@ const SWATCHES: Array<{ label: string; value: string | null }> = [
 const TABS = ['Preview', 'Construction', 'In context'] as const;
 type Tab = (typeof TABS)[number];
 
-export function Drawer({ icon, onClose }: { icon: SiteIcon; onClose: () => void }) {
+export function Drawer({ icon, state = 'open', onClose }: { icon: SiteIcon; state?: 'open' | 'closing'; onClose: () => void }) {
   const id = useId();
   const [tab, setTab] = useState<Tab>('Preview');
   const [look, setLook] = useState<Look>(DEFAULT_LOOK);
@@ -48,8 +48,8 @@ export function Drawer({ icon, onClose }: { icon: SiteIcon; onClose: () => void 
 
   return (
     <>
-      <div className="scrim" aria-hidden="true" onClick={onClose} />
-      <aside className="drawer" aria-label={`${icon.name} icon`}>
+      <div className="scrim" data-state={state} aria-hidden="true" onClick={onClose} />
+      <aside className="drawer" data-state={state} aria-label={`${icon.name} icon`} aria-hidden={state === 'closing' || undefined} inert={state === 'closing' || undefined}>
         <header className="drawer-head">
           <div>
             <p className="drawer-crumb">{categoryLabel(icon.category)}</p>

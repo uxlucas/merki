@@ -30,6 +30,13 @@ code, kbd, pre { font-family: var(--mono); }
 .menu-item kbd { font: 10.5px var(--font); color: var(--fg3); }
 .menu-item:hover, .menu-item.hover { background: var(--hov); color: var(--fg); }
 .menu:hover .menu-item.hover:not(:hover) { background: none; color: var(--fg2); }
+.swap { display: grid; }
+.swap > * { grid-area: 1 / 1; transition: opacity 150ms var(--ease-out), scale 150ms var(--ease-out); }
+.swap .swap-b, .swap[data-state='copied'] .swap-a { opacity: 0; scale: 0.6; }
+.swap[data-state='copied'] .swap-b { opacity: 1; scale: 1; }
+.action, .hero-link { transition: scale 150ms var(--ease-out); }
+.cell:active, .action:active, button.hero-link:active, .to-top:active { scale: 0.97; }
+.theme-switching, .theme-switching * { transition: none !important; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; }
 }

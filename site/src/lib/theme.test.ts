@@ -46,6 +46,18 @@ describe('theme', () => {
     expect(() => safeSet(THEME_KEY, 'dark')).not.toThrow();
   });
 
+  it('pauses transitions while the theme flips', () => {
+    const frames: FrameRequestCallback[] = [];
+    vi.stubGlobal('requestAnimationFrame', (cb: FrameRequestCallback) => frames.push(cb));
+    document.documentElement.dataset.theme = 'light';
+    toggleTheme();
+    expect(document.documentElement.classList.contains('theme-switching')).toBe(true);
+    frames.shift()!(0);
+    frames.shift()!(0);
+    expect(document.documentElement.classList.contains('theme-switching')).toBe(false);
+    vi.unstubAllGlobals();
+  });
+
   it('uses the same key as the bootstrap script in index.html', () => {
     const html = readFileSync(resolve(import.meta.dirname, '../../index.html'), 'utf8');
     expect(html).toContain(`localStorage.getItem('${THEME_KEY}')`);

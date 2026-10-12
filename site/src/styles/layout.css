@@ -50,6 +50,8 @@
   .side-head { line-height: 24px; }
 }
 
+@keyframes menu-in { from { opacity: 0; transform: translateY(-6px); } }
+@media (max-width: 767px) { .sidebar.open { animation: menu-in 200ms var(--ease-out); } }
 .to-top { position: fixed; right: 24px; bottom: 24px; z-index: 15; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); color: var(--fg2); box-shadow: 0 4px 14px var(--shadow); opacity: 0; transform: translateY(8px); pointer-events: none; transition: opacity 150ms var(--ease-in), transform 150ms var(--ease-in); }
 .to-top[data-visible='true'] { opacity: 1; transform: none; pointer-events: auto; transition-duration: 200ms; transition-timing-function: var(--ease-out); }
 @media (max-width: 767px) { .to-top { right: 16px; bottom: 16px; } }

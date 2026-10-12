@@ -8,6 +8,7 @@ import { Layout } from '../components/Layout';
 import { WallBand } from '../components/WallBand';
 import { CraftCards } from '../craft/CraftCards';
 import { iconByName } from '../data/icons';
+import { usePresence } from '../lib/presence';
 import { useRouter } from '../lib/router';
 
 const fromGrid = () => Boolean((window.history.state as { fromGrid?: boolean } | null)?.fromGrid);
@@ -16,6 +17,7 @@ export function Home({ openIcon }: { openIcon: string | null }) {
   const { navigate } = useRouter();
   const [query, setQuery] = useState('');
   const icon = openIcon ? (iconByName.get(openIcon) ?? null) : null;
+  const presence = usePresence(icon, 180);
 
   const open = (name: string) => {
     // Switching icons while open replaces and keeps the entry's state, so Back/Close behaves as it did when the drawer opened.
@@ -53,7 +55,7 @@ export function Home({ openIcon }: { openIcon: string | null }) {
       <section id="icons" className="sec" aria-labelledby="icons-title">
         <h2 className="sec-title" id="icons-title"><LayoutGridIcon size={14} className="glyph-blue" />Icons</h2>
         <Browser query={query} onQuery={setQuery} selected={openIcon} onOpen={open} onMove={move} />
-        {icon && <Drawer icon={icon} onClose={close} />}
+        {presence.current && <Drawer icon={presence.current} state={presence.state} onClose={close} />}
       </section>
       <section id="craft" className="sec" aria-labelledby="craft-title">
         <h2 className="sec-title" id="craft-title"><PencilIcon size={14} className="glyph-orange" />Craft</h2>

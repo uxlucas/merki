@@ -16,8 +16,10 @@ export function applyTheme(theme: Theme, root: HTMLElement = document.documentEl
 
 export function toggleTheme(root: HTMLElement = document.documentElement): Theme {
   const next: Theme = currentTheme(root) === 'dark' ? 'light' : 'dark';
+  root.classList.add('theme-switching');
   applyTheme(next, root);
   safeSet(THEME_KEY, next);
+  requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('theme-switching')));
   return next;
 }
 

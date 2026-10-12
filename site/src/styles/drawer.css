@@ -35,6 +35,12 @@
 .action.primary { background: var(--inv); color: var(--inv-fg); border-color: var(--inv); }
 @media (hover: hover) and (pointer: fine) { .action:not(.primary):hover { border-color: var(--fg3); } }
 
+.drawer { animation: drawer-in 240ms var(--ease-out); transition: opacity 180ms var(--ease-in), transform 180ms var(--ease-in); will-change: transform; }
+.drawer[data-state='closing'] { opacity: 0; transform: translateX(8px); pointer-events: none; }
+@keyframes drawer-in { from { opacity: 0; transform: translateX(16px); } }
+@keyframes scrim-in { from { opacity: 0; } }
+@keyframes sheet-in { from { opacity: 0; transform: translateY(24px); } }
+
 @media (max-width: 767px) {
   .scrim { display: block; position: fixed; inset: 0; z-index: 19; background: rgba(0, 0, 0, 0.25); }
   .drawer { top: auto; left: 0; right: 0; bottom: 0; width: auto; max-height: 88vh; border-radius: 22px 22px 0 0; border-width: 1px 0 0; padding: 10px 16px 20px; }
@@ -42,4 +48,8 @@
   .stage { height: 170px; }
   .stage .construction { width: 150px; height: 150px; }
   .context { flex-wrap: wrap; }
+  .scrim { animation: scrim-in 280ms var(--ease-out); transition: opacity 200ms var(--ease-in); }
+  .scrim[data-state='closing'] { opacity: 0; pointer-events: none; }
+  .drawer { animation: sheet-in 280ms var(--ease-out); transition-duration: 200ms; }
+  .drawer[data-state='closing'] { transform: translateY(24px); }
 }

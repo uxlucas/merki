@@ -51,6 +51,14 @@ describe('icon drawer on the home page', () => {
     expect(window.location.pathname).toBe('/');
   });
 
+  it('keeps the drawer mounted while it animates out, then removes it', async () => {
+    start('/icons/calendar'); // a direct visit closes with navigate('/'), which is synchronous; history.back() would settle later
+    fireEvent.keyDown(document.body, { key: 'Escape' });
+    const aside = document.querySelector('aside.drawer');
+    expect(aside?.getAttribute('data-state')).toBe('closing');
+    await waitFor(() => expect(document.querySelector('aside.drawer')).toBeNull());
+  });
+
   it('closes when the visitor presses back', async () => {
     start('/');
     fireEvent.click(cell('calendar'));

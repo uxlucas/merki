@@ -11,7 +11,10 @@ function NpmLink() {
     <button type="button" className="hero-link" aria-label="Copy npm i merki-icons" onClick={() => copy(LINKS.npmCommand)}>
       <TerminalIcon className="lead" />
       <code className="label">{LINKS.npmCommand}</code>
-      <span className="trail">{state === 'copied' ? <CheckIcon size={14} /> : <CopyIcon size={14} />}</span>
+      <span className="trail swap" data-state={state === 'copied' ? 'copied' : 'idle'} aria-hidden="true">
+        <CopyIcon size={14} className="swap-a" />
+        <CheckIcon size={14} className="swap-b" />
+      </span>
       {state === 'failed' && <span className="trail-text">Couldn't copy</span>}
       <span className="sr-only" aria-live="polite">{state === 'copied' ? 'Copied' : state === 'failed' ? "Couldn't copy" : ''}</span>
     </button>
