@@ -13,6 +13,8 @@ function Where() {
       <button onClick={() => navigate('/icons/bell', { replace: true })}>swap</button>
       <Link to="/guide/react">guide</Link>
       <Link to="/#craft">craft</Link>
+      <Link to="/changelog" target="_blank">blank</Link>
+      <Link to="/changelog" download>save</Link>
     </div>
   );
 }
@@ -65,5 +67,12 @@ describe('router', () => {
     fireEvent.click(screen.getByText('craft'));
     expect(screen.getByTestId('path').textContent).toBe('/');
     expect(screen.getByTestId('hash').textContent).toBe('craft');
+  });
+
+  it('leaves target and download links to the browser', () => {
+    render(<RouterProvider initialPath="/"><Where /></RouterProvider>);
+    expect(fireEvent.click(screen.getByText('blank'))).toBe(true);
+    expect(fireEvent.click(screen.getByText('save'))).toBe(true);
+    expect(screen.getByTestId('path').textContent).toBe('/');
   });
 });

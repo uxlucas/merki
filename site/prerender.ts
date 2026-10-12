@@ -1,4 +1,4 @@
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -48,7 +48,8 @@ export function prerender({ distDir, paths, render, siteUrl }: PrerenderInput): 
   return paths.length + 1;
 }
 
-const isMain = Boolean(process.argv[1]) && import.meta.url === pathToFileURL(process.argv[1]).href;
+// Compare real paths: on Windows argv[1] and import.meta.url can differ in casing or junctions.
+const isMain = Boolean(process.argv[1]) && realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1]);
 if (isMain) {
   const here = dirname(fileURLToPath(import.meta.url));
   const server = (await import(pathToFileURL(join(here, 'dist-server', 'entry-server.js')).href)) as {

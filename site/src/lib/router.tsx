@@ -75,6 +75,8 @@ export function Link({ to, onNavigate, onClick, ...rest }: LinkProps) {
   const handle = (event: MouseEvent<HTMLAnchorElement>) => {
     onClick?.(event);
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    // New tabs and downloads belong to the browser.
+    if ((rest.target && rest.target !== '_self') || rest.download !== undefined) return;
     event.preventDefault();
     onNavigate?.();
     const next = split(to);
