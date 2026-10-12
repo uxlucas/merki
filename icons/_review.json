@@ -528,5 +528,50 @@
     "status": "ok",
     "note": "",
     "updatedAt": "2026-10-11T13:48:50.584Z"
+  },
+  "thumbs-up": {
+    "status": "ok",
+    "note": "approved in chat",
+    "updatedAt": "2026-10-12T05:22:07.122Z"
+  },
+  "video": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-11T16:08:33.367Z"
+  },
+  "at-sign": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-11T16:08:34.817Z"
+  },
+  "mail": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-11T16:08:36.417Z"
+  },
+  "megaphone": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-11T16:08:37.745Z"
+  },
+  "message": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-11T16:08:39.118Z"
+  },
+  "messages": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-11T16:08:42.419Z"
+  },
+  "phone": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-11T16:08:43.653Z"
+  },
+  "smile": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-11T16:08:45.330Z"
   }
 }
