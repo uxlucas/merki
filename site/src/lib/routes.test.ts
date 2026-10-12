@@ -48,7 +48,7 @@ describe('allPaths', () => {
 describe('headFor / headTags', () => {
   it('writes a title, description and canonical url per page', () => {
     const home = headFor({ kind: 'home' }, '/', 157, 'https://x.test');
-    expect(home.title).toBe('Merki · 157 icons for software people use all day');
+    expect(home.title).toBe('Merki · An icon library that obsesses over details');
     expect(home.canonical).toBe('https://x.test/');
     const icon = headFor({ kind: 'icon', name: 'calendar' }, '/icons/calendar/', 157, 'https://x.test');
     expect(icon.title).toBe('calendar icon · Merki');

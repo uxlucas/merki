@@ -5,8 +5,8 @@ describe('render', () => {
   it('renders home', () => {
     const page = render('/');
     expect(page.status).toBe(200);
-    expect(page.html).toContain('157 icons for software');
-    expect(page.head).toContain('<title>Merki · 157 icons for software people use all day</title>');
+    expect(page.html).toContain('An icon library that');
+    expect(page.head).toContain('<title>Merki · An icon library that obsesses over details</title>');
   });
 
   it('renders an icon page with its drawer open', () => {

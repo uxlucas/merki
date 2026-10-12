@@ -5,6 +5,8 @@ export const LINKS: {
   npmCommand: string;
   npmPackage: string;
   github: string;
+  /** owner/name of the GitHub repo, for the star count. */
+  githubRepo: string;
   /** null until the Figma Community file is published: the link renders but goes nowhere. */
   figma: string | null;
   portfolio: string;
@@ -12,6 +14,7 @@ export const LINKS: {
   npmCommand: 'npm i merki-icons',
   npmPackage: 'https://www.npmjs.com/package/merki-icons',
   github: 'https://github.com/uxlucas/merki',
+  githubRepo: 'uxlucas/merki',
   figma: null,
   portfolio: 'https://lucaslima.design',
 };

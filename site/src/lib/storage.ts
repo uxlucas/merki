@@ -21,3 +21,27 @@ export function safeSet(key: string, value: string): void {
     // Storage is blocked: the choice still holds for this page view.
   }
 }
+
+function session(): Storage | null {
+  try {
+    return typeof window === 'undefined' ? null : window.sessionStorage;
+  } catch {
+    return null;
+  }
+}
+
+export function safeSessionGet(key: string): string | null {
+  try {
+    return session()?.getItem(key) ?? null;
+  } catch {
+    return null;
+  }
+}
+
+export function safeSessionSet(key: string, value: string): void {
+  try {
+    session()?.setItem(key, value);
+  } catch {
+    // Storage is blocked: fetch again next time.
+  }
+}

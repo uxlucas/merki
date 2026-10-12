@@ -50,7 +50,7 @@ export function headFor(route: Route, path: string, count: number, siteUrl: stri
   const canonical = `${siteUrl}${p}`;
   switch (route.kind) {
     case 'home':
-      return { title: `Merki · ${count} icons for software people use all day`, description: HOME_DESCRIPTION, canonical };
+      return { title: 'Merki · An icon library that obsesses over details', description: HOME_DESCRIPTION, canonical };
     case 'icon':
       return {
         title: `${route.name} icon · Merki`,
