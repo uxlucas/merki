@@ -33,7 +33,7 @@ Merki is an open-source icon library for SaaS products, dashboards, productivity
 - ⚙️ Bézier handles (curve control points) use at most 2 decimals. Smooth curves need finer handles than the anchor grid allows.
 
 **Stroke**
-- ⚙️ `stroke-width="1.5"`, `stroke-linecap="round"`, `stroke-linejoin="round"`. No other weights.
+- ⚙️ `stroke-width="1.5"`, `stroke-linecap="round"`, `stroke-linejoin="round"`. No other weights, except the 1.25 interior optical weight below.
 - ⚙️ Only `currentColor` or `none` for fill and stroke. No other color values.
 - ⚙️ Interior detail lines (inside an enclosing shape) may use `stroke-width="1.25"` as an optical correction; outer silhouettes stay 1.5 (decided 2026-10-12, first used by globe).
 
