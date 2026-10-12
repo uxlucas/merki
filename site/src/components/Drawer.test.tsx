@@ -28,7 +28,18 @@ describe('Drawer', () => {
     expect(screen.getAllByRole('tab')[1].getAttribute('aria-selected')).toBe('true');
     expect(screen.getByRole('button', { name: 'Keylines' })).toBeTruthy();
     fireEvent.click(screen.getAllByRole('tab')[2]);
-    expect(document.querySelector('.stage')!.textContent).toContain('Inbox');
+    expect(screen.getByRole('tabpanel').textContent).toContain('Inbox');
+  });
+
+  it('keeps each tab\'s controls inside its panel, and swatches follow Home and End', () => {
+    setup();
+    fireEvent.keyDown(screen.getByRole('radio', { name: 'Default' }), { key: 'End' });
+    expect(screen.getByRole('radio', { name: 'Violet' }).getAttribute('aria-checked')).toBe('true');
+    fireEvent.keyDown(screen.getByRole('radio', { name: 'Violet' }), { key: 'Home' });
+    expect(screen.getByRole('radio', { name: 'Default' }).getAttribute('aria-checked')).toBe('true');
+    fireEvent.click(screen.getAllByRole('tab')[1]);
+    expect(within(screen.getByRole('tabpanel')).getByRole('button', { name: 'Points' })).toBeTruthy();
+    expect(screen.getByRole('tabpanel').querySelector('.construction')).toBeTruthy();
   });
 
   it('previews a colour and a size, copies them, and resets', () => {

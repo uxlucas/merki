@@ -38,10 +38,10 @@ export function Drawer({ icon, onClose }: { icon: SiteIcon; onClose: () => void 
   };
 
   const swatchKey = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
-    const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[event.key];
-    if (step === undefined) return;
+    const target = { ArrowRight: index + 1, ArrowDown: index + 1, ArrowLeft: index - 1, ArrowUp: index - 1, Home: 0, End: SWATCHES.length - 1 }[event.key];
+    if (target === undefined) return;
     event.preventDefault();
-    const nextIndex = (index + step + SWATCHES.length) % SWATCHES.length;
+    const nextIndex = (target + SWATCHES.length) % SWATCHES.length;
     setLook((l) => ({ ...l, color: SWATCHES[nextIndex].value }));
     (event.currentTarget.parentElement?.children[nextIndex] as HTMLElement | undefined)?.focus();
   };
@@ -65,36 +65,6 @@ export function Drawer({ icon, onClose }: { icon: SiteIcon; onClose: () => void 
           </button>
         </header>
 
-        <div className="stage">
-          {tab === 'Preview' && (
-            <div className="preview">
-              <Icon component={icon.component} size={look.size} color={look.color ?? undefined} />
-            </div>
-          )}
-          {tab === 'Construction' && (
-            <>
-              <Construction svg={icon.svg} size={196} keylines={keylines} points={points} handles={points} />
-              <div className="stage-toggles">
-                <button type="button" className="pill" aria-pressed={keylines} onClick={() => setKeylines((on) => !on)}>Keylines</button>
-                <button type="button" className="pill" aria-pressed={points} onClick={() => setPoints((on) => !on)}>Points</button>
-              </div>
-            </>
-          )}
-          {tab === 'In context' && (
-            <div className="context">
-              <div className="menu">
-                <div className="menu-item"><InboxIcon /><span>Inbox</span></div>
-                <div className="menu-item hover"><Icon component={icon.component} /><span>{icon.name}</span></div>
-                <div className="menu-item"><TagIcon /><span>Labels</span></div>
-              </div>
-              <div className="context-col">
-                <span className="ctx-btn"><Icon component={icon.component} />Action</span>
-                <span className="ctx-input"><Icon component={icon.component} /><span>Search or type…</span></span>
-              </div>
-            </div>
-          )}
-        </div>
-
         <div className="tabs" role="tablist" aria-label="View">
           {TABS.map((name, index) => (
             <button
@@ -116,7 +86,29 @@ export function Drawer({ icon, onClose }: { icon: SiteIcon; onClose: () => void 
           ))}
         </div>
 
-        <div className="tab-panel" role="tabpanel" id={`${id}-panel`} aria-labelledby={`${id}-tab-${TABS.indexOf(tab)}`}>
+        <div className="tab-panel" role="tabpanel" id={`${id}-panel`} tabIndex={0} aria-labelledby={`${id}-tab-${TABS.indexOf(tab)}`}>
+          <div className="stage">
+            {tab === 'Preview' && (
+              <div className="preview">
+                <Icon component={icon.component} size={look.size} color={look.color ?? undefined} />
+              </div>
+            )}
+            {tab === 'Construction' && <Construction svg={icon.svg} size={196} keylines={keylines} points={points} handles={points} />}
+            {tab === 'In context' && (
+              <div className="context">
+                <div className="menu">
+                  <div className="menu-item"><InboxIcon /><span>Inbox</span></div>
+                  <div className="menu-item hover"><Icon component={icon.component} /><span>{icon.name}</span></div>
+                  <div className="menu-item"><TagIcon /><span>Labels</span></div>
+                </div>
+                <div className="context-col">
+                  <span className="ctx-btn"><Icon component={icon.component} />Action</span>
+                  <span className="ctx-input"><Icon component={icon.component} /><span>Search or type…</span></span>
+                </div>
+              </div>
+            )}
+          </div>
+
           {tab === 'Preview' && (
             <div className="look">
               <div className="swatches" role="radiogroup" aria-label="Colour">
@@ -151,7 +143,15 @@ export function Drawer({ icon, onClose }: { icon: SiteIcon; onClose: () => void 
               </label>
             </div>
           )}
-          {tab === 'Construction' && <p className="tab-note">The 16px grid and the four keylines every icon is drawn on.</p>}
+          {tab === 'Construction' && (
+            <>
+              <div className="tab-controls">
+                <button type="button" className="pill" aria-pressed={keylines} onClick={() => setKeylines((on) => !on)}>Keylines</button>
+                <button type="button" className="pill" aria-pressed={points} onClick={() => setPoints((on) => !on)}>Points</button>
+              </div>
+              <p className="tab-note">The 16px grid and the four keylines every icon is drawn on.</p>
+            </>
+          )}
           {tab === 'In context' && <p className="tab-note">At 16px, where it will live: a menu row, a button, an input.</p>}
         </div>
 
