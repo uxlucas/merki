@@ -1,5 +1,6 @@
 import { LayoutGridIcon, PencilIcon } from 'merki-icons';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { BackToTop } from '../components/BackToTop';
 import { Browser } from '../components/Browser';
 import { Drawer } from '../components/Drawer';
 import { Hero } from '../components/Hero';
@@ -64,6 +65,7 @@ export function Home({ openIcon }: { openIcon: string | null }) {
         <p className="sec-lede">How the set is built, shown rather than told.</p>
         <CraftCards />
       </section>
+      <BackToTop watch=".hero" />
     </Layout>
   );
 }

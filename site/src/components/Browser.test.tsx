@@ -25,7 +25,8 @@ afterEach(() => {
 describe('Browser', () => {
   it('shows every icon in its category card', () => {
     render(<Harness />);
-    expect(screen.getAllByRole('button', { name: /^[a-z0-9-]+$/ }).filter((b) => b.classList.contains('cell'))).toHaveLength(157);
+    expect(document.querySelectorAll('.cell')).toHaveLength(157);
+    expect(screen.getByRole('button', { name: 'calendar' }).textContent).toBe('calendar');
     expect(screen.getByRole('heading', { name: /Navigation 22/ })).toBeTruthy();
   });
 

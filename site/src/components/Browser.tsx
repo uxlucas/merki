@@ -131,13 +131,13 @@ export function Browser({ query, onQuery, selected, onOpen, onMove }: BrowserPro
                     type="button"
                     className="cell"
                     data-name={icon.name}
-                    aria-label={icon.name}
                     aria-current={selected === icon.name ? 'true' : undefined}
                     tabIndex={icon.name === tabStop ? 0 : -1}
                     onFocus={() => setActive(icon.name)}
                     onClick={() => onOpen(icon.name)}
                   >
                     <Icon component={icon.component} size={size} />
+                    <span className="cell-name">{icon.name}</span>
                   </button>
                 ))}
               </div>
