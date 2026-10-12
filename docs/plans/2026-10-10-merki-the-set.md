@@ -799,3 +799,25 @@ Every batch task follows the same steps. The task text lists only what differs: 
 
 - **Site:** home, icon panel, craft cards, guide (spec §6).
 - **Package polish + Figma + 1.0:** LICENSE in the package, types field, README, Figma sync, `RELEASE.md`, publish (spec §7–9).
+
+---
+
+### Task 15: High-frequency additions (11), added 2026-10-12
+
+Lucas asked for these before the site. He decided: no new sidebar, `funnel` is its own icon next to `filter`, and `circle-plus` is an outline. The set grows from 146 to 157.
+
+Update `icons/_set.json`, the count in `scripts/__tests__/manifest.test.ts`, and spec §3 (row counts and the list, plus the "146" mentions at spec lines 11, 72 and 186) to match. Then follow the batch steps.
+
+| icon | category | construction | tags · aliases |
+|---|---|---|---|
+| external-link | navigation | square frame open at the top-right (like `square-pen`'s frame) + an arrow out of the gap, using `arrow-up-right`'s construction, scaled | external, open, new-tab · new-tab |
+| dashboard | navigation | four rounded tiles of mixed sizes (e.g. a tall left tile, two right tiles of different heights). Must read differently from `layout-grid` | dashboard, overview, home · overview |
+| grip-vertical | actions | drag handle: six solid dots (r 1) in 2 close columns × 3 rows. Columns closer together than rows, narrow overall, so it reads as a grip and not a keypad | drag, handle, reorder, grip · drag-handle |
+| heart | actions | symmetric heart outline with soft, round lobes and a softened bottom point | like, favorite, love · favorite |
+| save | actions | floppy disk: a rounded square with the top-right corner cut, a shutter slot at the top, a label area at the bottom. Few parts | save, disk, floppy · floppy |
+| circle-plus | actions | shared circle frame + plus inside (about 5 long), same family as `circle-alert` / `info` / `help` | add, new, create · add-circle |
+| funnel | actions | funnel outline: a wide top tapering into a short stem, rounded corners. Clearly different from `filter`'s lines | funnel, filter, conversion · conversion |
+| zoom-in | actions | `search` geometry + a plus inside the lens (about 3 long, ≥1px clear from the ring) | zoom, magnify, enlarge · magnify |
+| zoom-out | actions | `search` geometry + a minus inside the lens | zoom, shrink, reduce · reduce |
+| map-pin | objects | teardrop pin outline + a round hole (outline ring) in the head, softly pointed tip | location, place, address · location |
+| clipboard | objects | portrait board, rounded + a clip at the top as one solid rounded tab | clipboard, paste · paste |
