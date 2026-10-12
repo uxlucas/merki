@@ -35,7 +35,7 @@ Merki is an open-source icon library for SaaS products, dashboards, productivity
 **Stroke**
 - ⚙️ `stroke-width="1.5"`, `stroke-linecap="round"`, `stroke-linejoin="round"`. No other weights, except the 1.25 interior optical weight below.
 - ⚙️ Only `currentColor` or `none` for fill and stroke. No other color values.
-- ⚙️ Interior detail lines (inside an enclosing shape) may use `stroke-width="1.25"` as an optical correction; outer silhouettes stay 1.5 (decided 2026-10-12, first used by globe).
+- ⚙️ Interior detail lines (inside an enclosing shape) and small glyph details (numerals, letterforms) may use `stroke-width="1.25"` as an optical correction; outer silhouettes stay 1.5 (decided 2026-10-12; used by globe and list-ordered).
 
 **Keylines** (centerline dimensions)
 - circle: diameter 12

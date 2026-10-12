@@ -653,5 +653,60 @@
     "status": "ok",
     "note": "approved in chat",
     "updatedAt": "2026-10-12T06:10:09.110Z"
+  },
+  "list-ordered": {
+    "status": "ok",
+    "note": "approved in chat",
+    "updatedAt": "2026-10-12T15:35:53.052Z"
+  },
+  "square-check": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-12T15:10:59.198Z"
+  },
+  "underline": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-12T15:11:38.725Z"
+  },
+  "type": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-12T15:11:40.901Z"
+  },
+  "strikethrough": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-12T15:11:43.519Z"
+  },
+  "quote": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-12T15:11:48.955Z"
+  },
+  "list-bullet": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-12T15:11:54.362Z"
+  },
+  "italic": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-12T15:15:15.280Z"
+  },
+  "hash": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-12T15:15:17.210Z"
+  },
+  "bold": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-12T15:15:19.205Z"
+  },
+  "align-left": {
+    "status": "ok",
+    "note": "",
+    "updatedAt": "2026-10-12T15:15:21.077Z"
   }
 }
