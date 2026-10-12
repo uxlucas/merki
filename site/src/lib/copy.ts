@@ -50,7 +50,26 @@ export const packageSvg = (svg: string): string => `${svg.replace(/^<svg\b/, '<s
 /** What Copy SVG puts on the clipboard: the package file without its trailing newline. */
 export const clipboardSvg = (svg: string): string => packageSvg(svg).trimEnd();
 
-export const jsxSnippet = (component: string): string => `<${component} />`;
+/** What the drawer's Preview tab has set. `color: null` means currentColor. */
+export interface Look {
+  color: string | null;
+  size: number;
+}
+
+export const DEFAULT_LOOK: Look = { color: null, size: 16 };
+
+export const isDefaultLook = (look: Look): boolean => look.color === null && look.size === DEFAULT_LOOK.size;
+
+/** The SVG as shown: the package file when untouched, otherwise with the chosen size and colour baked in. */
+export function customSvg(svg: string, look: Look): string {
+  const sized = `${svg.replace(/^<svg\b/, `<svg width="${look.size}" height="${look.size}"`)}\n`;
+  return look.color ? sized.replace(/currentColor/g, look.color) : sized;
+}
+
+export function jsxSnippet(component: string, look: Look = DEFAULT_LOOK): string {
+  const props = [look.size !== DEFAULT_LOOK.size ? `size={${look.size}}` : null, look.color ? `color="${look.color}"` : null].filter(Boolean);
+  return props.length ? `<${component} ${props.join(' ')} />` : `<${component} />`;
+}
 
 export function downloadSvg(name: string, contents: string, doc: Document = document, url: typeof URL = URL): void {
   const href = url.createObjectURL(new Blob([contents], { type: 'image/svg+xml' }));

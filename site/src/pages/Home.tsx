@@ -15,11 +15,9 @@ const fromGrid = () => Boolean((window.history.state as { fromGrid?: boolean } |
 export function Home({ openIcon }: { openIcon: string | null }) {
   const { navigate } = useRouter();
   const [query, setQuery] = useState('');
-  const [compact, setCompact] = useState(false);
   const icon = openIcon ? (iconByName.get(openIcon) ?? null) : null;
 
   const open = (name: string) => {
-    setCompact(true);
     // Switching icons while open replaces and keeps the entry's state, so Back/Close behaves as it did when the drawer opened.
     if (openIcon !== null) navigate(`/icons/${name}`, { replace: true, state: window.history.state });
     else navigate(`/icons/${name}`, { state: { fromGrid: true } });
@@ -42,10 +40,7 @@ export function Home({ openIcon }: { openIcon: string | null }) {
   }, [openIcon, navigate]);
 
   useEffect(() => {
-    if (!openIcon) {
-      setCompact(false);
-      return;
-    }
+    if (!openIcon) return;
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') close();
     };
@@ -58,7 +53,7 @@ export function Home({ openIcon }: { openIcon: string | null }) {
       <section id="icons" className="sec" aria-labelledby="icons-title">
         <h2 className="sec-title" id="icons-title"><LayoutGridIcon size={14} className="glyph-blue" />Icons</h2>
         <Browser query={query} onQuery={setQuery} selected={openIcon} onOpen={open} onMove={move} />
-        {icon && <Drawer icon={icon} compact={compact} onClose={close} />}
+        {icon && <Drawer icon={icon} onClose={close} />}
       </section>
       <section id="craft" className="sec" aria-labelledby="craft-title">
         <h2 className="sec-title" id="craft-title"><PencilIcon size={14} className="glyph-orange" />Craft</h2>

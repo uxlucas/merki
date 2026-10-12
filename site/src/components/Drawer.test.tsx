@@ -1,0 +1,47 @@
+// @vitest-environment jsdom
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { iconByName } from '../data/icons';
+import { Drawer } from './Drawer';
+
+afterEach(cleanup);
+const calendar = iconByName.get('calendar')!;
+const setup = () => render(<Drawer icon={calendar} onClose={vi.fn()} />);
+
+describe('Drawer', () => {
+  it('leads with the crumb, the name and the tags', () => {
+    setup();
+    const aside = screen.getByRole('complementary', { name: 'calendar icon' });
+    expect(within(aside).getByRole('heading', { level: 2 }).textContent).toBe('calendar');
+    expect(within(aside).getByText(calendar.tags[0])).toBeTruthy();
+    expect(aside.querySelector('.drawer-crumb')?.textContent).toContain('Objects');
+  });
+
+  it('switches tabs with clicks and arrow keys, one tab stop', () => {
+    setup();
+    const tabs = screen.getAllByRole('tab');
+    expect(tabs.map((t) => t.textContent)).toEqual(['Preview', 'Construction', 'In context']);
+    expect(tabs.map((t) => t.getAttribute('tabindex'))).toEqual(['0', '-1', '-1']);
+    expect(screen.getByRole('tabpanel').getAttribute('aria-labelledby')).toBe(tabs[0].id);
+    fireEvent.keyDown(tabs[0], { key: 'ArrowRight' });
+    expect(document.activeElement).toBe(screen.getAllByRole('tab')[1]);
+    expect(screen.getAllByRole('tab')[1].getAttribute('aria-selected')).toBe('true');
+    expect(screen.getByRole('button', { name: 'Keylines' })).toBeTruthy();
+    fireEvent.click(screen.getAllByRole('tab')[2]);
+    expect(document.querySelector('.stage')!.textContent).toContain('Inbox');
+  });
+
+  it('previews a colour and a size, copies them, and resets', () => {
+    setup();
+    expect(screen.queryByRole('button', { name: 'Reset' })).toBeNull();
+    fireEvent.click(screen.getByRole('radio', { name: 'Blue' }));
+    fireEvent.change(screen.getByRole('slider', { name: 'Size' }), { target: { value: '32' } });
+    const preview = document.querySelector('.preview svg')!;
+    expect(preview.getAttribute('width')).toBe('32');
+    expect(preview.getAttribute('color')).toBe('#2563eb');
+    expect(screen.getByText('#2563EB')).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Reset' }));
+    expect(document.querySelector('.preview svg')!.getAttribute('width')).toBe('16');
+    expect(screen.getByRole('radio', { name: 'Default' }).getAttribute('aria-checked')).toBe('true');
+  });
+});
