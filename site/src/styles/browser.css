@@ -28,4 +28,5 @@
   .chips::-webkit-scrollbar { display: none; }
   .chips a { flex: none; border: 1px solid var(--line); border-radius: 999px; padding: 3px 11px; font-size: 12.5px; color: var(--fg2); background: var(--card); }
   .grid { grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)); }
+  .cat { scroll-margin-top: 112px; }
 }
