@@ -1,8 +1,12 @@
 import react from '@vitejs/plugin-react';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: { 'merki-icons': fileURLToPath(new URL('./packages/merki/src/index.ts', import.meta.url)) },
+  },
   test: {
     include: [
       'scripts/**/*.test.ts',
