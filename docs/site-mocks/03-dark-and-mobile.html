@@ -1,0 +1,1230 @@
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><style>
+.option .content{min-width:0}
+.lt{--bg:#fafafa;--card:#fff;--stage:#fcfcfd;--line:#ececef;--line2:#f1f1f3;--fg:#18181b;--fg2:#52525b;--fg3:#a1a1aa;--hov:#f4f4f5;--blue:#3b82f6;--orange:#f97316;--inv:#18181b;--invfg:#fff;--shadow:rgba(0,0,0,.08)}
+.d1{--bg:#0b0b0c;--card:#131315;--stage:#0f0f11;--line:#222226;--line2:#1b1b1e;--fg:#ededef;--fg2:#a1a1aa;--fg3:#62626b;--hov:#1c1c1f;--blue:#60a5fa;--orange:#fb923c;--inv:#ededef;--invfg:#0b0b0c;--shadow:rgba(0,0,0,.5)}
+.d2{--bg:#0e0f13;--card:#16181d;--stage:#121318;--line:#25272e;--line2:#1d1f25;--fg:#e6e7eb;--fg2:#9b9da8;--fg3:#5d606c;--hov:#1e2027;--blue:#7aa2ff;--orange:#f59e6b;--inv:#e6e7eb;--invfg:#0e0f13;--shadow:rgba(0,0,0,.5)}
+.frame{width:100%;max-width:871px;height:900px;overflow:hidden;border:1px solid #e4e4e7;border-radius:14px;background:var(--bg)}
+.page{width:1280px;zoom:.68;font:16px/1.65 Inter,ui-sans-serif,system-ui,sans-serif;color:var(--fg);background:var(--bg);min-height:1330px}
+.frame svg,.phone svg{display:block}
+.topnav{display:flex;justify-content:space-between;align-items:center;padding:28px 190px}
+.logo{display:flex;gap:8px;align-items:center;font-size:15px;font-weight:600}
+.topnav nav{display:flex;gap:28px;font-size:14px;color:var(--fg2);align-items:center}
+.tt{border:1px solid var(--line);border-radius:8px;padding:5px;background:var(--card)}
+.hero{padding:60px 190px 30px;text-align:center}
+.byline{display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--fg3);margin-bottom:22px}
+.me{display:inline-flex;gap:6px;align-items:center;color:var(--fg);font-weight:500}
+h1{font-size:58px;line-height:1.05;letter-spacing:-.04em;font-weight:500;margin:0 0 22px}
+.copy{max-width:560px;margin:0 auto}.copy p{margin:0 0 12px;color:var(--fg2)}.copy b{color:var(--fg);font-weight:500}
+.links{display:flex;gap:10px;margin:26px 0 18px;justify-content:center}
+.lk{display:inline-flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:14px;color:var(--fg)}
+.lk code{font:13px ui-monospace,monospace}.lk-i{color:var(--fg2)}.lk-a{color:var(--fg3)}
+.crafted{font-size:13px;color:var(--fg3)}.crafted b{color:var(--fg2);font-weight:500}
+.wallband{position:relative;padding:10px 130px 0;height:240px;overflow:hidden}
+.wall{display:grid}.w{display:grid;place-items:center;color:var(--fg)}.w.hl{color:var(--blue)}
+.fade{position:absolute;left:0;right:0;bottom:0;height:150px;background:linear-gradient(transparent,var(--bg))}
+.gpage{display:grid;grid-template-columns:260px 760px;padding-left:70px}
+.gside{padding:40px 0 0;font-size:12px}
+.gs-item{color:var(--fg3);line-height:28px}.gs-item.on{color:var(--fg)}
+.gs-sec{margin-top:22px}
+.gs-head,.gs-title{display:flex;gap:8px;align-items:center;line-height:28px;color:var(--fg)}
+.gs-title{margin:0 0 14px;font-size:14px}
+.gmain{padding:40px 0 60px}
+.tb{display:flex;gap:10px;margin:0 0 14px}
+.tb-s{flex:1;display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;color:var(--fg3);font-size:14px}
+.tb-s span{flex:1}
+kbd{font:11px ui-monospace,monospace;border:1px solid var(--line);border-radius:5px;padding:1px 6px;color:var(--fg3)}
+.seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card);font-size:13px;color:var(--fg3)}
+.seg>*{padding:9px 13px}.seg b{background:var(--hov);color:var(--fg);font-weight:500}
+.cat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 14px 10px;margin-bottom:12px}
+.cat-h{display:flex;gap:8px;align-items:baseline;font-size:13px;margin:0 4px 6px}
+.cat-h i{font-style:normal;color:var(--fg3)}
+.cat-g{display:grid;grid-template-columns:repeat(16,1fr)}
+.ci{display:grid;place-items:center;height:42px;border-radius:9px;color:var(--fg)}
+.ci.sel{background:var(--inv);color:var(--invfg)}
+/* phones */
+.phones{display:flex;gap:18px;flex-wrap:wrap}
+.phone{width:250px;height:540px;border:1px solid #e4e4e7;border-radius:28px;overflow:hidden;background:var(--bg);position:relative}
+.ph{width:375px;zoom:.6667;font:15px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;color:var(--fg);background:var(--bg);min-height:810px;position:relative}
+.m-top{display:flex;justify-content:space-between;align-items:center;padding:18px 16px}
+.m-r{display:flex;gap:16px;color:var(--fg2)}
+.m-hero{padding:24px 16px;text-align:center}
+.m-hero h1{font-size:34px;letter-spacing:-.035em;margin:0 0 16px}
+.m-hero .copy p{font-size:14.5px}
+.m-links{display:flex;flex-direction:column;gap:8px;margin-top:18px}
+.m-links .lk{justify-content:space-between}.m-links .lk>*:nth-child(2){flex:1;text-align:left}
+.m-sticky{position:sticky;top:0;padding:0 16px 10px;background:var(--bg)}
+.m-chips{display:flex;gap:6px;margin-top:10px;font-size:12.5px;white-space:nowrap;overflow:hidden}
+.m-chips>*{border:1px solid var(--line);border-radius:999px;padding:3px 11px;color:var(--fg2);background:var(--card)}
+.m-chips b{background:var(--inv);color:var(--invfg);border-color:var(--inv);font-weight:500}
+.m-cats{padding:0 16px}
+.cat-g.m{grid-template-columns:repeat(6,1fr)}.cat-g.m .ci{height:52px}
+.dim .m-cats{opacity:.35}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--card);border-radius:22px 22px 0 0;border-top:1px solid var(--line);box-shadow:0 -10px 40px var(--shadow);padding:10px 16px 22px;display:flex;flex-direction:column;gap:14px}
+.grab{width:36px;height:4px;border-radius:2px;background:var(--line);align-self:center}
+.dh{display:flex;justify-content:space-between}.dh b{display:block;font-weight:500}.dh i{font-style:normal;font-size:12px;color:var(--fg3)}.x{color:var(--fg3)}
+.m-stage{display:grid;place-items:center;background:var(--stage);border:1px solid var(--line2);border-radius:14px;padding:22px}
+.m-sz{display:flex;gap:20px;align-items:end;justify-content:center}
+.acts{display:flex;gap:8px}
+.a{flex:1;display:inline-flex;gap:7px;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:10px;padding:9px 0;font-size:13px}
+.a:last-child{flex:0 0 44px}
+.a.pri{background:var(--inv);color:var(--invfg);border-color:var(--inv)}
+</style>
+<h2>Dark mode: two takes</h2>
+<p class="subtitle">Follows your system by default; the sun/moon button in the top nav overrides it and remembers. Icons are currentColor, so the set flips for free. The only real choice is the grey.</p>
+<div class="options">
+  <div class="option" data-choice="d1" onclick="toggleSelect(this)"><div class="letter">1</div><div class="content"><h3>Neutral ink</h3><p>Pure greys, near-black #0b0b0c. The mirror of the light theme, no tint.</p><div class="frame d1"><div class="page"><header class="topnav"><span class="logo"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7 2.25C7.55 1.7 8.45 1.7 9 2.25L13.75 7C14.3 7.55 14.3 8.45 13.75 9L9 13.75C8.45 14.3 7.55 14.3 7 13.75L2.25 9C1.7 8.45 1.7 7.55 2.25 7Z"/>
+</svg><span>merki</span></span><nav><span>Icons</span><span>Craft</span><span>Guide</span><span class="tt"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="2.75" fill="currentColor" stroke="none"/>
+  <path d="M8 1.75V3M8 13v1.25M1.75 8H3M13 8h1.25M3.5 3.5l1 1M11.5 11.5l1 1M12.5 3.5l-1 1M4.5 11.5l-1 1"/>
+</svg></span></nav></header><section class="hero"><span class="byline">Brought to you by <span class="me"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="16" viewBox="0 0 512 640"><path fill="currentColor" fill-rule="evenodd" d="M256 30 C180 30 135 70 126 132 C120 182 117 218 104 259 C88 296 81 330 94 359 C109 400 151 434 185 475 C222 518 254 554 228 611 C265 583 288 549 291 503 C294 471 285 440 299 405 C308 379 327 365 336 389 C344 410 324 442 348 474 C350 435 385 408 408 365 C436 320 425 288 409 249 C392 209 393 166 382 115 C372 61 326 30 256 30 Z M200 114 C185 145 185 183 220 215 C237 180 228 144 200 114 Z M312 114 C327 145 327 183 292 215 C275 180 284 144 312 114 Z"/></svg>Lucas Lima</span></span><h1>157 icons for software<br/>people use all day.</h1><div class="copy"><p>I wanted a set of icons that felt familiar, but had a little more personality. So I started drawing my own.</p><p><b>merki-icons</b> is a growing collection of bold, rounded icons for Figma and code. Open source and free to use under the MIT License.</p></div><div class="links"><span class="lk"><span class="lk-i"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="11.5" height="11.5" rx="2"/>
+  <path d="M5 5.5 7.5 8 5 10.5M9 10.5h2.25"/>
+</svg></span><code>npm i merki-icons</code><span class="lk-a"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.75 9.5A1.5 1.5 0 0 1 2.25 8V3.75a1.5 1.5 0 0 1 1.5-1.5H8a1.5 1.5 0 0 1 1.5 1.5"/>
+  <rect x="6.5" y="6.5" width="7.25" height="7.25" rx="1.5"/>
+</svg></span></span><span class="lk"><span class="lk-i"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 14C4.75 14 2 11.25 2 8S4.75 2 8 2s6 2.5 6 5.5c0 1.5-1 2.25-2.25 2.25H11c-1 0-1.75.75-1.75 1.75v.5c0 1-.5 2-1.25 2Z"/>
+  <circle cx="5" cy="8.75" r="1" fill="currentColor" stroke="none"/>
+  <circle cx="5.75" cy="5.75" r="1" fill="currentColor" stroke="none"/>
+  <circle cx="8.75" cy="5" r="1" fill="currentColor" stroke="none"/>
+</svg></span><span>Figma community file</span><span class="lk-a"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/>
+</svg></span></span><span class="lk"><span class="lk-i"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5.5 4.5 2 8l3.5 3.5M10.5 4.5 14 8l-3.5 3.5"/>
+</svg></span><span>GitHub</span><span class="lk-a"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/>
+</svg></span></span></div><div class="crafted">Crafted with <b>Claude Code</b> and <b>Figma</b></div></section>
+  <section class="wallband"><div class="wall" style="grid-template-columns:repeat(20,1fr)"><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 6.5 8 2.25l5.25 4.25v6.25a1 1 0 0 1-1 1H3.75a1 1 0 0 1-1-1Z"/>
+  <path d="M6 13.75v-3a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 .75.75v3"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.75" width="11.5" height="10.5" rx="2"/>
+  <path d="M2.25 9H5l1 1.5h4L11 9h2.75"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="7" r="4.5"/>
+  <path d="M10.25 10.25 13.75 13.75"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 4h10.5M2.75 8h10.5M2.75 12h10.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="11.5" height="11.5" rx="2"/>
+  <path d="M6.25 2.25h-2a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2Z" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="2.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2" y="1.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <rect x="2" y="6.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <rect x="2" y="11.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <path d="M6.75 3h6.5M6.75 8h6.5M6.75 13h6.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 9.75 8 6.25l3.5 3.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 6.25 8 9.75l3.5-3.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M9.75 4.5 6.25 8l3.5 3.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6.25 4.5 9.75 8l-3.5 3.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 6.25 8 3.25l3 3M5 9.75l3 3 3-3"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 13V3M4 7l4-4 4 4"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 3v10M4 9l4 4 4-4"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M13 8H3M7 4 3 8l4 4"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 8h10M9 4l4 4-4 4"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 5.25h10.5M10.5 2.5l2.75 2.75L10.5 8"/>
+  <path d="M13.25 10.75H2.75M5.5 8l-2.75 2.75L5.5 13.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="3.5" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="8" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="12.5" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="3.5" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="8" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="8" cy="12.5" r="1.25" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7 2.25H4.25a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h7.5a2 2 0 0 0 2-2V9"/>
+  <path d="M7.5 8.5 13.75 2.25M9.75 2.25h4v4"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="4.5" height="6" rx="1.25"/>
+  <rect x="2.25" y="10.75" width="4.5" height="3" rx="1.25"/>
+  <rect x="9.25" y="2.25" width="4.5" height="3" rx="1.25"/>
+  <rect x="9.25" y="7.75" width="4.5" height="6" rx="1.25"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 3v10M3 8h10"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 8h10"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 4l8 8M12 4 4 12"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.5 8.5 6.5 11.5 12.5 4.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 13.25 5.75 12.25 12.75 5.25A1.5 1.5 0 0 0 10.75 3.25L3.75 10.25Z"/>
+  <path d="M8.75 5.25l2 2"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.5 2.25H4.25a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h7.5a2 2 0 0 0 2-2V8.5"/>
+  <path d="M6.5 9.5 9.5 8.5 13 5A1.5 1.5 0 0 0 11 3L7.5 6.5Z"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.5 4.5h11"/>
+  <path d="M6 4.5V2.75A.75.75 0 0 1 6.75 2h2.5a.75.75 0 0 1 .75.75V4.5"/>
+  <path d="m3.75 4.5.5 8.25a1 1 0 0 0 1 1h5.5a1 1 0 0 0 1-1l.5-8.25"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.75 9.5A1.5 1.5 0 0 1 2.25 8V3.75a1.5 1.5 0 0 1 1.5-1.5H8a1.5 1.5 0 0 1 1.5 1.5"/>
+  <rect x="6.5" y="6.5" width="7.25" height="7.25" rx="1.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5.25 3 2.75 5.5 5.25 8"/>
+  <path d="M2.75 5.5h6.5a3.75 3.75 0 0 1 0 7.5H6.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M10.75 3l2.5 2.5-2.5 2.5"/>
+  <path d="M13.25 5.5h-6.5a3.75 3.75 0 0 0 0 7.5H9.5"/>
+</svg></span><span class="w hl" style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12.75 9.75A5 5 0 1 1 8 3c1.75 0 3.25.75 4.25 2"/>
+  <path d="M12.25 2.5V5h-2.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.25 6.5A5 5 0 0 1 8 3c1.75 0 3.25.75 4.25 2"/>
+  <path d="M12.25 2.5V5h-2.5"/>
+  <path d="M12.75 9.5A5 5 0 0 1 8 13c-1.75 0-3.25-.75-4.25-2"/>
+  <path d="M3.75 13.5V11h2.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 2.25v8M4.75 7 8 10.25 11.25 7"/>
+  <path d="M2.75 10.5v1.75a1.5 1.5 0 0 0 1.5 1.5h7.5a1.5 1.5 0 0 0 1.5-1.5V10.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 13.75v-8M4.75 9 8 5.75 11.25 9"/>
+  <path d="M2.75 5.5V3.75a1.5 1.5 0 0 1 1.5-1.5h7.5a1.5 1.5 0 0 1 1.5 1.5V5.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 10.5V2.25M4.75 5.5 8 2.25l3.25 3.25"/>
+  <path d="M5.5 8h-.75a2 2 0 0 0-2 2v1.75a2 2 0 0 0 2 2h6.5a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2h-.75"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6.25 5.25h-1.5a2.75 2.75 0 0 0 0 5.5h1.5"/>
+  <path d="M9.75 5.25h1.5a2.75 2.75 0 0 1 0 5.5h-1.5"/>
+  <path d="M5.5 8h5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 4.25h10.5M4.75 8h6.5M6.75 11.75h2.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 3v10M2.75 10.75 5 13l2.25-2.25"/>
+  <path d="M11 13V3M8.75 5.25 11 3l2.25 2.25"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M10 3h3v3M13 3 9 7"/>
+  <path d="M6 13H3v-3M3 13l4-4"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M9 4v3h3M9 7l4-4"/>
+  <path d="M7 12V9H4M7 9l-4 4"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.5" width="11.5" height="3" rx="1" fill="currentColor" stroke="none"/>
+  <path d="M3.25 7.25v4.5a2 2 0 0 0 2 2h5.5a2 2 0 0 0 2-2v-4.5"/>
+  <path d="M6.5 8.5h3"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 7 8.25 5.75 7.5 5 9 3.5A3.5 3.5 0 0 1 12.5 7L11 8.5 10.25 7.75 9 12Z"/>
+  <path d="M6.5 9.5 3.25 12.75"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.5 3.25C7.75 2.75 8.25 2.75 8.5 3.25L9.5 5.25C9.63 5.54 10.01 5.91 10.25 6L12.75 6.25C13.23 6.32 13.35 6.7 13 7L11.25 8.75C11.05 8.96 10.93 9.46 11 9.75L11.25 12C11.39 12.55 11.14 12.93 10.75 12.75L8.5 11.5C8.25 11.38 7.75 11.38 7.5 11.5L5.25 12.75C4.86 12.93 4.61 12.55 4.75 12L5 9.75C5.07 9.46 4.95 8.96 4.75 8.75L3 7C2.65 6.7 2.77 6.32 3.25 6.25L5.75 6C5.99 5.91 6.37 5.54 6.5 5.25Z"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 12.75V4.75a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v8Q12 13.5 11.25 13L9 11.5Q8 10.75 7 11.5L4.75 13Q4 13.5 4 12.75Z"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12.25 3Q13.5 2.5 13 3.75L9.25 12.75Q9 13.5 8.5 12.5L7 9 3.5 7.5Q2.5 7 3.25 6.75Z"/>
+  <path d="M7 9 13 3"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="6.25" cy="4.5" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="9.75" cy="4.5" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="6.25" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="9.75" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="6.25" cy="11.5" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="9.75" cy="11.5" r="1.25" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 5C7.52 3.91 6.44 3.25 5.25 3.25 3.6 3.25 2.25 4.6 2.25 6.25 2.25 7.5 3.25 8.5 4 9.25L7.25 12.5C7.6 12.85 8.4 12.85 8.75 12.5L12 9.25C12.75 8.5 13.75 7.5 13.75 6.25 13.75 4.6 12.4 3.25 10.75 3.25 9.56 3.25 8.48 3.91 8 5Z"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.25 4.25a2 2 0 0 1 2-2h6.5l3 3v6.5a2 2 0 0 1-2 2h-7.5a2 2 0 0 1-2-2Z"/>
+  <path d="M5.25 2.25v2a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1v-2"/>
+  <path d="M5 13.75v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <path d="M8 5.75v4.5M5.75 8h4.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.25 3.75Q2.5 2.75 3.75 2.75h8.5q1.25 0 .5 1L10.5 6.75Q9.75 7.75 9.75 9v3.5a.75.75 0 0 1-.75.75H7a.75.75 0 0 1-.75-.75V9q0-1.25-.75-2.25Z"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="7" r="4.5"/>
+  <path d="M10.25 10.25 13.75 13.75"/>
+  <path d="M7 5.25v3.5M5.25 7h3.5" stroke-width="1.25"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="7" r="4.5"/>
+  <path d="M10.25 10.25 13.75 13.75"/>
+  <path d="M5.25 7h3.5" stroke-width="1.25"/>
+</svg></span><span class="w hl" style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 1.75a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 1 1 0-12.5ZM5.75 7.5 7 8.75l3.25-3.25a.75.75 0 0 1 1 1L7.5 10.25a.75.75 0 0 1-1 0L4.75 8.5a.75.75 0 0 1 1-1Z" fill="currentColor" fill-rule="evenodd" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 1.75a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 1 1 0-12.5ZM6.5 5.5 8 7l1.5-1.5a.75.75 0 0 1 1 1L9 8l1.5 1.5a.75.75 0 0 1-1 1L8 9l-1.5 1.5a.75.75 0 0 1-1-1L7 8 5.5 6.5a.75.75 0 0 1 1-1Z" fill="currentColor" fill-rule="evenodd" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <path d="M8 4.75v3.25"/>
+  <circle cx="8" cy="11" r="1" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.5 2.75Q8 1.75 8.5 2.75L13.75 12.75Q14.25 13.75 13.25 13.75H2.75Q1.75 13.75 2.25 12.75Z"/>
+  <path d="M8 7.25v1.5"/>
+  <circle cx="8" cy="11.25" r=".75" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <circle cx="8" cy="5" r="1" fill="currentColor" stroke="none"/>
+  <path d="M8 8v3.25"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <path d="M6.25 6.25C6.25 5.28 7.03 4.5 8 4.5s1.75.78 1.75 1.75c0 1.25-1.75 1.25-1.75 2"/>
+  <circle cx="8" cy="11" r="1" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <path d="M3.75 3.75l8.5 8.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="5.5" stroke-dasharray="1 3.32" stroke-dashoffset="0.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="5.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="5.5"/>
+  <path d="M8 4.5a3.5 3.5 0 0 1 0 7Z" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 2.25a5.75 5.75 0 1 1-5.75 5.75"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <path d="M8 4.75V8l2.25 1.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.25 11A5.25 5.25 0 1 0 7.5 2.75C6.25 2.75 5.25 3.25 4.5 4L3.5 5"/>
+  <path d="M3.5 3v2h2"/>
+  <path d="M8 6v2l1.5 1"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.5 11.75c.75-.5 1.25-1.25 1.25-2.25V6.5a4.25 4.25 0 0 1 8.5 0v3c0 1 .5 1.75 1.25 2.25Z"/>
+  <path d="M6.25 14.25h3.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6 2.75A4.25 4.25 0 0 1 12.25 6.5V9"/>
+  <path d="M3.75 7v2.5c0 1-.5 1.75-1.25 2.25H8.5"/>
+  <path d="M6.25 14.25h3.5"/>
+  <path d="M2.75 2.75l10.5 10.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2 7.5C3 5.75 5.25 3.5 8 3.5s5 2.25 6 4Q14.25 8 14 8.5c-1 1.75-3.25 4-6 4s-5-2.25-6-4Q1.75 8 2 7.5Z"/>
+  <circle cx="8" cy="8" r="1.75" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.25 3.5H8c2.75 0 5 2.25 6 4Q14.25 8 14 8.5c-.19.34-.43.69-.75 1"/>
+  <path d="M8.75 12.5H8c-2.75 0-5-2.25-6-4Q1.75 8 2 7.5c.19-.34.43-.69.75-1"/>
+  <path d="M2.75 2.75l10.5 10.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="3" y="7" width="10" height="7" rx="1.5"/>
+  <path d="M5.25 7V5.25a2.75 2.75 0 0 1 5.5 0V7"/>
+  <circle cx="8" cy="10.5" r="1" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="3" y="7" width="10" height="7" rx="1.5"/>
+  <path d="M5.25 7V5.25a2.75 2.75 0 0 1 2.75-2.75c1.23 0 2.41.82 2.75 2"/>
+  <circle cx="8" cy="10.5" r="1" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="4.75" r="2.75" fill="currentColor" stroke="none"/>
+  <path d="M3 13.25c.45-2.3 2.45-3.75 5-3.75s4.55 1.45 5 3.75"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="6.25" cy="6.5" r="2.5" fill="currentColor" stroke="none"/>
+  <path d="M1.75 14.25c.4-2.1 2.2-3.5 4.5-3.5s4.1 1.4 4.5 3.5"/>
+  <circle cx="11.5" cy="3.75" r="2.25" fill="currentColor" stroke="none"/>
+  <path d="M10.25 8.5c1.75-.75 3.75 0 4 2.75"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <circle cx="8" cy="6.25" r="2" fill="currentColor" stroke="none"/>
+  <path d="M3.75 12.25c1-1.25 2.5-1.75 4.25-1.75s3.25.5 4.25 1.75"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="4.5" r="2.5" fill="currentColor" stroke="none"/>
+  <path d="M2.25 13.25c.45-2.25 2.35-3.75 4.75-3.75"/>
+  <path d="M12 9.75v4.5M9.75 12h4.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="4.5" r="2.5" fill="currentColor" stroke="none"/>
+  <path d="M2.25 13.25c.45-2.25 2.35-3.75 4.75-3.75"/>
+  <path d="M9.5 12.25 11 13.75 14.25 10"/>
+</svg></span><span class="w hl" style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="4.5" r="2.5" fill="currentColor" stroke="none"/>
+  <path d="M2.25 13.25c.45-2.25 2.35-3.75 4.75-3.75"/>
+  <path d="M9.5 12h4.75M12 9.75 14.25 12 12 14.25"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="3" y="1.75" width="10" height="12.5" rx="1.25"/>
+  <path d="M5.5 4h1a.5.5 0 0 1 .5.5v.5a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-.5a.5.5 0 0 1 .5-.5ZM9.5 4h1a.5.5 0 0 1 .5.5v.5a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-.5a.5.5 0 0 1 .5-.5ZM5.5 7h1a.5.5 0 0 1 .5.5v.5a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-.5a.5.5 0 0 1 .5-.5ZM9.5 7h1a.5.5 0 0 1 .5.5v.5a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-.5a.5.5 0 0 1 .5-.5Z" fill="currentColor" stroke="none"/>
+  <path d="M6.5 14.25v-3a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 .75.75v3"/>
+</svg></span></div><div class="fade"></div></section>
+  <div class="gpage"><aside class="gside"><div class="gs-item">Index</div><div class="gs-item">Changelog</div>
+  <div class="gs-sec"><div class="gs-head"><span style="color:var(--blue)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="2.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+</svg></span><span>Icons</span></div><div class="gs-item on">All 157</div><div class="gs-item ">Navigation</div><div class="gs-item ">Actions</div><div class="gs-item ">Status</div><div class="gs-item ">People</div><div class="gs-item ">Objects</div><div class="gs-item ">Data</div></div>
+  <div class="gs-sec"><div class="gs-head"><span style="color:var(--orange)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 13.25 5.75 12.25 12.75 5.25A1.5 1.5 0 0 0 10.75 3.25L3.75 10.25Z"/>
+  <path d="M8.75 5.25l2 2"/>
+</svg></span><span>Craft</span></div><div class="gs-item ">Keylines</div><div class="gs-item ">One stroke</div><div class="gs-item ">Looks right</div></div></aside><main class="gmain"><div class="gs-title"><span style="color:var(--blue)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="2.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+</svg></span><span>Icons</span></div><div class="tb"><span class="tb-s"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="7" r="4.5"/>
+  <path d="M10.25 10.25 13.75 13.75"/>
+</svg><span>Search 157 icons</span><kbd>/</kbd></span><span class="seg"><b>16</b><span>20</span><span>24</span></span></div><div class="cat"><div class="cat-h"><span>Navigation</span><i>22</i></div><div class="cat-g"><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 6.5 8 2.25l5.25 4.25v6.25a1 1 0 0 1-1 1H3.75a1 1 0 0 1-1-1Z"/>
+  <path d="M6 13.75v-3a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 .75.75v3"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.75" width="11.5" height="10.5" rx="2"/>
+  <path d="M2.25 9H5l1 1.5h4L11 9h2.75"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="7" r="4.5"/>
+  <path d="M10.25 10.25 13.75 13.75"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 4h10.5M2.75 8h10.5M2.75 12h10.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="11.5" height="11.5" rx="2"/>
+  <path d="M6.25 2.25h-2a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2Z" fill="currentColor" stroke="none"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="2.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2" y="1.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <rect x="2" y="6.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <rect x="2" y="11.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <path d="M6.75 3h6.5M6.75 8h6.5M6.75 13h6.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 9.75 8 6.25l3.5 3.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 6.25 8 9.75l3.5-3.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M9.75 4.5 6.25 8l3.5 3.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6.25 4.5 9.75 8l-3.5 3.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 6.25 8 3.25l3 3M5 9.75l3 3 3-3"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 13V3M4 7l4-4 4 4"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 3v10M4 9l4 4 4-4"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M13 8H3M7 4 3 8l4 4"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 8h10M9 4l4 4-4 4"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 5.25h10.5M10.5 2.5l2.75 2.75L10.5 8"/>
+  <path d="M13.25 10.75H2.75M5.5 8l-2.75 2.75L5.5 13.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="3.5" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="8" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="12.5" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="3.5" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="8" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="8" cy="12.5" r="1.25" fill="currentColor" stroke="none"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7 2.25H4.25a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h7.5a2 2 0 0 0 2-2V9"/>
+  <path d="M7.5 8.5 13.75 2.25M9.75 2.25h4v4"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="4.5" height="6" rx="1.25"/>
+  <rect x="2.25" y="10.75" width="4.5" height="3" rx="1.25"/>
+  <rect x="9.25" y="2.25" width="4.5" height="3" rx="1.25"/>
+  <rect x="9.25" y="7.75" width="4.5" height="6" rx="1.25"/>
+</svg></span></div></div><div class="cat"><div class="cat-h"><span>Actions</span><i>32</i></div><div class="cat-g"><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 3v10M3 8h10"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 8h10"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 4l8 8M12 4 4 12"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.5 8.5 6.5 11.5 12.5 4.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 13.25 5.75 12.25 12.75 5.25A1.5 1.5 0 0 0 10.75 3.25L3.75 10.25Z"/>
+  <path d="M8.75 5.25l2 2"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.5 2.25H4.25a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h7.5a2 2 0 0 0 2-2V8.5"/>
+  <path d="M6.5 9.5 9.5 8.5 13 5A1.5 1.5 0 0 0 11 3L7.5 6.5Z"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.5 4.5h11"/>
+  <path d="M6 4.5V2.75A.75.75 0 0 1 6.75 2h2.5a.75.75 0 0 1 .75.75V4.5"/>
+  <path d="m3.75 4.5.5 8.25a1 1 0 0 0 1 1h5.5a1 1 0 0 0 1-1l.5-8.25"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.75 9.5A1.5 1.5 0 0 1 2.25 8V3.75a1.5 1.5 0 0 1 1.5-1.5H8a1.5 1.5 0 0 1 1.5 1.5"/>
+  <rect x="6.5" y="6.5" width="7.25" height="7.25" rx="1.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5.25 3 2.75 5.5 5.25 8"/>
+  <path d="M2.75 5.5h6.5a3.75 3.75 0 0 1 0 7.5H6.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M10.75 3l2.5 2.5-2.5 2.5"/>
+  <path d="M13.25 5.5h-6.5a3.75 3.75 0 0 0 0 7.5H9.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12.75 9.75A5 5 0 1 1 8 3c1.75 0 3.25.75 4.25 2"/>
+  <path d="M12.25 2.5V5h-2.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.25 6.5A5 5 0 0 1 8 3c1.75 0 3.25.75 4.25 2"/>
+  <path d="M12.25 2.5V5h-2.5"/>
+  <path d="M12.75 9.5A5 5 0 0 1 8 13c-1.75 0-3.25-.75-4.25-2"/>
+  <path d="M3.75 13.5V11h2.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 2.25v8M4.75 7 8 10.25 11.25 7"/>
+  <path d="M2.75 10.5v1.75a1.5 1.5 0 0 0 1.5 1.5h7.5a1.5 1.5 0 0 0 1.5-1.5V10.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 13.75v-8M4.75 9 8 5.75 11.25 9"/>
+  <path d="M2.75 5.5V3.75a1.5 1.5 0 0 1 1.5-1.5h7.5a1.5 1.5 0 0 1 1.5 1.5V5.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 10.5V2.25M4.75 5.5 8 2.25l3.25 3.25"/>
+  <path d="M5.5 8h-.75a2 2 0 0 0-2 2v1.75a2 2 0 0 0 2 2h6.5a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2h-.75"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6.25 5.25h-1.5a2.75 2.75 0 0 0 0 5.5h1.5"/>
+  <path d="M9.75 5.25h1.5a2.75 2.75 0 0 1 0 5.5h-1.5"/>
+  <path d="M5.5 8h5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 4.25h10.5M4.75 8h6.5M6.75 11.75h2.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 3v10M2.75 10.75 5 13l2.25-2.25"/>
+  <path d="M11 13V3M8.75 5.25 11 3l2.25 2.25"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M10 3h3v3M13 3 9 7"/>
+  <path d="M6 13H3v-3M3 13l4-4"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M9 4v3h3M9 7l4-4"/>
+  <path d="M7 12V9H4M7 9l-4 4"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.5" width="11.5" height="3" rx="1" fill="currentColor" stroke="none"/>
+  <path d="M3.25 7.25v4.5a2 2 0 0 0 2 2h5.5a2 2 0 0 0 2-2v-4.5"/>
+  <path d="M6.5 8.5h3"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 7 8.25 5.75 7.5 5 9 3.5A3.5 3.5 0 0 1 12.5 7L11 8.5 10.25 7.75 9 12Z"/>
+  <path d="M6.5 9.5 3.25 12.75"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.5 3.25C7.75 2.75 8.25 2.75 8.5 3.25L9.5 5.25C9.63 5.54 10.01 5.91 10.25 6L12.75 6.25C13.23 6.32 13.35 6.7 13 7L11.25 8.75C11.05 8.96 10.93 9.46 11 9.75L11.25 12C11.39 12.55 11.14 12.93 10.75 12.75L8.5 11.5C8.25 11.38 7.75 11.38 7.5 11.5L5.25 12.75C4.86 12.93 4.61 12.55 4.75 12L5 9.75C5.07 9.46 4.95 8.96 4.75 8.75L3 7C2.65 6.7 2.77 6.32 3.25 6.25L5.75 6C5.99 5.91 6.37 5.54 6.5 5.25Z"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 12.75V4.75a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v8Q12 13.5 11.25 13L9 11.5Q8 10.75 7 11.5L4.75 13Q4 13.5 4 12.75Z"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12.25 3Q13.5 2.5 13 3.75L9.25 12.75Q9 13.5 8.5 12.5L7 9 3.5 7.5Q2.5 7 3.25 6.75Z"/>
+  <path d="M7 9 13 3"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="6.25" cy="4.5" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="9.75" cy="4.5" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="6.25" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="9.75" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="6.25" cy="11.5" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="9.75" cy="11.5" r="1.25" fill="currentColor" stroke="none"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 5C7.52 3.91 6.44 3.25 5.25 3.25 3.6 3.25 2.25 4.6 2.25 6.25 2.25 7.5 3.25 8.5 4 9.25L7.25 12.5C7.6 12.85 8.4 12.85 8.75 12.5L12 9.25C12.75 8.5 13.75 7.5 13.75 6.25 13.75 4.6 12.4 3.25 10.75 3.25 9.56 3.25 8.48 3.91 8 5Z"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.25 4.25a2 2 0 0 1 2-2h6.5l3 3v6.5a2 2 0 0 1-2 2h-7.5a2 2 0 0 1-2-2Z"/>
+  <path d="M5.25 2.25v2a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1v-2"/>
+  <path d="M5 13.75v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <path d="M8 5.75v4.5M5.75 8h4.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.25 3.75Q2.5 2.75 3.75 2.75h8.5q1.25 0 .5 1L10.5 6.75Q9.75 7.75 9.75 9v3.5a.75.75 0 0 1-.75.75H7a.75.75 0 0 1-.75-.75V9q0-1.25-.75-2.25Z"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="7" r="4.5"/>
+  <path d="M10.25 10.25 13.75 13.75"/>
+  <path d="M7 5.25v3.5M5.25 7h3.5" stroke-width="1.25"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="7" r="4.5"/>
+  <path d="M10.25 10.25 13.75 13.75"/>
+  <path d="M5.25 7h3.5" stroke-width="1.25"/>
+</svg></span></div></div></main></div></div></div></div></div>
+  <div class="option" data-choice="d2" onclick="toggleSelect(this)"><div class="letter">2</div><div class="content"><h3>Cool slate</h3><p>Greys with a faint blue cast (#0e0f13), Linear's dark. Sits closer to the blue construction lines.</p><div class="frame d2"><div class="page"><header class="topnav"><span class="logo"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7 2.25C7.55 1.7 8.45 1.7 9 2.25L13.75 7C14.3 7.55 14.3 8.45 13.75 9L9 13.75C8.45 14.3 7.55 14.3 7 13.75L2.25 9C1.7 8.45 1.7 7.55 2.25 7Z"/>
+</svg><span>merki</span></span><nav><span>Icons</span><span>Craft</span><span>Guide</span><span class="tt"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="2.75" fill="currentColor" stroke="none"/>
+  <path d="M8 1.75V3M8 13v1.25M1.75 8H3M13 8h1.25M3.5 3.5l1 1M11.5 11.5l1 1M12.5 3.5l-1 1M4.5 11.5l-1 1"/>
+</svg></span></nav></header><section class="hero"><span class="byline">Brought to you by <span class="me"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="16" viewBox="0 0 512 640"><path fill="currentColor" fill-rule="evenodd" d="M256 30 C180 30 135 70 126 132 C120 182 117 218 104 259 C88 296 81 330 94 359 C109 400 151 434 185 475 C222 518 254 554 228 611 C265 583 288 549 291 503 C294 471 285 440 299 405 C308 379 327 365 336 389 C344 410 324 442 348 474 C350 435 385 408 408 365 C436 320 425 288 409 249 C392 209 393 166 382 115 C372 61 326 30 256 30 Z M200 114 C185 145 185 183 220 215 C237 180 228 144 200 114 Z M312 114 C327 145 327 183 292 215 C275 180 284 144 312 114 Z"/></svg>Lucas Lima</span></span><h1>157 icons for software<br/>people use all day.</h1><div class="copy"><p>I wanted a set of icons that felt familiar, but had a little more personality. So I started drawing my own.</p><p><b>merki-icons</b> is a growing collection of bold, rounded icons for Figma and code. Open source and free to use under the MIT License.</p></div><div class="links"><span class="lk"><span class="lk-i"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="11.5" height="11.5" rx="2"/>
+  <path d="M5 5.5 7.5 8 5 10.5M9 10.5h2.25"/>
+</svg></span><code>npm i merki-icons</code><span class="lk-a"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.75 9.5A1.5 1.5 0 0 1 2.25 8V3.75a1.5 1.5 0 0 1 1.5-1.5H8a1.5 1.5 0 0 1 1.5 1.5"/>
+  <rect x="6.5" y="6.5" width="7.25" height="7.25" rx="1.5"/>
+</svg></span></span><span class="lk"><span class="lk-i"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 14C4.75 14 2 11.25 2 8S4.75 2 8 2s6 2.5 6 5.5c0 1.5-1 2.25-2.25 2.25H11c-1 0-1.75.75-1.75 1.75v.5c0 1-.5 2-1.25 2Z"/>
+  <circle cx="5" cy="8.75" r="1" fill="currentColor" stroke="none"/>
+  <circle cx="5.75" cy="5.75" r="1" fill="currentColor" stroke="none"/>
+  <circle cx="8.75" cy="5" r="1" fill="currentColor" stroke="none"/>
+</svg></span><span>Figma community file</span><span class="lk-a"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/>
+</svg></span></span><span class="lk"><span class="lk-i"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5.5 4.5 2 8l3.5 3.5M10.5 4.5 14 8l-3.5 3.5"/>
+</svg></span><span>GitHub</span><span class="lk-a"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/>
+</svg></span></span></div><div class="crafted">Crafted with <b>Claude Code</b> and <b>Figma</b></div></section>
+  <section class="wallband"><div class="wall" style="grid-template-columns:repeat(20,1fr)"><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 6.5 8 2.25l5.25 4.25v6.25a1 1 0 0 1-1 1H3.75a1 1 0 0 1-1-1Z"/>
+  <path d="M6 13.75v-3a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 .75.75v3"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.75" width="11.5" height="10.5" rx="2"/>
+  <path d="M2.25 9H5l1 1.5h4L11 9h2.75"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="7" r="4.5"/>
+  <path d="M10.25 10.25 13.75 13.75"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 4h10.5M2.75 8h10.5M2.75 12h10.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="11.5" height="11.5" rx="2"/>
+  <path d="M6.25 2.25h-2a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2Z" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="2.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2" y="1.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <rect x="2" y="6.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <rect x="2" y="11.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <path d="M6.75 3h6.5M6.75 8h6.5M6.75 13h6.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 9.75 8 6.25l3.5 3.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 6.25 8 9.75l3.5-3.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M9.75 4.5 6.25 8l3.5 3.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6.25 4.5 9.75 8l-3.5 3.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 6.25 8 3.25l3 3M5 9.75l3 3 3-3"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 13V3M4 7l4-4 4 4"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 3v10M4 9l4 4 4-4"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M13 8H3M7 4 3 8l4 4"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 8h10M9 4l4 4-4 4"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 5.25h10.5M10.5 2.5l2.75 2.75L10.5 8"/>
+  <path d="M13.25 10.75H2.75M5.5 8l-2.75 2.75L5.5 13.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="3.5" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="8" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="12.5" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="3.5" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="8" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="8" cy="12.5" r="1.25" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7 2.25H4.25a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h7.5a2 2 0 0 0 2-2V9"/>
+  <path d="M7.5 8.5 13.75 2.25M9.75 2.25h4v4"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="4.5" height="6" rx="1.25"/>
+  <rect x="2.25" y="10.75" width="4.5" height="3" rx="1.25"/>
+  <rect x="9.25" y="2.25" width="4.5" height="3" rx="1.25"/>
+  <rect x="9.25" y="7.75" width="4.5" height="6" rx="1.25"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 3v10M3 8h10"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 8h10"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 4l8 8M12 4 4 12"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.5 8.5 6.5 11.5 12.5 4.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 13.25 5.75 12.25 12.75 5.25A1.5 1.5 0 0 0 10.75 3.25L3.75 10.25Z"/>
+  <path d="M8.75 5.25l2 2"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.5 2.25H4.25a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h7.5a2 2 0 0 0 2-2V8.5"/>
+  <path d="M6.5 9.5 9.5 8.5 13 5A1.5 1.5 0 0 0 11 3L7.5 6.5Z"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.5 4.5h11"/>
+  <path d="M6 4.5V2.75A.75.75 0 0 1 6.75 2h2.5a.75.75 0 0 1 .75.75V4.5"/>
+  <path d="m3.75 4.5.5 8.25a1 1 0 0 0 1 1h5.5a1 1 0 0 0 1-1l.5-8.25"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.75 9.5A1.5 1.5 0 0 1 2.25 8V3.75a1.5 1.5 0 0 1 1.5-1.5H8a1.5 1.5 0 0 1 1.5 1.5"/>
+  <rect x="6.5" y="6.5" width="7.25" height="7.25" rx="1.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5.25 3 2.75 5.5 5.25 8"/>
+  <path d="M2.75 5.5h6.5a3.75 3.75 0 0 1 0 7.5H6.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M10.75 3l2.5 2.5-2.5 2.5"/>
+  <path d="M13.25 5.5h-6.5a3.75 3.75 0 0 0 0 7.5H9.5"/>
+</svg></span><span class="w hl" style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12.75 9.75A5 5 0 1 1 8 3c1.75 0 3.25.75 4.25 2"/>
+  <path d="M12.25 2.5V5h-2.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.25 6.5A5 5 0 0 1 8 3c1.75 0 3.25.75 4.25 2"/>
+  <path d="M12.25 2.5V5h-2.5"/>
+  <path d="M12.75 9.5A5 5 0 0 1 8 13c-1.75 0-3.25-.75-4.25-2"/>
+  <path d="M3.75 13.5V11h2.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 2.25v8M4.75 7 8 10.25 11.25 7"/>
+  <path d="M2.75 10.5v1.75a1.5 1.5 0 0 0 1.5 1.5h7.5a1.5 1.5 0 0 0 1.5-1.5V10.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 13.75v-8M4.75 9 8 5.75 11.25 9"/>
+  <path d="M2.75 5.5V3.75a1.5 1.5 0 0 1 1.5-1.5h7.5a1.5 1.5 0 0 1 1.5 1.5V5.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 10.5V2.25M4.75 5.5 8 2.25l3.25 3.25"/>
+  <path d="M5.5 8h-.75a2 2 0 0 0-2 2v1.75a2 2 0 0 0 2 2h6.5a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2h-.75"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6.25 5.25h-1.5a2.75 2.75 0 0 0 0 5.5h1.5"/>
+  <path d="M9.75 5.25h1.5a2.75 2.75 0 0 1 0 5.5h-1.5"/>
+  <path d="M5.5 8h5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 4.25h10.5M4.75 8h6.5M6.75 11.75h2.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 3v10M2.75 10.75 5 13l2.25-2.25"/>
+  <path d="M11 13V3M8.75 5.25 11 3l2.25 2.25"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M10 3h3v3M13 3 9 7"/>
+  <path d="M6 13H3v-3M3 13l4-4"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M9 4v3h3M9 7l4-4"/>
+  <path d="M7 12V9H4M7 9l-4 4"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.5" width="11.5" height="3" rx="1" fill="currentColor" stroke="none"/>
+  <path d="M3.25 7.25v4.5a2 2 0 0 0 2 2h5.5a2 2 0 0 0 2-2v-4.5"/>
+  <path d="M6.5 8.5h3"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 7 8.25 5.75 7.5 5 9 3.5A3.5 3.5 0 0 1 12.5 7L11 8.5 10.25 7.75 9 12Z"/>
+  <path d="M6.5 9.5 3.25 12.75"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.5 3.25C7.75 2.75 8.25 2.75 8.5 3.25L9.5 5.25C9.63 5.54 10.01 5.91 10.25 6L12.75 6.25C13.23 6.32 13.35 6.7 13 7L11.25 8.75C11.05 8.96 10.93 9.46 11 9.75L11.25 12C11.39 12.55 11.14 12.93 10.75 12.75L8.5 11.5C8.25 11.38 7.75 11.38 7.5 11.5L5.25 12.75C4.86 12.93 4.61 12.55 4.75 12L5 9.75C5.07 9.46 4.95 8.96 4.75 8.75L3 7C2.65 6.7 2.77 6.32 3.25 6.25L5.75 6C5.99 5.91 6.37 5.54 6.5 5.25Z"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 12.75V4.75a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v8Q12 13.5 11.25 13L9 11.5Q8 10.75 7 11.5L4.75 13Q4 13.5 4 12.75Z"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12.25 3Q13.5 2.5 13 3.75L9.25 12.75Q9 13.5 8.5 12.5L7 9 3.5 7.5Q2.5 7 3.25 6.75Z"/>
+  <path d="M7 9 13 3"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="6.25" cy="4.5" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="9.75" cy="4.5" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="6.25" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="9.75" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="6.25" cy="11.5" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="9.75" cy="11.5" r="1.25" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 5C7.52 3.91 6.44 3.25 5.25 3.25 3.6 3.25 2.25 4.6 2.25 6.25 2.25 7.5 3.25 8.5 4 9.25L7.25 12.5C7.6 12.85 8.4 12.85 8.75 12.5L12 9.25C12.75 8.5 13.75 7.5 13.75 6.25 13.75 4.6 12.4 3.25 10.75 3.25 9.56 3.25 8.48 3.91 8 5Z"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.25 4.25a2 2 0 0 1 2-2h6.5l3 3v6.5a2 2 0 0 1-2 2h-7.5a2 2 0 0 1-2-2Z"/>
+  <path d="M5.25 2.25v2a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1v-2"/>
+  <path d="M5 13.75v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <path d="M8 5.75v4.5M5.75 8h4.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.25 3.75Q2.5 2.75 3.75 2.75h8.5q1.25 0 .5 1L10.5 6.75Q9.75 7.75 9.75 9v3.5a.75.75 0 0 1-.75.75H7a.75.75 0 0 1-.75-.75V9q0-1.25-.75-2.25Z"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="7" r="4.5"/>
+  <path d="M10.25 10.25 13.75 13.75"/>
+  <path d="M7 5.25v3.5M5.25 7h3.5" stroke-width="1.25"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="7" r="4.5"/>
+  <path d="M10.25 10.25 13.75 13.75"/>
+  <path d="M5.25 7h3.5" stroke-width="1.25"/>
+</svg></span><span class="w hl" style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 1.75a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 1 1 0-12.5ZM5.75 7.5 7 8.75l3.25-3.25a.75.75 0 0 1 1 1L7.5 10.25a.75.75 0 0 1-1 0L4.75 8.5a.75.75 0 0 1 1-1Z" fill="currentColor" fill-rule="evenodd" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 1.75a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 1 1 0-12.5ZM6.5 5.5 8 7l1.5-1.5a.75.75 0 0 1 1 1L9 8l1.5 1.5a.75.75 0 0 1-1 1L8 9l-1.5 1.5a.75.75 0 0 1-1-1L7 8 5.5 6.5a.75.75 0 0 1 1-1Z" fill="currentColor" fill-rule="evenodd" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <path d="M8 4.75v3.25"/>
+  <circle cx="8" cy="11" r="1" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.5 2.75Q8 1.75 8.5 2.75L13.75 12.75Q14.25 13.75 13.25 13.75H2.75Q1.75 13.75 2.25 12.75Z"/>
+  <path d="M8 7.25v1.5"/>
+  <circle cx="8" cy="11.25" r=".75" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <circle cx="8" cy="5" r="1" fill="currentColor" stroke="none"/>
+  <path d="M8 8v3.25"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <path d="M6.25 6.25C6.25 5.28 7.03 4.5 8 4.5s1.75.78 1.75 1.75c0 1.25-1.75 1.25-1.75 2"/>
+  <circle cx="8" cy="11" r="1" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <path d="M3.75 3.75l8.5 8.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="5.5" stroke-dasharray="1 3.32" stroke-dashoffset="0.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="5.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="5.5"/>
+  <path d="M8 4.5a3.5 3.5 0 0 1 0 7Z" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 2.25a5.75 5.75 0 1 1-5.75 5.75"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <path d="M8 4.75V8l2.25 1.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.25 11A5.25 5.25 0 1 0 7.5 2.75C6.25 2.75 5.25 3.25 4.5 4L3.5 5"/>
+  <path d="M3.5 3v2h2"/>
+  <path d="M8 6v2l1.5 1"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.5 11.75c.75-.5 1.25-1.25 1.25-2.25V6.5a4.25 4.25 0 0 1 8.5 0v3c0 1 .5 1.75 1.25 2.25Z"/>
+  <path d="M6.25 14.25h3.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6 2.75A4.25 4.25 0 0 1 12.25 6.5V9"/>
+  <path d="M3.75 7v2.5c0 1-.5 1.75-1.25 2.25H8.5"/>
+  <path d="M6.25 14.25h3.5"/>
+  <path d="M2.75 2.75l10.5 10.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2 7.5C3 5.75 5.25 3.5 8 3.5s5 2.25 6 4Q14.25 8 14 8.5c-1 1.75-3.25 4-6 4s-5-2.25-6-4Q1.75 8 2 7.5Z"/>
+  <circle cx="8" cy="8" r="1.75" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.25 3.5H8c2.75 0 5 2.25 6 4Q14.25 8 14 8.5c-.19.34-.43.69-.75 1"/>
+  <path d="M8.75 12.5H8c-2.75 0-5-2.25-6-4Q1.75 8 2 7.5c.19-.34.43-.69.75-1"/>
+  <path d="M2.75 2.75l10.5 10.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="3" y="7" width="10" height="7" rx="1.5"/>
+  <path d="M5.25 7V5.25a2.75 2.75 0 0 1 5.5 0V7"/>
+  <circle cx="8" cy="10.5" r="1" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="3" y="7" width="10" height="7" rx="1.5"/>
+  <path d="M5.25 7V5.25a2.75 2.75 0 0 1 2.75-2.75c1.23 0 2.41.82 2.75 2"/>
+  <circle cx="8" cy="10.5" r="1" fill="currentColor" stroke="none"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="4.75" r="2.75" fill="currentColor" stroke="none"/>
+  <path d="M3 13.25c.45-2.3 2.45-3.75 5-3.75s4.55 1.45 5 3.75"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="6.25" cy="6.5" r="2.5" fill="currentColor" stroke="none"/>
+  <path d="M1.75 14.25c.4-2.1 2.2-3.5 4.5-3.5s4.1 1.4 4.5 3.5"/>
+  <circle cx="11.5" cy="3.75" r="2.25" fill="currentColor" stroke="none"/>
+  <path d="M10.25 8.5c1.75-.75 3.75 0 4 2.75"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <circle cx="8" cy="6.25" r="2" fill="currentColor" stroke="none"/>
+  <path d="M3.75 12.25c1-1.25 2.5-1.75 4.25-1.75s3.25.5 4.25 1.75"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="4.5" r="2.5" fill="currentColor" stroke="none"/>
+  <path d="M2.25 13.25c.45-2.25 2.35-3.75 4.75-3.75"/>
+  <path d="M12 9.75v4.5M9.75 12h4.5"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="4.5" r="2.5" fill="currentColor" stroke="none"/>
+  <path d="M2.25 13.25c.45-2.25 2.35-3.75 4.75-3.75"/>
+  <path d="M9.5 12.25 11 13.75 14.25 10"/>
+</svg></span><span class="w hl" style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="4.5" r="2.5" fill="currentColor" stroke="none"/>
+  <path d="M2.25 13.25c.45-2.25 2.35-3.75 4.75-3.75"/>
+  <path d="M9.5 12h4.75M12 9.75 14.25 12 12 14.25"/>
+</svg></span><span class="w " style="height:56px"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="3" y="1.75" width="10" height="12.5" rx="1.25"/>
+  <path d="M5.5 4h1a.5.5 0 0 1 .5.5v.5a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-.5a.5.5 0 0 1 .5-.5ZM9.5 4h1a.5.5 0 0 1 .5.5v.5a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-.5a.5.5 0 0 1 .5-.5ZM5.5 7h1a.5.5 0 0 1 .5.5v.5a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-.5a.5.5 0 0 1 .5-.5ZM9.5 7h1a.5.5 0 0 1 .5.5v.5a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-.5a.5.5 0 0 1 .5-.5Z" fill="currentColor" stroke="none"/>
+  <path d="M6.5 14.25v-3a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 .75.75v3"/>
+</svg></span></div><div class="fade"></div></section>
+  <div class="gpage"><aside class="gside"><div class="gs-item">Index</div><div class="gs-item">Changelog</div>
+  <div class="gs-sec"><div class="gs-head"><span style="color:var(--blue)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="2.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+</svg></span><span>Icons</span></div><div class="gs-item on">All 157</div><div class="gs-item ">Navigation</div><div class="gs-item ">Actions</div><div class="gs-item ">Status</div><div class="gs-item ">People</div><div class="gs-item ">Objects</div><div class="gs-item ">Data</div></div>
+  <div class="gs-sec"><div class="gs-head"><span style="color:var(--orange)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 13.25 5.75 12.25 12.75 5.25A1.5 1.5 0 0 0 10.75 3.25L3.75 10.25Z"/>
+  <path d="M8.75 5.25l2 2"/>
+</svg></span><span>Craft</span></div><div class="gs-item ">Keylines</div><div class="gs-item ">One stroke</div><div class="gs-item ">Looks right</div></div></aside><main class="gmain"><div class="gs-title"><span style="color:var(--blue)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="2.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+</svg></span><span>Icons</span></div><div class="tb"><span class="tb-s"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="7" r="4.5"/>
+  <path d="M10.25 10.25 13.75 13.75"/>
+</svg><span>Search 157 icons</span><kbd>/</kbd></span><span class="seg"><b>16</b><span>20</span><span>24</span></span></div><div class="cat"><div class="cat-h"><span>Navigation</span><i>22</i></div><div class="cat-g"><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 6.5 8 2.25l5.25 4.25v6.25a1 1 0 0 1-1 1H3.75a1 1 0 0 1-1-1Z"/>
+  <path d="M6 13.75v-3a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 .75.75v3"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.75" width="11.5" height="10.5" rx="2"/>
+  <path d="M2.25 9H5l1 1.5h4L11 9h2.75"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="7" r="4.5"/>
+  <path d="M10.25 10.25 13.75 13.75"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 4h10.5M2.75 8h10.5M2.75 12h10.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="11.5" height="11.5" rx="2"/>
+  <path d="M6.25 2.25h-2a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2Z" fill="currentColor" stroke="none"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="2.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2" y="1.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <rect x="2" y="6.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <rect x="2" y="11.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <path d="M6.75 3h6.5M6.75 8h6.5M6.75 13h6.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 9.75 8 6.25l3.5 3.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 6.25 8 9.75l3.5-3.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M9.75 4.5 6.25 8l3.5 3.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6.25 4.5 9.75 8l-3.5 3.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 6.25 8 3.25l3 3M5 9.75l3 3 3-3"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 13V3M4 7l4-4 4 4"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 3v10M4 9l4 4 4-4"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M13 8H3M7 4 3 8l4 4"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 8h10M9 4l4 4-4 4"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 5.25h10.5M10.5 2.5l2.75 2.75L10.5 8"/>
+  <path d="M13.25 10.75H2.75M5.5 8l-2.75 2.75L5.5 13.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="3.5" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="8" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="12.5" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="3.5" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="8" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="8" cy="12.5" r="1.25" fill="currentColor" stroke="none"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7 2.25H4.25a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h7.5a2 2 0 0 0 2-2V9"/>
+  <path d="M7.5 8.5 13.75 2.25M9.75 2.25h4v4"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="4.5" height="6" rx="1.25"/>
+  <rect x="2.25" y="10.75" width="4.5" height="3" rx="1.25"/>
+  <rect x="9.25" y="2.25" width="4.5" height="3" rx="1.25"/>
+  <rect x="9.25" y="7.75" width="4.5" height="6" rx="1.25"/>
+</svg></span></div></div><div class="cat"><div class="cat-h"><span>Actions</span><i>32</i></div><div class="cat-g"><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 3v10M3 8h10"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 8h10"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 4l8 8M12 4 4 12"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.5 8.5 6.5 11.5 12.5 4.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 13.25 5.75 12.25 12.75 5.25A1.5 1.5 0 0 0 10.75 3.25L3.75 10.25Z"/>
+  <path d="M8.75 5.25l2 2"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.5 2.25H4.25a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h7.5a2 2 0 0 0 2-2V8.5"/>
+  <path d="M6.5 9.5 9.5 8.5 13 5A1.5 1.5 0 0 0 11 3L7.5 6.5Z"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.5 4.5h11"/>
+  <path d="M6 4.5V2.75A.75.75 0 0 1 6.75 2h2.5a.75.75 0 0 1 .75.75V4.5"/>
+  <path d="m3.75 4.5.5 8.25a1 1 0 0 0 1 1h5.5a1 1 0 0 0 1-1l.5-8.25"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.75 9.5A1.5 1.5 0 0 1 2.25 8V3.75a1.5 1.5 0 0 1 1.5-1.5H8a1.5 1.5 0 0 1 1.5 1.5"/>
+  <rect x="6.5" y="6.5" width="7.25" height="7.25" rx="1.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5.25 3 2.75 5.5 5.25 8"/>
+  <path d="M2.75 5.5h6.5a3.75 3.75 0 0 1 0 7.5H6.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M10.75 3l2.5 2.5-2.5 2.5"/>
+  <path d="M13.25 5.5h-6.5a3.75 3.75 0 0 0 0 7.5H9.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12.75 9.75A5 5 0 1 1 8 3c1.75 0 3.25.75 4.25 2"/>
+  <path d="M12.25 2.5V5h-2.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.25 6.5A5 5 0 0 1 8 3c1.75 0 3.25.75 4.25 2"/>
+  <path d="M12.25 2.5V5h-2.5"/>
+  <path d="M12.75 9.5A5 5 0 0 1 8 13c-1.75 0-3.25-.75-4.25-2"/>
+  <path d="M3.75 13.5V11h2.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 2.25v8M4.75 7 8 10.25 11.25 7"/>
+  <path d="M2.75 10.5v1.75a1.5 1.5 0 0 0 1.5 1.5h7.5a1.5 1.5 0 0 0 1.5-1.5V10.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 13.75v-8M4.75 9 8 5.75 11.25 9"/>
+  <path d="M2.75 5.5V3.75a1.5 1.5 0 0 1 1.5-1.5h7.5a1.5 1.5 0 0 1 1.5 1.5V5.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 10.5V2.25M4.75 5.5 8 2.25l3.25 3.25"/>
+  <path d="M5.5 8h-.75a2 2 0 0 0-2 2v1.75a2 2 0 0 0 2 2h6.5a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2h-.75"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6.25 5.25h-1.5a2.75 2.75 0 0 0 0 5.5h1.5"/>
+  <path d="M9.75 5.25h1.5a2.75 2.75 0 0 1 0 5.5h-1.5"/>
+  <path d="M5.5 8h5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 4.25h10.5M4.75 8h6.5M6.75 11.75h2.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 3v10M2.75 10.75 5 13l2.25-2.25"/>
+  <path d="M11 13V3M8.75 5.25 11 3l2.25 2.25"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M10 3h3v3M13 3 9 7"/>
+  <path d="M6 13H3v-3M3 13l4-4"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M9 4v3h3M9 7l4-4"/>
+  <path d="M7 12V9H4M7 9l-4 4"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.5" width="11.5" height="3" rx="1" fill="currentColor" stroke="none"/>
+  <path d="M3.25 7.25v4.5a2 2 0 0 0 2 2h5.5a2 2 0 0 0 2-2v-4.5"/>
+  <path d="M6.5 8.5h3"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 7 8.25 5.75 7.5 5 9 3.5A3.5 3.5 0 0 1 12.5 7L11 8.5 10.25 7.75 9 12Z"/>
+  <path d="M6.5 9.5 3.25 12.75"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.5 3.25C7.75 2.75 8.25 2.75 8.5 3.25L9.5 5.25C9.63 5.54 10.01 5.91 10.25 6L12.75 6.25C13.23 6.32 13.35 6.7 13 7L11.25 8.75C11.05 8.96 10.93 9.46 11 9.75L11.25 12C11.39 12.55 11.14 12.93 10.75 12.75L8.5 11.5C8.25 11.38 7.75 11.38 7.5 11.5L5.25 12.75C4.86 12.93 4.61 12.55 4.75 12L5 9.75C5.07 9.46 4.95 8.96 4.75 8.75L3 7C2.65 6.7 2.77 6.32 3.25 6.25L5.75 6C5.99 5.91 6.37 5.54 6.5 5.25Z"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 12.75V4.75a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v8Q12 13.5 11.25 13L9 11.5Q8 10.75 7 11.5L4.75 13Q4 13.5 4 12.75Z"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12.25 3Q13.5 2.5 13 3.75L9.25 12.75Q9 13.5 8.5 12.5L7 9 3.5 7.5Q2.5 7 3.25 6.75Z"/>
+  <path d="M7 9 13 3"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="6.25" cy="4.5" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="9.75" cy="4.5" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="6.25" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="9.75" cy="8" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="6.25" cy="11.5" r="1.25" fill="currentColor" stroke="none"/>
+  <circle cx="9.75" cy="11.5" r="1.25" fill="currentColor" stroke="none"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 5C7.52 3.91 6.44 3.25 5.25 3.25 3.6 3.25 2.25 4.6 2.25 6.25 2.25 7.5 3.25 8.5 4 9.25L7.25 12.5C7.6 12.85 8.4 12.85 8.75 12.5L12 9.25C12.75 8.5 13.75 7.5 13.75 6.25 13.75 4.6 12.4 3.25 10.75 3.25 9.56 3.25 8.48 3.91 8 5Z"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.25 4.25a2 2 0 0 1 2-2h6.5l3 3v6.5a2 2 0 0 1-2 2h-7.5a2 2 0 0 1-2-2Z"/>
+  <path d="M5.25 2.25v2a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1v-2"/>
+  <path d="M5 13.75v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <path d="M8 5.75v4.5M5.75 8h4.5"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.25 3.75Q2.5 2.75 3.75 2.75h8.5q1.25 0 .5 1L10.5 6.75Q9.75 7.75 9.75 9v3.5a.75.75 0 0 1-.75.75H7a.75.75 0 0 1-.75-.75V9q0-1.25-.75-2.25Z"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="7" r="4.5"/>
+  <path d="M10.25 10.25 13.75 13.75"/>
+  <path d="M7 5.25v3.5M5.25 7h3.5" stroke-width="1.25"/>
+</svg></span><span class="ci "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="7" r="4.5"/>
+  <path d="M10.25 10.25 13.75 13.75"/>
+  <path d="M5.25 7h3.5" stroke-width="1.25"/>
+</svg></span></div></div></main></div></div></div></div></div>
+</div>
+<h2 style="margin-top:40px">Mobile: one proposal</h2>
+<p class="subtitle">Hero stacks, links go full-width. The sidebar folds into a sticky search + category chip row. The side drawer becomes a bottom sheet with the essentials (construction view and in-context demos stay on the per-icon page). Shout if any of this is off.</p>
+<div class="phones"><div class="phone lt"><div class="ph"><header class="m-top"><span class="logo"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7 2.25C7.55 1.7 8.45 1.7 9 2.25L13.75 7C14.3 7.55 14.3 8.45 13.75 9L9 13.75C8.45 14.3 7.55 14.3 7 13.75L2.25 9C1.7 8.45 1.7 7.55 2.25 7Z"/>
+</svg><span>merki</span></span><span class="m-r"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.25 2.25A5.75 5.75 0 1 0 13.5 8.5 4.5 4.5 0 1 1 7.25 2.25Z"/>
+</svg><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 4h10.5M2.75 8h10.5M2.75 12h10.5"/>
+</svg></span></header><section class="m-hero"><span class="byline">Brought to you by <span class="me"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="14" viewBox="0 0 512 640"><path fill="currentColor" fill-rule="evenodd" d="M256 30 C180 30 135 70 126 132 C120 182 117 218 104 259 C88 296 81 330 94 359 C109 400 151 434 185 475 C222 518 254 554 228 611 C265 583 288 549 291 503 C294 471 285 440 299 405 C308 379 327 365 336 389 C344 410 324 442 348 474 C350 435 385 408 408 365 C436 320 425 288 409 249 C392 209 393 166 382 115 C372 61 326 30 256 30 Z M200 114 C185 145 185 183 220 215 C237 180 228 144 200 114 Z M312 114 C327 145 327 183 292 215 C275 180 284 144 312 114 Z"/></svg>Lucas Lima</span></span><h1>157 icons for software people use all day.</h1><div class="copy"><p>I wanted a set of icons that felt familiar, but had a little more personality. So I started drawing my own.</p><p><b>merki-icons</b> is a growing collection of bold, rounded icons for Figma and code. Open source and free to use under the MIT License.</p></div><div class="m-links"><span class="lk"><span class="lk-i"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="11.5" height="11.5" rx="2"/>
+  <path d="M5 5.5 7.5 8 5 10.5M9 10.5h2.25"/>
+</svg></span><code>npm i merki-icons</code><span class="lk-a"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.75 9.5A1.5 1.5 0 0 1 2.25 8V3.75a1.5 1.5 0 0 1 1.5-1.5H8a1.5 1.5 0 0 1 1.5 1.5"/>
+  <rect x="6.5" y="6.5" width="7.25" height="7.25" rx="1.5"/>
+</svg></span></span><span class="lk"><span class="lk-i"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 14C4.75 14 2 11.25 2 8S4.75 2 8 2s6 2.5 6 5.5c0 1.5-1 2.25-2.25 2.25H11c-1 0-1.75.75-1.75 1.75v.5c0 1-.5 2-1.25 2Z"/>
+  <circle cx="5" cy="8.75" r="1" fill="currentColor" stroke="none"/>
+  <circle cx="5.75" cy="5.75" r="1" fill="currentColor" stroke="none"/>
+  <circle cx="8.75" cy="5" r="1" fill="currentColor" stroke="none"/>
+</svg></span><span>Figma community file</span><span class="lk-a"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/>
+</svg></span></span><span class="lk"><span class="lk-i"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5.5 4.5 2 8l3.5 3.5M10.5 4.5 14 8l-3.5 3.5"/>
+</svg></span><span>GitHub</span><span class="lk-a"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6"/>
+</svg></span></span></div></section></div></div><div class="phone lt"><div class="ph"><header class="m-top"><span class="logo"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7 2.25C7.55 1.7 8.45 1.7 9 2.25L13.75 7C14.3 7.55 14.3 8.45 13.75 9L9 13.75C8.45 14.3 7.55 14.3 7 13.75L2.25 9C1.7 8.45 1.7 7.55 2.25 7Z"/>
+</svg><span>merki</span></span><span class="m-r"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.25 2.25A5.75 5.75 0 1 0 13.5 8.5 4.5 4.5 0 1 1 7.25 2.25Z"/>
+</svg><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 4h10.5M2.75 8h10.5M2.75 12h10.5"/>
+</svg></span></header><div class="m-sticky"><span class="tb-s"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="7" r="4.5"/>
+  <path d="M10.25 10.25 13.75 13.75"/>
+</svg><span>Search 157 icons</span></span><div class="m-chips"><b>All</b><span>Navigation</span><span>Actions</span><span>Status</span><span>People</span></div></div>
+  <div class="m-cats"><div class="cat"><div class="cat-h"><span>Navigation</span><i>22</i></div><div class="cat-g m"><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 6.5 8 2.25l5.25 4.25v6.25a1 1 0 0 1-1 1H3.75a1 1 0 0 1-1-1Z"/>
+  <path d="M6 13.75v-3a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 .75.75v3"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.75" width="11.5" height="10.5" rx="2"/>
+  <path d="M2.25 9H5l1 1.5h4L11 9h2.75"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="7" r="4.5"/>
+  <path d="M10.25 10.25 13.75 13.75"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 4h10.5M2.75 8h10.5M2.75 12h10.5"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="11.5" height="11.5" rx="2"/>
+  <path d="M6.25 2.25h-2a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2Z" fill="currentColor" stroke="none"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="2.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2" y="1.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <rect x="2" y="6.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <rect x="2" y="11.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <path d="M6.75 3h6.5M6.75 8h6.5M6.75 13h6.5"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 9.75 8 6.25l3.5 3.5"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 6.25 8 9.75l3.5-3.5"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M9.75 4.5 6.25 8l3.5 3.5"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6.25 4.5 9.75 8l-3.5 3.5"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 6.25 8 3.25l3 3M5 9.75l3 3 3-3"/>
+</svg></span></div></div><div class="cat"><div class="cat-h"><span>Actions</span><i>32</i></div><div class="cat-g m"><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 3v10M3 8h10"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 8h10"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 4l8 8M12 4 4 12"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.5 8.5 6.5 11.5 12.5 4.5"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 13.25 5.75 12.25 12.75 5.25A1.5 1.5 0 0 0 10.75 3.25L3.75 10.25Z"/>
+  <path d="M8.75 5.25l2 2"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.5 2.25H4.25a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h7.5a2 2 0 0 0 2-2V8.5"/>
+  <path d="M6.5 9.5 9.5 8.5 13 5A1.5 1.5 0 0 0 11 3L7.5 6.5Z"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.5 4.5h11"/>
+  <path d="M6 4.5V2.75A.75.75 0 0 1 6.75 2h2.5a.75.75 0 0 1 .75.75V4.5"/>
+  <path d="m3.75 4.5.5 8.25a1 1 0 0 0 1 1h5.5a1 1 0 0 0 1-1l.5-8.25"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.75 9.5A1.5 1.5 0 0 1 2.25 8V3.75a1.5 1.5 0 0 1 1.5-1.5H8a1.5 1.5 0 0 1 1.5 1.5"/>
+  <rect x="6.5" y="6.5" width="7.25" height="7.25" rx="1.5"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5.25 3 2.75 5.5 5.25 8"/>
+  <path d="M2.75 5.5h6.5a3.75 3.75 0 0 1 0 7.5H6.5"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M10.75 3l2.5 2.5-2.5 2.5"/>
+  <path d="M13.25 5.5h-6.5a3.75 3.75 0 0 0 0 7.5H9.5"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12.75 9.75A5 5 0 1 1 8 3c1.75 0 3.25.75 4.25 2"/>
+  <path d="M12.25 2.5V5h-2.5"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.25 6.5A5 5 0 0 1 8 3c1.75 0 3.25.75 4.25 2"/>
+  <path d="M12.25 2.5V5h-2.5"/>
+  <path d="M12.75 9.5A5 5 0 0 1 8 13c-1.75 0-3.25-.75-4.25-2"/>
+  <path d="M3.75 13.5V11h2.5"/>
+</svg></span></div></div><div class="cat"><div class="cat-h"><span>Status</span><i>19</i></div><div class="cat-g m"><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 1.75a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 1 1 0-12.5ZM5.75 7.5 7 8.75l3.25-3.25a.75.75 0 0 1 1 1L7.5 10.25a.75.75 0 0 1-1 0L4.75 8.5a.75.75 0 0 1 1-1Z" fill="currentColor" fill-rule="evenodd" stroke="none"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 1.75a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 1 1 0-12.5ZM6.5 5.5 8 7l1.5-1.5a.75.75 0 0 1 1 1L9 8l1.5 1.5a.75.75 0 0 1-1 1L8 9l-1.5 1.5a.75.75 0 0 1-1-1L7 8 5.5 6.5a.75.75 0 0 1 1-1Z" fill="currentColor" fill-rule="evenodd" stroke="none"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <path d="M8 4.75v3.25"/>
+  <circle cx="8" cy="11" r="1" fill="currentColor" stroke="none"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.5 2.75Q8 1.75 8.5 2.75L13.75 12.75Q14.25 13.75 13.25 13.75H2.75Q1.75 13.75 2.25 12.75Z"/>
+  <path d="M8 7.25v1.5"/>
+  <circle cx="8" cy="11.25" r=".75" fill="currentColor" stroke="none"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <circle cx="8" cy="5" r="1" fill="currentColor" stroke="none"/>
+  <path d="M8 8v3.25"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <path d="M6.25 6.25C6.25 5.28 7.03 4.5 8 4.5s1.75.78 1.75 1.75c0 1.25-1.75 1.25-1.75 2"/>
+  <circle cx="8" cy="11" r="1" fill="currentColor" stroke="none"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <path d="M3.75 3.75l8.5 8.5"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="5.5" stroke-dasharray="1 3.32" stroke-dashoffset="0.5"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="5.5"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="5.5"/>
+  <path d="M8 4.5a3.5 3.5 0 0 1 0 7Z" fill="currentColor" stroke="none"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 2.25a5.75 5.75 0 1 1-5.75 5.75"/>
+</svg></span><span class="ci "><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="8" cy="8" r="6"/>
+  <path d="M8 4.75V8l2.25 1.5"/>
+</svg></span></div></div></div></div></div><div class="phone lt dim"><div class="ph"><header class="m-top"><span class="logo"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7 2.25C7.55 1.7 8.45 1.7 9 2.25L13.75 7C14.3 7.55 14.3 8.45 13.75 9L9 13.75C8.45 14.3 7.55 14.3 7 13.75L2.25 9C1.7 8.45 1.7 7.55 2.25 7Z"/>
+</svg><span>merki</span></span><span class="m-r"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.25 2.25A5.75 5.75 0 1 0 13.5 8.5 4.5 4.5 0 1 1 7.25 2.25Z"/>
+</svg><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 4h10.5M2.75 8h10.5M2.75 12h10.5"/>
+</svg></span></header><div class="m-cats"><div class="cat"><div class="cat-h"><span>Navigation</span></div><div class="cat-g m"><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 6.5 8 2.25l5.25 4.25v6.25a1 1 0 0 1-1 1H3.75a1 1 0 0 1-1-1Z"/>
+  <path d="M6 13.75v-3a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 .75.75v3"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.75" width="11.5" height="10.5" rx="2"/>
+  <path d="M2.25 9H5l1 1.5h4L11 9h2.75"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="7" r="4.5"/>
+  <path d="M10.25 10.25 13.75 13.75"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 4h10.5M2.75 8h10.5M2.75 12h10.5"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="11.5" height="11.5" rx="2"/>
+  <path d="M6.25 2.25h-2a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2Z" fill="currentColor" stroke="none"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="2.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="2.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+  <rect x="9.25" y="9.25" width="4.5" height="4.5" rx="1.25"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2" y="1.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <rect x="2" y="6.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <rect x="2" y="11.75" width="2.5" height="2.5" rx=".75" fill="currentColor" stroke="none"/>
+  <path d="M6.75 3h6.5M6.75 8h6.5M6.75 13h6.5"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 9.75 8 6.25l3.5 3.5"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 6.25 8 9.75l3.5-3.5"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M9.75 4.5 6.25 8l3.5 3.5"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6.25 4.5 9.75 8l-3.5 3.5"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 6.25 8 3.25l3 3M5 9.75l3 3 3-3"/>
+</svg></span></div></div><div class="cat"><div class="cat-h"><span>Actions</span></div><div class="cat-g m"><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 3v10M3 8h10"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 8h10"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 4l8 8M12 4 4 12"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.5 8.5 6.5 11.5 12.5 4.5"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.75 13.25 5.75 12.25 12.75 5.25A1.5 1.5 0 0 0 10.75 3.25L3.75 10.25Z"/>
+  <path d="M8.75 5.25l2 2"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7.5 2.25H4.25a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h7.5a2 2 0 0 0 2-2V8.5"/>
+  <path d="M6.5 9.5 9.5 8.5 13 5A1.5 1.5 0 0 0 11 3L7.5 6.5Z"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.5 4.5h11"/>
+  <path d="M6 4.5V2.75A.75.75 0 0 1 6.75 2h2.5a.75.75 0 0 1 .75.75V4.5"/>
+  <path d="m3.75 4.5.5 8.25a1 1 0 0 0 1 1h5.5a1 1 0 0 0 1-1l.5-8.25"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.75 9.5A1.5 1.5 0 0 1 2.25 8V3.75a1.5 1.5 0 0 1 1.5-1.5H8a1.5 1.5 0 0 1 1.5 1.5"/>
+  <rect x="6.5" y="6.5" width="7.25" height="7.25" rx="1.5"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5.25 3 2.75 5.5 5.25 8"/>
+  <path d="M2.75 5.5h6.5a3.75 3.75 0 0 1 0 7.5H6.5"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M10.75 3l2.5 2.5-2.5 2.5"/>
+  <path d="M13.25 5.5h-6.5a3.75 3.75 0 0 0 0 7.5H9.5"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12.75 9.75A5 5 0 1 1 8 3c1.75 0 3.25.75 4.25 2"/>
+  <path d="M12.25 2.5V5h-2.5"/>
+</svg></span><span class="ci"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.25 6.5A5 5 0 0 1 8 3c1.75 0 3.25.75 4.25 2"/>
+  <path d="M12.25 2.5V5h-2.5"/>
+  <path d="M12.75 9.5A5 5 0 0 1 8 13c-1.75 0-3.25-.75-4.25-2"/>
+  <path d="M3.75 13.5V11h2.5"/>
+</svg></span></div></div></div>
+  <div class="sheet"><span class="grab"></span><div class="dh"><div><b>calendar</b><i>16 × 16 · objects</i></div><span class="x"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 4l8 8M12 4 4 12"/>
+</svg></span></div>
+  <div class="m-stage"><div class="big"><svg width="120" height="120" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.75" width="11.5" height="11" rx="2"/>
+  <path d="M2.25 4.75a2 2 0 0 1 2-2h7.5a2 2 0 0 1 2 2V6.5H2.25Z" fill="currentColor" stroke="none"/>
+</svg></div></div>
+  <div class="m-sz"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.75" width="11.5" height="11" rx="2"/>
+  <path d="M2.25 4.75a2 2 0 0 1 2-2h7.5a2 2 0 0 1 2 2V6.5H2.25Z" fill="currentColor" stroke="none"/>
+</svg><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.75" width="11.5" height="11" rx="2"/>
+  <path d="M2.25 4.75a2 2 0 0 1 2-2h7.5a2 2 0 0 1 2 2V6.5H2.25Z" fill="currentColor" stroke="none"/>
+</svg><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2.25" y="2.75" width="11.5" height="11" rx="2"/>
+  <path d="M2.25 4.75a2 2 0 0 1 2-2h7.5a2 2 0 0 1 2 2V6.5H2.25Z" fill="currentColor" stroke="none"/>
+</svg></div>
+  <div class="acts"><span class="a pri"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.75 9.5A1.5 1.5 0 0 1 2.25 8V3.75a1.5 1.5 0 0 1 1.5-1.5H8a1.5 1.5 0 0 1 1.5 1.5"/>
+  <rect x="6.5" y="6.5" width="7.25" height="7.25" rx="1.5"/>
+</svg>Copy SVG</span><span class="a"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5.5 4.5 2 8l3.5 3.5M10.5 4.5 14 8l-3.5 3.5"/>
+</svg>JSX</span><span class="a"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 2.25v8M4.75 7 8 10.25 11.25 7"/>
+  <path d="M2.75 10.5v1.75a1.5 1.5 0 0 0 1.5 1.5h7.5a1.5 1.5 0 0 0 1.5-1.5V10.5"/>
+</svg></span></div></div></div></div></div>
