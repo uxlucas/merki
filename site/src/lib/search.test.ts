@@ -26,6 +26,19 @@ describe('searchIcons', () => {
     expect(names('CalendarIcon')).toEqual(['calendar']);
   });
 
+  it('does not match every icon on letters of the "Icon" suffix', () => {
+    for (const query of ['i', 'c', 'o', 'n', 'ic', 'co', 'on', 'con', 'icon']) {
+      expect(names(query).length, query).toBeLessThan(icons.length);
+    }
+    expect(names('con').length).toBeLessThan(157);
+    expect(names('icon').length).toBeLessThan(157);
+    expect(names('on').length).toBeLessThan(157);
+  });
+
+  it('accepts a component name in any case', () => {
+    expect(names('HOMEICON')).toContain('home');
+  });
+
   it('returns nothing when nothing matches', () => {
     expect(names('zzzz')).toEqual([]);
   });

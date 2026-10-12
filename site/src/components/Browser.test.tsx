@@ -56,6 +56,29 @@ describe('Browser', () => {
     expect(document.activeElement).toBe(input);
   });
 
+  it('does not steal "/" while typing in the search, and Cmd+K focuses it', () => {
+    render(<Harness />);
+    const input = screen.getByRole('searchbox', { name: 'Search icons' });
+    input.focus();
+    expect(fireEvent.keyDown(input, { key: '/' })).toBe(true);
+    expect(document.activeElement).toBe(input);
+    input.blur();
+    expect(fireEvent.keyDown(document.body, { key: '/', ctrlKey: true })).toBe(true);
+    expect(document.activeElement).not.toBe(input);
+    fireEvent.keyDown(document.body, { key: 'k', metaKey: true });
+    expect(document.activeElement).toBe(input);
+  });
+
+  it('leaves Alt+Arrow to the browser', () => {
+    const onMove = vi.fn();
+    render(<Harness selected="home" onMove={onMove} />);
+    const home = screen.getByRole('button', { name: 'home' });
+    home.focus();
+    expect(fireEvent.keyDown(home, { key: 'ArrowRight', altKey: true })).toBe(true);
+    expect(document.activeElement).toBe(home);
+    expect(onMove).not.toHaveBeenCalled();
+  });
+
   it('clears the query with Escape', () => {
     render(<Harness />);
     const input = screen.getByRole('searchbox', { name: 'Search icons' }) as HTMLInputElement;

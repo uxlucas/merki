@@ -41,7 +41,8 @@ export function Browser({ query, onQuery, selected, onOpen, onMove }: BrowserPro
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       const typing = event.target instanceof HTMLElement && event.target.closest('input, textarea, [contenteditable="true"]');
-      if ((event.key === 'k' && (event.metaKey || event.ctrlKey)) || (event.key === '/' && !typing)) {
+      const modified = event.ctrlKey || event.metaKey || event.altKey;
+      if ((event.key === 'k' && (event.metaKey || event.ctrlKey)) || (event.key === '/' && !typing && !modified)) {
         event.preventDefault();
         inputRef.current?.focus();
       }
@@ -51,7 +52,7 @@ export function Browser({ query, onQuery, selected, onOpen, onMove }: BrowserPro
   }, []);
 
   const onGridKey = (event: ReactKeyboardEvent<HTMLDivElement>) => {
-    if (!NAV_KEYS.has(event.key)) return;
+    if (!NAV_KEYS.has(event.key) || event.altKey || event.metaKey || event.ctrlKey) return;
     const cell = (event.target as HTMLElement).closest<HTMLElement>('[data-name]');
     if (!cell?.dataset.name) return;
     event.preventDefault();
