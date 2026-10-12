@@ -283,7 +283,7 @@ Routes: `/guide/install`, `/guide/react`, `/guide/svg`, `/guide/accessibility`, 
   3. Lucas runs `npm publish` (his account, 2FA)
   4. GitHub release with the SVG zip
   5. run the Figma sync; Lucas publishes the Community update
-  6. the site deploys from `main`
+  6. the site deploys from `main`; at the 1.0 launch, remove the `X-Robots-Tag: noindex` header from `vercel.json` (it keeps the site out of search until then)
 
 ## 9. Build order
 
