@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
 import { App } from '../App';
 
@@ -17,17 +17,20 @@ const start = (path: string) => {
   return render(<App initialPath={path} />);
 };
 
+// The craft cards also have a "calendar" button, so grid cells are looked up inside the Icons section.
+const cell = (name: string) => within(document.getElementById('icons')!).getByRole('button', { name });
+
 describe('icon drawer on the home page', () => {
   it('opens from the grid and pushes the icon url', () => {
     start('/');
-    fireEvent.click(screen.getByRole('button', { name: 'calendar' }));
+    fireEvent.click(cell('calendar'));
     expect(window.location.pathname).toBe('/icons/calendar');
     expect(screen.getByRole('complementary', { name: 'calendar icon' })).toBeTruthy();
   });
 
   it('closes with Escape and goes back to the home url', async () => {
     start('/');
-    fireEvent.click(screen.getByRole('button', { name: 'calendar' }));
+    fireEvent.click(cell('calendar'));
     fireEvent.keyDown(document.body, { key: 'Escape' });
     await waitFor(() => expect(window.location.pathname).toBe('/'));
     await waitFor(() => expect(screen.queryByRole('complementary', { name: 'calendar icon' })).toBeNull());
@@ -35,7 +38,7 @@ describe('icon drawer on the home page', () => {
 
   it('closes when the visitor presses back', async () => {
     start('/');
-    fireEvent.click(screen.getByRole('button', { name: 'calendar' }));
+    fireEvent.click(cell('calendar'));
     window.history.back();
     await waitFor(() => expect(screen.queryByRole('complementary', { name: 'calendar icon' })).toBeNull());
   });
@@ -49,7 +52,7 @@ describe('icon drawer on the home page', () => {
 
   it('closes to / after a direct visit and a click on another icon', async () => {
     start('/icons/bell');
-    fireEvent.click(screen.getByRole('button', { name: 'calendar' }));
+    fireEvent.click(cell('calendar'));
     expect(window.location.pathname).toBe('/icons/calendar');
     fireEvent.click(screen.getByRole('button', { name: 'Close' }));
     await waitFor(() => expect(window.location.pathname).toBe('/'));
@@ -58,7 +61,7 @@ describe('icon drawer on the home page', () => {
 
   it('clears the search on the first Escape and closes on the second', async () => {
     start('/');
-    fireEvent.click(screen.getByRole('button', { name: 'calendar' }));
+    fireEvent.click(cell('calendar'));
     const input = screen.getByRole('searchbox', { name: 'Search icons' }) as HTMLInputElement;
     fireEvent.change(input, { target: { value: 'bell' } });
     fireEvent.keyDown(input, { key: 'Escape' });
@@ -70,11 +73,11 @@ describe('icon drawer on the home page', () => {
 
   it('follows the arrow keys while open, without adding history entries', () => {
     start('/');
-    fireEvent.click(screen.getByRole('button', { name: 'calendar' }));
+    fireEvent.click(cell('calendar'));
     const length = window.history.length;
-    const cell = screen.getByRole('button', { name: 'calendar' });
-    cell.focus();
-    fireEvent.keyDown(cell, { key: 'ArrowRight' });
+    const target = cell('calendar');
+    target.focus();
+    fireEvent.keyDown(target, { key: 'ArrowRight' });
     expect(window.location.pathname).not.toBe('/icons/calendar');
     expect(window.history.length).toBe(length);
   });

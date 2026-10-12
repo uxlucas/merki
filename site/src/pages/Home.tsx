@@ -5,6 +5,7 @@ import { Drawer } from '../components/Drawer';
 import { Hero } from '../components/Hero';
 import { Layout } from '../components/Layout';
 import { WallBand } from '../components/WallBand';
+import { CraftCards } from '../craft/CraftCards';
 import { iconByName } from '../data/icons';
 import { useRouter } from '../lib/router';
 
@@ -52,6 +53,7 @@ export function Home({ openIcon }: { openIcon: string | null }) {
       <section id="craft" className="sec" aria-labelledby="craft-title">
         <h2 className="sec-title" id="craft-title"><PencilIcon size={14} className="glyph-orange" />Craft</h2>
         <p className="sec-lede">How the set is built, shown rather than told.</p>
+        <CraftCards />
       </section>
       {icon && <Drawer icon={icon} compact={compact} onClose={close} />}
     </Layout>
