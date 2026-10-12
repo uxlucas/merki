@@ -2,6 +2,9 @@
 
 Items the task and final reviews deferred. Each later plan picks up the ones in its area.
 
+## Test reliability
+- An intermittent local test failure was seen 3 times (2026-10-10 and twice on 2026-10-12, each right after git/build commands while the /lab dev server was running). It could not be reproduced in 15+ follow-up runs, and GitHub CI has passed every push. The failing test name was never captured. Next time it appears, keep the full vitest output. Suspects: jsdom /lab tests or the resvg sheet test under CPU load.
+
 ## Linter hardening
 - Use `Object.hasOwn` for the allow-list lookups (`ALLOWED_ATTRS[tag]`, `in REQUIRED_ROOT`).
 - Test gaps: rect/line cases, upper bounds, geometry error paths, optimizer survival of `fill-rule`/`stroke-dasharray`, stale entries in `index.ts`/`icons.json`.
