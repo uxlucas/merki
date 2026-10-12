@@ -23,6 +23,33 @@ describe('Lab', () => {
     await waitFor(() => expect(fetchMock).toHaveBeenCalledWith('/__lab/review'));
   });
 
+  it('orders the category chips canonically, not alphabetically', () => {
+    const icons = [icon('calendar', 'objects'), icon('home', 'navigation')];
+    render(<Lab icons={icons} fetchImpl={vi.fn(async () => reply({})) as unknown as typeof fetch} />);
+
+    const chips = within(screen.getByRole('navigation', { name: 'Categories' })).getAllByRole('button');
+    expect(chips.map((chip) => chip.firstChild?.textContent?.trim())).toEqual(['All', 'navigation', 'objects']);
+  });
+
+  it('puts billing after objects and unknown or uncategorized chips last', () => {
+    const icons = [
+      { ...icon('a', 'billing') },
+      { ...icon('b', 'zzz') },
+      { name: 'c', svg, meta: null },
+      icon('d', 'objects'),
+    ];
+    render(<Lab icons={icons} fetchImpl={vi.fn(async () => reply({})) as unknown as typeof fetch} />);
+
+    const chips = within(screen.getByRole('navigation', { name: 'Categories' })).getAllByRole('button');
+    expect(chips.map((chip) => chip.firstChild?.textContent?.trim())).toEqual([
+      'All',
+      'objects',
+      'billing',
+      'zzz',
+      'uncategorized',
+    ]);
+  });
+
   it('opens compare with the same category plus the reference icons, each once', async () => {
     render(<Lab icons={ICONS} fetchImpl={vi.fn(async () => reply({})) as unknown as typeof fetch} />);
 

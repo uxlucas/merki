@@ -35,7 +35,7 @@ Merki is an open-source icon library for SaaS products, dashboards, productivity
 **Stroke**
 - ⚙️ `stroke-width="1.5"`, `stroke-linecap="round"`, `stroke-linejoin="round"`. No other weights, except the 1.25 interior optical weight below.
 - ⚙️ Only `currentColor` or `none` for fill and stroke. No other color values.
-- ⚙️ Interior detail lines (inside an enclosing shape) and small glyph details (numerals, letterforms) may use `stroke-width="1.25"` as an optical correction; outer silhouettes stay 1.5 (decided 2026-10-12; used by globe and list-ordered).
+- ⚙️ Interior detail lines (inside an enclosing shape) and small glyph details (numerals, letterforms) may use `stroke-width="1.25"` as an optical correction; outer silhouettes stay 1.5 (decided 2026-10-12; used by globe, list-ordered and receipt).
 
 **Keylines** (centerline dimensions)
 - circle: diameter 12
@@ -48,7 +48,7 @@ Merki is an open-source icon library for SaaS products, dashboards, productivity
 - At least 1px of clear space between separate shapes.
 
 **Solid accents**
-- At most one solid element per icon, used for a reason: people's heads, header bands (calendar), markers (flag), solid states (circle-x style knockouts), data bars (priority).
+- At most one solid *role* per icon (repeated markers, dots and bars count as one), used for a reason: people's heads, header bands (calendar), markers (flag), solid states (circle-x style knockouts), data bars (priority).
 - ⚙️ Knockouts are built as compound paths (`fill-rule="evenodd"`), **never `<mask>` or `<clipPath>`**. Masks need IDs, and IDs collide when an icon appears twice on a page.
 
 **Modifier marks** (user-plus, user-arrow, file-plus…)

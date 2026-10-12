@@ -25,6 +25,14 @@ describe('optimizeSvg', () => {
     const output = optimizeSvg(`<svg ${ROOT_ATTRS}><circle cx="8" cy="8" r="2"/></svg>`);
     expect(output).toContain('<circle');
   });
+
+  it('keeps opacity on a solid rect and the 1.25 stroke width on a child path', () => {
+    const output = optimizeSvg(
+      `<svg ${ROOT_ATTRS}><rect x="2" y="9" width="3" height="5" rx="0.75" fill="currentColor" stroke="none" opacity="0.3"/><path d="M8 4v8" stroke-width="1.25"/></svg>`,
+    );
+    expect(output).toContain('opacity="0.3"');
+    expect(output).toContain('stroke-width="1.25"');
+  });
 });
 
 describe('withSize', () => {

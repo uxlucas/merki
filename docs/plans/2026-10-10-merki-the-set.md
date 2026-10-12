@@ -4,6 +4,8 @@
 
 **Goal:** Draw the remaining 129 icons of the 145-icon v1 set in ten category batches. Each batch is reviewed by Lucas in `/lab`. Before the batches start, three small tooling upgrades make batch review workable: a category filter and side panel in `/lab`, a PNG contact sheet the drawer can look at, and a manifest that tracks what's left.
 
+> Note: the set became 146 icons when `sync` was split from `refresh` during the actions review (2026-10-10). Counts of 145 below are historical.
+
 **Architecture:** Same pipeline as the foundation. Icons live in `icons/` as `name.svg` + `name.json`. The linter enforces the rules, the build generates the `merki-icons` package, and `/lab` is the review surface. New pieces:
 - `icons/_set.json` is the manifest: the spec §3 list, category → names.
 - `scripts/sheet.ts` renders a batch to a PNG with @resvg/resvg-js, so the drawer can check its own work by eye before Lucas sees it.
@@ -18,7 +20,7 @@
 - All foundation constraints hold, as amended there:
   - `xmlns` is required on the root.
   - Names must start with a letter: `/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/`.
-  - Stroke width is locked at 1.5.
+  - Root stroke width is locked at 1.5 (children may use the 1.25 optical weight, see below).
   - The npm package is `merki-icons`, not `merki`.
 - Root element of every icon, exactly: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">`
 - Anchors on the 0.25 grid. Handles at most 2 decimals. Ink stays within 1–15 including the 0.75 half-stroke. Allowed elements are path, circle, rect, line. Allowed attributes on path, circle, rect and line include `stroke-width (1.25 only)`, for interior detail lines and small glyph details (numerals, letterforms) on stroked shapes (decided 2026-10-12). Colors are only `currentColor` or `none`. `opacity="0.3"` is allowed on path, circle and rect, only on solid shapes (fill currentColor, stroke none), for inactive states such as priority bars (decided 2026-10-11). No transforms, masks, groups or ids.
@@ -37,7 +39,7 @@
 - **Arrowheads: the tip is the end of the stroke, and the legs trail behind it** (actions review). On straight arrows, the legs sit symmetric about the shaft (see `arrow-right`). On curved arrows (refresh, sync, undo, history), the curve must turn into a short straight 45° segment before the tip, and the head is the axis-aligned L at that tip, legs trailing up/left or down/right (see `refresh`). Never end a head on a still-curving stroke: the inner leg collides with the curve and reads as a hook or a bump. Never point legs forward.
 - **"Simplify" means fewer parts** (actions review). Name the parts first (pin: head, neck, flange, point), give each one clear shape, and use no overlapping or crossing strokes. One outline plus one line beats several overlapping shapes.
 - **Check against the references before reporting.** Compare every icon with how the approved ones handle the same problem: corners, ends, heads, partial shapes. If it looks odd at 4×, it is odd. Fix it before Lucas sees it.
-- **One solid element per icon, with a reason.** Solid shapes are for people's heads, header bands, markers, solid states and data bars.
+- **At most one solid *role* per icon (repeated markers, dots and bars count as one), with a reason.** Solid shapes are for people's heads, header bands, markers, solid states and data bars.
 
 ### Shared parts (centerline coordinates; reuse them so the set stays consistent)
 

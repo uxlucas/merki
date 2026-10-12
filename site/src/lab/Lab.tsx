@@ -6,7 +6,7 @@ import { Ladder } from './Ladder';
 import { MenuMock } from './MenuMock';
 import type { ReviewFile, ReviewUpdate } from './review';
 import { ReviewPanel, type ReviewState } from './ReviewPanel';
-import type { LabIcon } from './types';
+import { CATEGORY_ORDER, type LabIcon } from './types';
 
 interface Props {
   icons: LabIcon[];
@@ -68,7 +68,12 @@ export function Lab({ icons, fetchImpl = globalThis.fetch }: Props) {
   const categoryOf = (icon: LabIcon) => icon.meta?.category ?? 'uncategorized';
   const counts: Record<string, number> = {};
   for (const icon of icons) counts[categoryOf(icon)] = (counts[categoryOf(icon)] ?? 0) + 1;
-  const categories = Object.keys(counts).sort();
+  const rank = (name: string) => {
+    if (name === 'uncategorized') return CATEGORY_ORDER.length + 1;
+    const index = (CATEGORY_ORDER as readonly string[]).indexOf(name);
+    return index === -1 ? CATEGORY_ORDER.length : index;
+  };
+  const categories = Object.keys(counts).sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
   const visible = category === null ? icons : icons.filter((icon) => categoryOf(icon) === category);
 
   const target = icons.find((icon) => icon.name === selected) ?? null;

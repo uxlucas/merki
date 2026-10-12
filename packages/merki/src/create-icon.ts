@@ -14,7 +14,7 @@ export interface IconProps extends Omit<SVGProps<SVGSVGElement>, 'ref' | 'color'
   size?: number | string;
   /** Sets the SVG `color`, which strokes and solid accents both follow. Default currentColor. */
   color?: string;
-  /** Keep the stroke at 1.5 screen px at any size. Solid accents still scale. */
+  /** Keep strokes at their 16px weight (1.5, or 1.25 on interior details) at any size. Solid accents still scale. */
   absoluteStrokeWidth?: boolean;
   /** Accessible name. Without it (or aria-label) the icon is hidden from screen readers. */
   title?: string;

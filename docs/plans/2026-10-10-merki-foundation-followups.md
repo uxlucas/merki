@@ -6,7 +6,8 @@ Items the task and final reviews deferred. Each later plan picks up the ones in 
 - Use `Object.hasOwn` for the allow-list lookups (`ALLOWED_ATTRS[tag]`, `in REQUIRED_ROOT`).
 - Test gaps: rect/line cases, upper bounds, geometry error paths, optimizer survival of `fill-rule`/`stroke-dasharray`, stale entries in `index.ts`/`icons.json`.
 - `buildAll` wipes outputs before the post-optimize lint check. Compute everything in memory first.
-- Replace literal U+FEFF characters in `optimize.ts`, `parse.ts`, `lab-plugin.ts` and their tests with `﻿` escapes.
+- Replace literal U+FEFF characters in `optimize.ts`, `parse.ts`, `lab-plugin.ts` and their tests with `\uFEFF` escapes.
+- Shapes with `fill="none" stroke="none"`, and paths with no visible segment (a lone `M`), still lint clean. They draw nothing, so /lab shows the problem, but a rule would catch it in CI.
 
 ## Package polish (spec §9 step 3)
 - Ship `LICENSE` inside `packages/merki`. Add a top-level `types` field and a `default` export condition.
@@ -19,4 +20,5 @@ Items the task and final reviews deferred. Each later plan picks up the ones in 
 ## Lab polish
 - `aria-pressed` on the selected cell, a text alternative for the needs-work dot, better contrast for the orange badge, `color-scheme: dark`.
 - Error-copy edge cases: the "Couldn't save: save failed: 500" double prefix, a GET that never resolves staying on "Loading notes…".
-- Atomic `_review.json` writes; a body size cap; watcher reloads only for `.svg`/`.json`.
+- Atomic `_review.json` writes; a body size cap.
+- Middleware tests for `/__lab/review`: a broken `_review.json` returns 500 and never writes; a non-JSON POST returns 415 (site/lab-plugin.ts).
