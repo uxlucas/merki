@@ -35,7 +35,8 @@
 .action.primary { background: var(--inv); color: var(--inv-fg); border-color: var(--inv); }
 @media (hover: hover) and (pointer: fine) { .action:not(.primary):hover { border-color: var(--fg3); } }
 
-.drawer { animation: drawer-in 240ms var(--ease-out); transition: opacity 180ms var(--ease-in), transform 180ms var(--ease-in); will-change: transform; }
+.drawer[data-enter='true'] { animation: drawer-in 240ms var(--ease-out); }
+.drawer { transition: opacity 180ms var(--ease-in), transform 180ms var(--ease-in); will-change: transform; }
 .drawer[data-state='closing'] { opacity: 0; transform: translateX(8px); pointer-events: none; }
 @keyframes drawer-in { from { opacity: 0; transform: translateX(16px); } }
 @keyframes scrim-in { from { opacity: 0; } }
@@ -48,8 +49,10 @@
   .stage { height: 170px; }
   .stage .construction { width: 150px; height: 150px; }
   .context { flex-wrap: wrap; }
-  .scrim { animation: scrim-in 280ms var(--ease-out); transition: opacity 200ms var(--ease-in); }
+  .scrim { transition: opacity 200ms var(--ease-in); }
+  .scrim[data-enter='true'] { animation: scrim-in 280ms var(--ease-out); }
   .scrim[data-state='closing'] { opacity: 0; pointer-events: none; }
-  .drawer { animation: sheet-in 280ms var(--ease-out); transition-duration: 200ms; }
+  .drawer[data-enter='true'] { animation: sheet-in 280ms var(--ease-out); }
+  .drawer { transition-duration: 200ms; }
   .drawer[data-state='closing'] { transform: translateY(24px); }
 }

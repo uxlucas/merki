@@ -36,7 +36,7 @@ code, kbd, pre { font-family: var(--mono); }
 .swap[data-state='copied'] .swap-b { opacity: 1; scale: 1; }
 .action, .hero-link { transition: scale 150ms var(--ease-out); }
 .cell:active, .action:active, button.hero-link:active, .to-top:active { scale: 0.97; }
-.theme-switching, .theme-switching * { transition: none !important; }
+.theme-switching, .theme-switching *, .theme-switching *::before, .theme-switching *::after { transition: none !important; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; }
 }
