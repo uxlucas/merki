@@ -1,3 +1,5 @@
+import '@fontsource-variable/inter';
+import './styles/index.css';
 import { StrictMode } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import { App } from './App';

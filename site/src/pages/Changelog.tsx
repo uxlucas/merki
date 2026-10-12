@@ -1,7 +1,11 @@
+import { Layout } from '../components/Layout';
+
 export function ChangelogPage() {
   return (
-    <main>
-      <h1>Changelog</h1>
-    </main>
+    <Layout active="changelog">
+      <article className="prose">
+        <h1>Changelog</h1>
+      </article>
+    </Layout>
   );
 }

@@ -1,0 +1,34 @@
+.topnav { display: flex; justify-content: space-between; align-items: center; max-width: 948px; margin: 0 auto; padding: 28px 24px; }
+.logo { display: flex; gap: 8px; align-items: center; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.topnav-links { display: flex; gap: 28px; align-items: center; font-size: 14px; color: var(--fg2); }
+.topnav-links a:hover { color: var(--fg); }
+.theme-toggle .sun { display: none; }
+[data-theme='dark'] .theme-toggle .sun { display: block; }
+[data-theme='dark'] .theme-toggle .moon { display: none; }
+.menu-btn { display: none; }
+
+.index { display: grid; grid-template-columns: 180px minmax(0, 760px); gap: 64px; max-width: 1068px; margin: 0 auto; padding: 0 24px 120px; }
+.sidebar { position: sticky; top: 0; align-self: start; max-height: 100vh; overflow-y: auto; padding: 40px 0; font-size: 12px; }
+.side-item { display: block; color: var(--fg3); line-height: 28px; }
+.side-item:hover { color: var(--fg2); }
+.side-item[aria-current='page'] { color: var(--fg); }
+.side-count { color: var(--fg3); margin-left: 4px; font-variant-numeric: tabular-nums; }
+.side-sec { margin-top: 24px; }
+.side-head { display: flex; gap: 8px; align-items: center; line-height: 28px; color: var(--fg); }
+.main { padding: 40px 0 0; min-width: 0; }
+.sec { scroll-margin-top: 16px; }
+.sec + .sec { margin-top: 72px; }
+.sec-title { display: flex; gap: 8px; align-items: center; font-size: 14px; font-weight: 500; line-height: 28px; margin: 0 0 14px; }
+.sec-lede { font-size: 14px; color: var(--fg2); margin: -8px 0 18px; }
+
+@media (max-width: 767px) {
+  .topnav { padding: 18px 16px; }
+  .topnav-links { gap: 16px; }
+  .topnav-links .nav-text { display: none; }
+  .menu-btn { display: grid; }
+  .index { display: block; padding: 0 16px 80px; }
+  .sidebar { display: none; }
+  .sidebar.open { display: block; position: fixed; inset: 64px 0 0; z-index: 30; max-height: none; background: var(--bg); padding: 8px 16px 40px; font-size: 14px; }
+  .sidebar.open .side-item { line-height: 36px; }
+  .main { padding-top: 16px; }
+}
