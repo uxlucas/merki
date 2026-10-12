@@ -85,6 +85,11 @@ export function Link({ to, onNavigate, onClick, ...rest }: LinkProps) {
       scrollToId(next.hash);
       return;
     }
+    if (next.path === path) {
+      // Same page, no hash: no duplicate history entry, just back to the top.
+      if (typeof window.scrollTo === 'function') window.scrollTo(0, 0);
+      return;
+    }
     navigate(to);
   };
   return <a href={to} {...rest} onClick={handle} />;

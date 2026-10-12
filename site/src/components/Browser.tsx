@@ -1,7 +1,7 @@
 import { SearchIcon } from 'merki-icons';
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { categories, icons, orderedIcons } from '../data/icons';
-import { SIZES } from '../lab/types';
+import { SIZES } from '../data/constants';
 import { NAV_KEYS, columnsOf, moveInGroups, type NavKey } from '../lib/grid-nav';
 import { usePrefs } from '../lib/prefs';
 import { Link } from '../lib/router';

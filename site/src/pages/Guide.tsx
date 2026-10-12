@@ -46,7 +46,7 @@ function ReactGuide() {
       <h2>Stroke</h2>
       <p>
         The set is tuned for 16 and 20. Bigger, the stroke scales with the icon and reads heavier. <code>absoluteStrokeWidth</code> keeps
-        it at 1.5 screen pixels, which reads thinner. Pick per use.
+        strokes at their 16px weight (1.5, or 1.25 on interior details), which reads thinner. Pick per use.
       </p>
       <div className="demo-row">
         <figure><CalendarIcon size={32} /><figcaption>scaled</figcaption></figure>

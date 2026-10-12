@@ -23,9 +23,10 @@ describe('CraftCards', () => {
     expect(c.getByText('3px')).toBeTruthy(); // 32px, scaled
     fireEvent.change(c.getByRole('slider', { name: 'Icon size' }), { target: { value: '64' } });
     expect(c.getByText('6px')).toBeTruthy();
-    fireEvent.click(c.getByRole('button', { name: 'scaled' }));
+    expect(c.getByRole('button', { name: 'Absolute stroke' }).getAttribute('aria-pressed')).toBe('false');
+    fireEvent.click(c.getByRole('button', { name: 'Absolute stroke' }));
     expect(c.getByText('1.5px')).toBeTruthy();
-    expect(c.getByRole('button', { name: 'absolute' }).getAttribute('aria-pressed')).toBe('true');
+    expect(c.getByRole('button', { name: 'Absolute stroke' }).getAttribute('aria-pressed')).toBe('true');
   });
 
   it('grows the circle by eye', () => {
@@ -40,8 +41,9 @@ describe('CraftCards', () => {
   it('turns solid accents off', () => {
     render(<CraftCards />);
     const c = within(card('solid-accents'));
-    fireEvent.click(c.getByRole('button', { name: 'Accents on' }));
-    expect(c.getByRole('button', { name: 'Accents off' })).toBeTruthy();
+    expect(c.getByRole('button', { name: 'Solid accents' }).getAttribute('aria-pressed')).toBe('true');
+    fireEvent.click(c.getByRole('button', { name: 'Solid accents' }));
+    expect(c.getByRole('button', { name: 'Solid accents' }).getAttribute('aria-pressed')).toBe('false');
     expect(card('solid-accents').querySelector('.solid')?.classList.contains('off')).toBe(true);
   });
 

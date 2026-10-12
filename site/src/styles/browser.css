@@ -5,7 +5,7 @@
 .search input::placeholder { color: var(--fg3); }
 .search kbd { font-size: 11px; border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; color: var(--fg3); }
 .seg { display: flex; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--card); font-size: 13px; }
-.seg button { padding: 9px 13px; color: var(--fg3); font-variant-numeric: tabular-nums; }
+.seg button { padding: 9px 13px; color: var(--fg-nav); font-variant-numeric: tabular-nums; }
 .seg button[aria-pressed='true'] { background: var(--hov); color: var(--fg); font-weight: 500; }
 .chips { display: none; }
 
@@ -24,6 +24,7 @@
 @media (max-width: 767px) {
   .toolbar { flex-wrap: wrap; margin: 0 -16px 8px; padding: 8px 16px; }
   .seg { display: none; }
+  .search input { font-size: 16px; }
   .chips { display: flex; gap: 6px; width: 100%; overflow-x: auto; scrollbar-width: none; }
   .chips::-webkit-scrollbar { display: none; }
   .chips a { flex: none; border: 1px solid var(--line); border-radius: 999px; padding: 3px 11px; font-size: 12.5px; color: var(--fg2); background: var(--card); }

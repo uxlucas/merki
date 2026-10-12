@@ -69,7 +69,7 @@ function OneStroke() {
       controls={
         <>
           <input type="range" min={16} max={64} step={1} value={size} aria-label="Icon size" onChange={(e) => setSize(Number(e.target.value))} />
-          <button type="button" className="ctl" aria-pressed={absolute} onClick={() => setAbsolute((on) => !on)}>
+          <button type="button" className="ctl" aria-label="Absolute stroke" aria-pressed={absolute} onClick={() => setAbsolute((on) => !on)}>
             {absolute ? 'absolute' : 'scaled'}
           </button>
         </>
@@ -123,7 +123,7 @@ function SolidAccents() {
         </div>
       }
       controls={
-        <button type="button" className="ctl" aria-pressed={on} onClick={() => setOn((v) => !v)}>
+        <button type="button" className="ctl" aria-label="Solid accents" aria-pressed={on} onClick={() => setOn((v) => !v)}>
           {on ? 'Accents on' : 'Accents off'}
         </button>
       }

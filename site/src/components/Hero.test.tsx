@@ -33,7 +33,7 @@ describe('Hero', () => {
     const writeText = vi.fn(async () => {});
     Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });
     render(<Hero />);
-    fireEvent.click(screen.getByRole('button', { name: /Copy install command/ }));
+    fireEvent.click(screen.getByRole('button', { name: "Copy npm i merki-icons" }));
     await waitFor(() => expect(writeText).toHaveBeenCalledWith('npm i merki-icons'));
     await screen.findByText('Copied');
   });

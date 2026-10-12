@@ -1,4 +1,4 @@
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
@@ -12,7 +12,9 @@ describe('prerender', () => {
   it('maps paths to files', () => {
     expect(outFile('/d', '/')).toBe(join('/d', 'index.html'));
     expect(outFile('/d', '/404')).toBe(join('/d', '404.html'));
-    expect(outFile('/d', '/icons/calendar')).toBe(join('/d', 'icons', 'calendar', 'index.html'));
+    expect(outFile('/d', '/icons/calendar')).toBe(join('/d', 'icons', 'calendar.html'));
+    expect(outFile('/d', '/guide/react')).toBe(join('/d', 'guide', 'react.html'));
+    expect(outFile('/d', '/changelog')).toBe(join('/d', 'changelog.html'));
   });
 
   it('fills the template without treating $ in the html as a pattern', () => {
@@ -29,7 +31,8 @@ describe('prerender', () => {
     const count = prerender({ distDir: dir, paths: ['/', '/icons/calendar'], render, siteUrl: 'https://x.test' });
     expect(count).toBe(3);
     expect(readFileSync(join(dir, 'index.html'), 'utf8')).toContain('<p>/</p>');
-    expect(readFileSync(join(dir, 'icons', 'calendar', 'index.html'), 'utf8')).toContain('<p>/icons/calendar</p>');
+    expect(readFileSync(join(dir, 'icons', 'calendar.html'), 'utf8')).toContain('<p>/icons/calendar</p>');
+    expect(existsSync(join(dir, 'icons', 'calendar'))).toBe(false);
     expect(readFileSync(join(dir, '404.html'), 'utf8')).toContain('<p>/404</p>');
     expect(readFileSync(join(dir, 'sitemap.xml'), 'utf8')).toBe(sitemap('https://x.test', ['/', '/icons/calendar']));
   });

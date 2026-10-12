@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { CalendarIcon } from 'merki-icons';
-import { CATEGORY_ORDER } from '../lab/types';
+import { CATEGORY_ORDER } from './constants';
 import { categories, categoryLabel, iconByName, icons, orderedIcons } from './icons';
 
 describe('site icon data', () => {

@@ -27,6 +27,6 @@ if (import.meta.env.DEV && path.replace(/\/$/, '') === '/lab') {
   );
   // Prerendered pages hydrate. Render from scratch over the bare dev template and over the shared
   // 404 page, which Vercel serves at any unknown path and so can differ from what this path renders.
-  if (shouldHydrate(root)) hydrateRoot(root, app);
+  if (shouldHydrate(root, path)) hydrateRoot(root, app);
   else createRoot(root).render(app);
 }

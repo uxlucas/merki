@@ -30,7 +30,7 @@ function mount(path: string) {
 describe('hydration', () => {
   it.each(['/', '/icons/calendar', '/guide/react', '/changelog'])('hydrates %s without mismatches, even with stored prefs', async (path) => {
     const container = mount(path);
-    expect(shouldHydrate(container)).toBe(true);
+    expect(shouldHydrate(container, path)).toBe(true);
     const errors = vi.spyOn(console, 'error').mockImplementation(() => {});
     const recoverable = vi.fn();
 
@@ -56,7 +56,7 @@ describe('hydration', () => {
   it('leaves the shared 404 page to a fresh client render instead of hydrating it', () => {
     const container = mount('/icons/nope');
     expect(container.querySelector('[data-notfound]')).not.toBeNull();
-    expect(shouldHydrate(container)).toBe(false);
+    expect(shouldHydrate(container, '/icons/nope')).toBe(false);
     container.remove();
   });
 });

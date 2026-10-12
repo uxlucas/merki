@@ -1,5 +1,5 @@
 import set from '../../../icons/_set.json';
-import { CATEGORY_ORDER } from '../lab/types';
+import { CATEGORY_ORDER } from './constants';
 import raw from './icons.json';
 
 export type Category = (typeof CATEGORY_ORDER)[number];

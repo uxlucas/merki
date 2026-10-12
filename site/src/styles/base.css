@@ -21,7 +21,7 @@ code, kbd, pre { font-family: var(--mono); }
 .glyph-pink { color: var(--pink); }
 .icon-btn { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--fg2); }
 .icon-btn:hover { color: var(--fg); }
-.ctl { font-size: 12px; border: 1px solid var(--line); background: var(--card); color: var(--fg3); border-radius: 999px; padding: 3px 10px; display: inline-flex; align-items: center; gap: 4px; }
+.ctl { font-size: 12px; border: 1px solid var(--line); background: var(--card); color: var(--fg-nav); border-radius: 999px; padding: 3px 10px; display: inline-flex; align-items: center; gap: 4px; }
 .ctl:hover { color: var(--fg2); }
 .ctl[aria-pressed='true'] { color: var(--fg); border-color: var(--fg3); background: var(--hov); }
 .menu { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 5px; box-shadow: 0 4px 14px var(--shadow); font-size: 12.5px; width: 200px; color: var(--fg2); }

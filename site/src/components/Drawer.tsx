@@ -45,14 +45,14 @@ export function Drawer({ icon, compact, onClose }: { icon: SiteIcon; compact: bo
               <figcaption>{s}</figcaption>
             </figure>
           ))}
-          <div className="swatch" aria-label="On the other theme">
+          <div className="swatch" role="group" aria-label="On the other theme">
             {[16, 20, 24].map((s) => (
               <Icon key={s} component={icon.component} size={s} />
             ))}
           </div>
         </div>
 
-        <div className="context full-only" aria-label="In context">
+        <div className="context full-only" role="group" aria-label="In context">
           <div className="menu">
             <div className="menu-item"><InboxIcon /><span>Inbox</span></div>
             <div className="menu-item hover"><Icon component={icon.component} /><span>{icon.name}</span></div>

@@ -18,7 +18,10 @@ export interface PrerenderInput {
 export function outFile(distDir: string, path: string): string {
   if (path === '/') return join(distDir, 'index.html');
   if (path === '/404') return join(distDir, '404.html');
-  return join(distDir, ...path.slice(1).split('/'), 'index.html');
+  // Flat files: with cleanUrls on, /icons/heart is served from icons/heart.html.
+  const parts = path.slice(1).split('/');
+  const last = parts.pop()!;
+  return join(distDir, ...parts, `${last}.html`);
 }
 
 export function fillTemplate(template: string, page: Rendered): string {

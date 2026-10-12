@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { Link, RouterProvider, useRouter } from './router';
 
 function Where() {
@@ -12,6 +12,7 @@ function Where() {
       <button onClick={() => navigate('/icons/calendar', { state: { fromGrid: true } })}>open</button>
       <button onClick={() => navigate('/icons/bell', { replace: true })}>swap</button>
       <Link to="/guide/react">guide</Link>
+      <Link to="/changelog">same page</Link>
       <Link to="/#craft">craft</Link>
       <Link to="/changelog" target="_blank">blank</Link>
       <Link to="/changelog" download>save</Link>
@@ -21,6 +22,7 @@ function Where() {
 
 afterEach(() => {
   cleanup();
+  vi.restoreAllMocks();
   window.history.replaceState(null, '', '/');
 });
 
@@ -67,6 +69,21 @@ describe('router', () => {
     fireEvent.click(screen.getByText('craft'));
     expect(screen.getByTestId('path').textContent).toBe('/');
     expect(screen.getByTestId('hash').textContent).toBe('craft');
+  });
+
+  it('scrolls to the top instead of pushing a duplicate entry when a link points at the current page', () => {
+    const scrollTo = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+    window.history.replaceState(null, '', '/changelog');
+    render(<RouterProvider initialPath="/changelog"><Where /></RouterProvider>);
+    const before = window.history.length;
+    const same = screen.getByText('same page');
+    expect(fireEvent.click(same)).toBe(false); // handled in-app
+    expect(scrollTo).toHaveBeenCalledWith(0, 0);
+    expect(window.history.length).toBe(before);
+    expect(screen.getByTestId('path').textContent).toBe('/changelog');
+    // A different page still pushes.
+    fireEvent.click(screen.getByText('guide'));
+    expect(window.history.length).toBe(before + 1);
   });
 
   it('leaves target and download links to the browser', () => {

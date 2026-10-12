@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { App } from '../App';
 
 const clipboardDescriptor = Object.getOwnPropertyDescriptor(navigator, 'clipboard');
@@ -10,6 +10,7 @@ afterEach(() => {
   if (clipboardDescriptor) Object.defineProperty(navigator, 'clipboard', clipboardDescriptor);
   else delete (navigator as { clipboard?: unknown }).clipboard;
   window.history.replaceState(null, '', '/');
+  vi.restoreAllMocks();
 });
 
 const start = (path: string) => {
@@ -34,6 +35,20 @@ describe('icon drawer on the home page', () => {
     fireEvent.keyDown(document.body, { key: 'Escape' });
     await waitFor(() => expect(window.location.pathname).toBe('/'));
     await waitFor(() => expect(screen.queryByRole('complementary', { name: 'calendar icon' })).toBeNull());
+  });
+
+  it('steps back once when Escape is pressed twice before the first back settles', async () => {
+    start('/');
+    fireEvent.click(cell('calendar'));
+    const opened = window.history.length;
+    const back = vi.spyOn(window.history, 'back');
+    fireEvent.keyDown(document.body, { key: 'Escape' });
+    fireEvent.keyDown(document.body, { key: 'Escape' });
+    expect(back).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(window.location.pathname).toBe('/'));
+    await waitFor(() => expect(screen.queryByRole('complementary', { name: 'calendar icon' })).toBeNull());
+    expect(window.history.length).toBe(opened); // back() keeps entries; nothing was pushed or dropped
+    expect(window.location.pathname).toBe('/');
   });
 
   it('closes when the visitor presses back', async () => {

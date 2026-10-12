@@ -7,7 +7,7 @@
 .stage { position: relative; display: grid; place-items: center; background: var(--stage); border: 1px solid var(--line2); border-radius: 14px; padding: 22px 0 48px; }
 .stage.compact-only { display: none; padding: 22px; }
 .stage-toggles { position: absolute; left: 12px; bottom: 10px; display: flex; gap: 6px; }
-.pill { font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; color: var(--fg3); background: var(--card); }
+.pill { font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; color: var(--fg-nav); background: var(--card); }
 .pill[aria-pressed='true'] { color: var(--blue); border-color: color-mix(in srgb, var(--blue) 35%, transparent); background: color-mix(in srgb, var(--blue) 8%, transparent); }
 .sizes { display: flex; gap: 18px; align-items: end; padding: 0 4px; }
 .sizes figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; }

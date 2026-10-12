@@ -7,7 +7,7 @@ import { LucasMark } from './LucasMark';
 function NpmLink() {
   const { state, copy } = useCopy();
   return (
-    <button type="button" className="hero-link" aria-label="Copy install command" onClick={() => copy(LINKS.npmCommand)}>
+    <button type="button" className="hero-link" aria-label="Copy npm i merki-icons" onClick={() => copy(LINKS.npmCommand)}>
       <TerminalIcon className="lead" />
       <code className="label">{LINKS.npmCommand}</code>
       <span className="trail">{state === 'copied' ? <CheckIcon size={14} /> : <CopyIcon size={14} />}</span>
