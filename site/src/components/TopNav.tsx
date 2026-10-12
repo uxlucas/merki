@@ -1,7 +1,8 @@
-import { DiamondIcon, MenuIcon, MoonIcon, SunIcon, XIcon } from 'merki-icons';
+import { MenuIcon, MoonIcon, SunIcon, XIcon } from 'merki-icons';
 import { useEffect } from 'react';
 import { Link } from '../lib/router';
 import { toggleTheme, watchSystemTheme } from '../lib/theme';
+import { Logo } from './Logo';
 
 function ThemeToggle() {
   useEffect(() => watchSystemTheme(), []);
@@ -17,10 +18,7 @@ function ThemeToggle() {
 export function TopNav({ menuOpen, onMenu }: { menuOpen: boolean; onMenu: () => void }) {
   return (
     <header className="topnav">
-      <Link to="/" className="logo">
-        <DiamondIcon size={15} />
-        <span>merki</span>
-      </Link>
+      <Logo />
       <nav className="topnav-links" aria-label="Main">
         <Link to="/#icons" className="nav-text">Icons</Link>
         <Link to="/#craft" className="nav-text">Craft</Link>

@@ -1,5 +1,15 @@
 .topnav { display: flex; justify-content: space-between; align-items: center; max-width: 1068px; margin: 0 auto; padding: 28px 24px; }
-.logo { display: flex; gap: 8px; align-items: center; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.logo { display: flex; gap: 9px; align-items: center; color: var(--fg); }
+.logo-word { position: relative; font: 500 15px/1 var(--mono); letter-spacing: -0.01em; }
+.logo-word::before, .logo-word::after { content: attr(data-text); position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+@media (hover: hover) and (pointer: fine) {
+  .logo:hover .logo-word::before { clip-path: inset(0 0 55% 0); animation: glitch-top 320ms steps(2, end) 1; }
+  .logo:hover .logo-word::after { clip-path: inset(45% 0 0 0); animation: glitch-bottom 320ms steps(2, end) 1; }
+  .logo:hover .logo-mark { animation: glitch-mark 320ms steps(3, end) 1; }
+}
+@keyframes glitch-top { 0% { opacity: 1; transform: translateX(-2px); } 50% { opacity: 1; transform: translate(2px, -1px); } 100% { opacity: 0; transform: none; } }
+@keyframes glitch-bottom { 0% { opacity: 1; transform: translateX(2px); } 50% { opacity: 1; transform: translate(-2px, 1px); } 100% { opacity: 0; transform: none; } }
+@keyframes glitch-mark { 0% { transform: translateX(-1px); } 50% { transform: translateX(1px); } 100% { transform: none; } }
 .topnav-links { display: flex; gap: 28px; align-items: center; font-size: 14px; color: var(--fg2); }
 .topnav-links a:hover { color: var(--fg); }
 .theme-toggle .sun { display: none; }
@@ -19,7 +29,7 @@
 .main { padding: 40px 0 0; min-width: 0; }
 .sec { scroll-margin-top: 16px; }
 .sec + .sec { margin-top: 72px; }
-.sec-title { display: flex; gap: 8px; align-items: center; font-size: 14px; font-weight: 500; line-height: 28px; margin: 0 0 14px; }
+.sec-title { font-family: var(--font-head); display: flex; gap: 8px; align-items: center; font-size: 14px; font-weight: 500; line-height: 28px; margin: 0 0 14px; }
 .sec-lede { font-size: 14px; color: var(--fg2); margin: -8px 0 18px; }
 
 @media (max-width: 767px) {

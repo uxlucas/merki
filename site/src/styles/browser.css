@@ -10,7 +10,7 @@
 .chips { display: none; }
 
 .cat { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px 14px 10px; margin-bottom: 12px; scroll-margin-top: 72px; }
-.cat-h { display: flex; gap: 8px; align-items: baseline; font-size: 13px; font-weight: 500; margin: 0 4px 6px; }
+.cat-h { font-family: var(--font-head); display: flex; gap: 8px; align-items: baseline; font-size: 13px; font-weight: 500; margin: 0 4px 6px; }
 .cat-h span { color: var(--fg3); font-weight: 400; font-variant-numeric: tabular-nums; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); }
 .cell { display: grid; place-items: center; height: 42px; border-radius: 9px; color: var(--fg); }
