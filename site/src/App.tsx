@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { SITE_URL } from './config';
 import { iconByName, icons } from './data/icons';
+import { PrefsProvider } from './lib/prefs';
 import { RouterProvider, scrollToId, useRouter } from './lib/router';
 import { headFor, matchRoute } from './lib/routes';
 import { ChangelogPage } from './pages/Changelog';
@@ -40,7 +41,9 @@ function Shell() {
 export function App({ initialPath }: { initialPath: string }) {
   return (
     <RouterProvider initialPath={initialPath}>
-      <Shell />
+      <PrefsProvider>
+        <Shell />
+      </PrefsProvider>
     </RouterProvider>
   );
 }

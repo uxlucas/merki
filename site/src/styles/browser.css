@@ -1,0 +1,31 @@
+.toolbar { display: flex; gap: 10px; align-items: center; position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 8px 0; margin: 0 0 6px; }
+.search { flex: 1; display: flex; gap: 10px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 0 14px; color: var(--fg3); }
+.search:focus-within { border-color: var(--fg3); }
+.search input { flex: 1; min-width: 0; border: 0; background: none; font: inherit; font-size: 14px; color: var(--fg); padding: 10px 0; outline: none; }
+.search input::placeholder { color: var(--fg3); }
+.search kbd { font-size: 11px; border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; color: var(--fg3); }
+.seg { display: flex; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--card); font-size: 13px; }
+.seg button { padding: 9px 13px; color: var(--fg3); font-variant-numeric: tabular-nums; }
+.seg button[aria-pressed='true'] { background: var(--hov); color: var(--fg); font-weight: 500; }
+.chips { display: none; }
+
+.cat { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px 14px 10px; margin-bottom: 12px; scroll-margin-top: 72px; }
+.cat-h { display: flex; gap: 8px; align-items: baseline; font-size: 13px; font-weight: 500; margin: 0 4px 6px; }
+.cat-h span { color: var(--fg3); font-weight: 400; font-variant-numeric: tabular-nums; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); }
+.cell { display: grid; place-items: center; height: 42px; border-radius: 9px; color: var(--fg); }
+.grid[data-size='20'] .cell { height: 48px; }
+.grid[data-size='24'] .cell { height: 54px; }
+.cell:hover { background: var(--hov); }
+.cell[aria-current='true'] { background: var(--inv); color: var(--inv-fg); }
+.empty { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 28px; text-align: center; color: var(--fg2); font-size: 14px; }
+.empty p { margin: 0 0 12px; }
+
+@media (max-width: 767px) {
+  .toolbar { flex-wrap: wrap; margin: 0 -16px 8px; padding: 8px 16px; }
+  .seg { display: none; }
+  .chips { display: flex; gap: 6px; width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chips a { flex: none; border: 1px solid var(--line); border-radius: 999px; padding: 3px 11px; font-size: 12.5px; color: var(--fg2); background: var(--card); }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)); }
+}
