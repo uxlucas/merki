@@ -124,7 +124,7 @@ merki/
 
 One package, **`merki-icons`** (npm blocked plain `merki` as too similar to `merge`/`mri`):
 - main export: React components. ESM-only, `sideEffects: false`, tree-shakeable. Peer dependency `react >= 18`.
-- `merki/svg/<name>.svg`: raw optimized SVGs, for non-React users.
+- `merki-icons/svg/<name>.svg`: raw optimized SVGs, for non-React users.
 - Each GitHub release also attaches a zip of the SVGs.
 
 ```tsx
@@ -166,57 +166,104 @@ import { CalendarIcon } from 'merki-icons'
 
 ## 6. Site
 
-**Purpose:** carry the craft story. The icons are the hero. Claude designs the site from Lucas's references, and Lucas reviews it as it's built.
+**Purpose:** a showcase landing page first, a library second. It carries the craft story, and the icons are the hero. It is designed from Lucas's references and was settled screen by screen in the visual companion on 2026-10-12. The mocks live in `.superpowers/brainstorm/` (git-ignored); this section is the record.
+
+**Address:** `merki.lucaslima.design`, on Vercel, deployed from `main`.
+
+**Two stages**
+- **Site 1** (this plan): home, the icon drawer and per-icon pages, the guide, and the six craft cards as live demos.
+- **Site 2** (later plan): the six craft articles. Until they ship, each card shows an "Article soon" pill and doesn't link anywhere.
+
+**Launch gate:** the site goes public only after the Figma Community file is published (§7). It is built and reviewed before that, but not announced.
 
 **References and what we take from each**
-- **Linear:** density, how type is used, the sidebar.
-- **craft.gustavofior.com:** minimal interactive cards, gray-level hierarchy in the sidebar, the optical-alignment toggle demo.
-- **interior.dev:** minimal cards that present components live, short and pointed hero copy.
+- **Linear:** density, how type is used, the sidebar, dark mode greys.
+- **craft.gustavofior.com:** the index layout (sidebar with 12px items on 28px rows, colored section glyphs), minimal interactive cards, the optical-alignment toggle demo.
+- **interior.dev:** big tight headline, generous whitespace, double-border cards that present things live.
 - **foglamp.dev:** clear, objective language. Real product UI as illustration.
 - **lineicons.com:** the *idea* of presenting care (grid & keyline / stroke & corners / points). Not its visuals.
-- **runeicons.com:** the construction view (grid, keylines, anchor points, `24 × 24` header). Made much quieter.
+- **runeicons.com:** the construction view (grid, keylines, anchor points, `16 × 16` header). Made much quieter.
 - **tenor.design:** secondary reference.
 
-**Avoid:** bubbly color badges and heavy shadows (lineicons), clutter like isometric 3D, many styles and color dials (runeicons), big image heroes, anything that animates on scroll.
+**Avoid:** bubbly color badges and heavy shadows (lineicons), clutter like isometric 3D, many styles and color dials (runeicons), big image heroes, anything that animates on scroll. A page that reads as a cold library (Lucas rejected that direction outright).
 
-**Layout:** a left sidebar in the Linear/gustavo style:
-- **Icons:** All, plus the ten categories with counts
-- **Craft:** one short article per rule card
-- **Guide:** Install, React, Accessibility, Changelog
-- Inactive items in light gray, the active one near-black with a small dot.
+### Home (`/`), top to bottom
 
-**Home (`/`), top to bottom**
-1. **Statement + install.** One plain sentence. Draft: *"157 icons for software people use all day."* plus *"16px grid. One stroke. MIT."* A copy button for `npm i merki-icons`, and GitHub with its star count.
-2. **The set.** All icons at 16px, visible without scrolling. Search is focused on load. Category chips. A 16/20/24 size switch.
-3. **Craft cards.** Six live mini-demos in the gustavo/interior style. Each has a title and one plain sentence, and links to its Craft article:
-   1. **Keylines:** toggle the construction shapes over an icon
-   2. **One stroke:** a size slider; the stroke stays consistent
-   3. **Looks right vs measures right:** circle and square, mathematically equal vs optically equal
-   4. **Solid accents:** outline-only vs accented, side by side
-   5. **In context:** a Linear-like menu built entirely from Merki icons
-   6. **Points:** hover to reveal anchor points
+1. **Top nav.** Merki logo (diamond glyph + "merki") on the left. Icons, Craft, Guide and the theme toggle (sun/moon) on the right.
+2. **Hero, centered.**
+   - Byline: "Brought to you by" + Lucas's mark (`mark-ink.svg` from his brand kit, filled with `currentColor` so it follows the theme) + "Lucas Lima", linking to `https://lucaslima.design`.
+   - Headline: **"157 icons for software people use all day."** About 58px, weight 500, tracking −0.04em, broken after "software". The number comes from the icon data, not hardcoded.
+   - Two paragraphs, centered, max ~560px, verbatim:
+     > I wanted a set of icons that felt familiar, but had a little more personality. So I started drawing my own.
+     >
+     > **merki-icons** is a growing collection of bold, rounded icons for Figma and code. Open source and free to use under the MIT License.
+   - Three equal links in a row: `npm i merki-icons` with a copy button · "Figma community file" ↗ · "GitHub" ↗.
+   - "Crafted with **Claude Code** and **Figma**", small and grey.
+3. **Wall band.** A wide grid of the set at 24px with a few icons in the accent blue, fading out at the bottom. It's decoration with a purpose: the set, seen at once.
+4. **The index** (gustavo layout), which starts right under the wall band:
+   - **Sidebar** (no logo, since the top nav carries it): Index, Changelog; **Icons** (blue `layout-grid` glyph): All 157 + the ten categories; **Craft** (orange `pencil` glyph): the six cards; **Guide** (pink `book` glyph): Install, React, SVG, Accessibility. Inactive items light grey, the active one near-black. The sidebar is sticky and its links scroll to their sections.
+   - **Icons section:** a toolbar with search ("Search 157 icons", `/` hint) and a 16/20/24 segmented size switch. Below it, one white card per category with its name, its count and a grid of its icons. Clicking an icon opens the drawer.
+   - **Craft section:** the six live demo cards in a 2-column grid (below).
 
-**Icon panel**
-- Opens from the grid as a side panel. The URL becomes `/icons/<name>` (prerendered, shareable, indexable). Esc closes it and returns to `/`.
-- Header: name + `16 × 16`.
-- Construction view: icon over the 16px grid and its keylines. Toggle for anchor points.
-- Previews at 16/20/24, light and dark. The icon in context: menu row, button, input.
-- Copy SVG · Copy JSX · Download SVG. Tags and category.
+### Icon drawer and per-icon pages
 
-**Behaviour**
-- Search covers name, tags and aliases. `/` or ⌘K focuses it. Results update as you type.
-- Arrow keys move through the grid, Enter opens the panel, Esc closes it.
-- Copy confirms inline: the button shows ✓ for ~1.2s. No toasts.
-- Size and theme preferences are kept in `localStorage`, wrapped in try/catch, with sensible defaults when it isn't available.
-- Motion only where something changes place (the panel, card demos on interaction). Fast and ease-out. Respects `prefers-reduced-motion`. Nothing on scroll.
+- **Desktop:** a floating rounded panel on the right (~430px wide, 12px off the viewport edges, radius ~20). The grid stays visible behind it. Opening it pushes `/icons/<name>` onto history; Esc or the close button returns to `/` at the same scroll position. Arrow keys keep moving through icons while it's open, and the drawer follows.
+- **Contents, top to bottom:**
+  - name + `16 × 16`, close button
+  - construction view: the icon large, over the 16px grid and the four keylines from §2, with Keylines and Points toggles. Points shows anchors (squares) and curve handles (dots and lines), parsed from the icon's own SVG.
+  - sizes: 16, 20, 24 in light, and the same three on a dark swatch
+  - in context: the icon in a menu row, a button and an input
+  - actions: **Copy SVG** (primary), **Copy JSX**, **Download**
+  - category chip and tags
+- **Mobile (< 768px):** the drawer becomes a bottom sheet with the name, the large icon, the three sizes and the actions (Copy SVG · JSX · Download). The full construction view and in-context demos live on the per-icon page.
+- **Per-icon pages:** every `/icons/<name>` is prerendered as the home page with that icon's drawer open, with its own `<title>` and description, so it can be shared and indexed. On mobile it renders as a full page.
+- **Copy output:** Copy SVG gives the exact optimized SVG the package ships. Copy JSX gives `<NameIcon />` with the export name the package uses. Download saves `<name>.svg`.
 
-**Visual rules**
-- Off-white page, white cards with a hairline border and barely any shadow, card radius ~16.
-- Inter-class type at a 14px base. Hierarchy comes from weight and gray level, not size jumps.
-- **One accent color (blue), used only for construction overlays.** Blue always means "how it's built".
-- Light and dark themes, both designed, not inverted.
+### Craft cards (live demos)
 
-**Stack:** Vite + React, static output. Per-icon pages are prerendered at build time. Hosted on Vercel and deployed from `main`.
+Six cards, each with a stage on top (interactive, controls as small pills at the bottom of the stage) and a title, a line and an "Article soon" pill below. Approved as built in the companion:
+
+1. **Keylines:** "Four shapes under every icon. Hover to see them." Hovering the stage fades the keylines in. Chips switch between calendar, settings, bell, user and inbox.
+2. **One stroke:** "Tuned for 16 and 20. Bigger, the stroke scales with the icon, or you pin it at 1.5." A 16–64px slider over the bell, a readout of size and rendered stroke, and a toggle that starts on **scaled** and flips to **absolute** (`absoluteStrokeWidth`). It must never claim 1.5 holds up at every size: scaled reads heavy past 24, absolute reads thin.
+3. **Looks right:** "A circle drawn the same size as a square reads smaller." A square (11.5) and a circle with dashed guides. "On paper" makes the circle 11.5; "By eye" grows it to 12, animated.
+4. **Solid accents:** "One solid part per icon gives it weight at 16px." Eight icons with solid parts (user, calendar, flag, tag, priority-high, circle-check, lock, thumbs-up) at 28px, and an "Accents on/off" toggle that turns the solid shapes into outlines.
+5. **In context:** "Made for menus, not posters." A Linear-like menu (Inbox, Assign to…, Due date, Labels, Archive, with shortcut hints) with hover rows and a Light/Dark switch.
+6. **Points:** "Every anchor on a quarter-pixel grid. 9 on heart." The heart as a construction view: pale 1.5 stroke, thin centreline, anchor squares; hover or "Show handles" reveals the curve handles. The count comes from the parser.
+
+### Guide
+
+- **Install:** npm, pnpm, yarn and bun one-liners.
+- **React:** the props (`size`, `color`, `absoluteStrokeWidth`, `title`, `className`) with live examples rendered by the real package.
+- **SVG:** using Merki without React: copy or download, the `merki-icons/svg/<name>.svg` path, and the fact that the files are plain `currentColor` SVGs.
+- **Accessibility:** decorative by default (`aria-hidden`), `title` to name an icon, and icon-only buttons still need a label on the button.
+- **Changelog:** rendered from `CHANGELOG.md` at the repo root. This plan creates it with the 0.x history so far; the release checklist (§8) keeps it current.
+
+Routes: `/guide/install`, `/guide/react`, `/guide/svg`, `/guide/accessibility`, `/changelog`. They use the same top nav and sidebar as home.
+
+### Behaviour
+
+- Search covers name, tags and aliases, and filters as you type. `/` or ⌘K focuses it. Empty results say so plainly and offer to clear the search.
+- Arrow keys move through the grid, Enter opens the drawer, Esc closes it.
+- Copy confirms inside the button: it shows ✓ for ~1.2s. No toasts.
+- Size and theme preferences are kept in `localStorage`, wrapped in try/catch, with sensible defaults when storage isn't available.
+- Motion only where something changes place (the drawer, the sheet, card demos on interaction). Fast and ease-out. Respects `prefers-reduced-motion`. Nothing on scroll.
+
+### Visual rules
+
+- Off-white page (`#fafafa`), white cards with a hairline border (`#ececef`) and barely any shadow, radius ~16–18. Demo cards use the double border: a 6px-padded outer card around an inner stage.
+- Inter, 16px body in the hero and 14–15px in the index. Hierarchy comes from weight and grey level. The hero headline is the one big size jump.
+- **Blue means "how it's built":** construction overlays, keylines, points, and the highlighted icons in the wall band. Section glyphs in the sidebar are the only other color (blue, orange, pink).
+- **Themes:** light, and dark in **cool slate** (background `#0e0f13`, cards `#16181d`, borders `#25272e`, text `#e6e7eb`). Both designed through CSS variables, not inverted. The site follows the system theme by default; the toggle overrides it and remembers.
+- **Mobile:** the hero stacks and the three links go full width. The sidebar folds into a sticky bar with search and a row of category chips. Phone width has a 16px side gutter and no horizontal scroll.
+
+### Stack and build
+
+- Vite + React 19 in the existing `site/` workspace. The site imports the real components from the `merki-icons` workspace package, so it doubles as a test of the package.
+- **Prerender:** a small build step renders each route to static HTML with React's server renderer, and the client hydrates it. No framework added. Routes: `/`, 157 × `/icons/<name>`, the four guide pages and `/changelog`.
+- **Icon data:** read at build time from `icons/*.svg` and each icon's `.json` (category, tags, aliases), plus `icons/_set.json` for category order.
+- **One config module** holds the outside links: npm, GitHub, Figma (`null` until the Community file is published; the link renders but goes nowhere) and the portfolio URL.
+- `/lab` stays a dev-only page and is not in the production build.
+- **Tests:** Vitest component tests for search, keyboard navigation, copy output (it must match the package's SVG and export name exactly), drawer routing and the theme logic, plus a build test that every route is emitted as HTML. Before review, the built site is checked in a real browser at desktop and phone widths.
 
 ## 7. Figma file
 
@@ -243,9 +290,10 @@ import { CalendarIcon } from 'merki-icons'
 1. **Foundation:** repo, linter with fixtures, build script, the React package runtime and generator, `/lab`. Redraw the spike icons to these rules as the first real batch (16 icons).
 2. **The set:** draw the remaining icons in category batches. Each batch is reviewed in `/lab` before the next starts.
 3. **Package polish:** README, docs comments, package checks before publishing.
-4. **Site:** home, icon panel, craft cards and articles, guide.
-5. **Figma:** sync script and file.
-6. **1.0:** release checklist, launch.
+4. **Site 1:** home, icon drawer and per-icon pages, guide, craft cards as live demos. Built and reviewed, not announced.
+5. **Figma:** sync script and file. Lucas publishes the Community file.
+6. **Site 2:** the six craft articles (can run alongside Figma).
+7. **1.0:** release checklist, then launch: package, Figma file and site go public together. The site never launches before the Figma file is out.
 
 ## 10. Out of scope for v1
 
@@ -253,7 +301,7 @@ Vue/Svelte/other framework packages, icon font, solid or duotone variants, a `st
 
 ## 11. Open items (Lucas)
 
-- Trademark and domain check for "Merki".
-- Claim npm `merki` with a `0.0.1` placeholder (Claude can prepare it; Lucas publishes).
+- Trademark check for "Merki". The site lives at `merki.lucaslima.design` (decided 2026-10-12); Lucas adds the DNS record in Vercel.
+- npm: `merki-icons` is claimed (done 2026-10-10).
 - Rename the folder `~/Desktop/arkan-icons` → `~/Desktop/merki` (between sessions, since this one runs inside it).
-- Create the GitHub repo `uxlucas/merki` when ready to push. It stays private until launch.
+- GitHub repo `uxlucas/merki` exists (done 2026-10-10). It stays private until launch, so the site's GitHub link only works once it goes public.
