@@ -43,3 +43,22 @@ export function useCopy(): { state: CopyState; copy: (text: string) => Promise<v
   const copy = useCallback(async (text: string) => setState((await copyText(text)) ? 'copied' : 'failed'), []);
   return { state, copy };
 }
+
+/** The exact contents of packages/merki/svg/<name>.svg (mirrors withSize in scripts/lib/optimize.ts, plus its trailing newline). */
+export const packageSvg = (svg: string): string => `${svg.replace(/^<svg\b/, '<svg width="16" height="16"')}\n`;
+
+/** What Copy SVG puts on the clipboard: the package file without its trailing newline. */
+export const clipboardSvg = (svg: string): string => packageSvg(svg).trimEnd();
+
+export const jsxSnippet = (component: string): string => `<${component} />`;
+
+export function downloadSvg(name: string, contents: string, doc: Document = document, url: typeof URL = URL): void {
+  const href = url.createObjectURL(new Blob([contents], { type: 'image/svg+xml' }));
+  const anchor = doc.createElement('a');
+  anchor.href = href;
+  anchor.download = `${name}.svg`;
+  doc.body.append(anchor);
+  anchor.click();
+  anchor.remove();
+  url.revokeObjectURL(href);
+}
