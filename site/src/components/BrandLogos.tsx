@@ -11,7 +11,7 @@ export function FigmaLogo() {
   );
 }
 
-/** GitHub's mark, in the text colour. */
+/** GitHub's mark; it follows the `.lead` colour. */
 export function GitHubMark() {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false" className="lead">

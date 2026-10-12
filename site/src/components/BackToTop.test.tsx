@@ -46,4 +46,26 @@ describe('BackToTop', () => {
     expect(window.scrollTo).toHaveBeenCalledWith(expect.objectContaining({ top: 0 }));
     expect(document.activeElement?.className).toBe('logo');
   });
+
+  it('hands focus to the logo when it hides while focused', () => {
+    setup();
+    act(() => fire(false));
+    const button = screen.getByRole('button', { name: 'Back to top' });
+    button.focus();
+    expect(document.activeElement).toBe(button);
+    act(() => fire(true));
+    expect(document.activeElement?.className).toBe('logo');
+    expect(button.getAttribute('tabindex')).toBe('-1');
+  });
+
+  it('leaves focus alone when something else has it', () => {
+    setup();
+    act(() => fire(false));
+    const other = document.createElement('input');
+    document.body.append(other);
+    other.focus();
+    act(() => fire(true));
+    expect(document.activeElement).toBe(other);
+    other.remove();
+  });
 });

@@ -66,6 +66,19 @@ describe('icon drawer on the home page', () => {
     await waitFor(() => expect(screen.queryByRole('complementary', { name: 'calendar icon' })).toBeNull());
   });
 
+  it('does not step back again when Escape follows Back mid-exit', async () => {
+    start('/');
+    fireEvent.click(cell('calendar'));
+    window.history.back();
+    await waitFor(() => expect(document.querySelector('aside.drawer')?.getAttribute('data-state')).toBe('closing'));
+    const back = vi.spyOn(window.history, 'back');
+    fireEvent.keyDown(document.body, { key: 'Escape' });
+    expect(back).toHaveBeenCalledTimes(0);
+    await waitFor(() => expect(document.querySelector('aside.drawer')).toBeNull());
+    expect(back).toHaveBeenCalledTimes(0);
+    expect(window.location.pathname).toBe('/');
+  });
+
   it('opens directly from an icon url and closes to /', async () => {
     start('/icons/bell');
     expect(screen.getByRole('complementary', { name: 'bell icon' })).toBeTruthy();

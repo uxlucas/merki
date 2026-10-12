@@ -26,6 +26,14 @@ export function Drawer({ icon, state = 'open', enter = false, onClose }: { icon:
   const [keylines, setKeylines] = useState(true);
   const [points, setPoints] = useState(false);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const downloadRef = useRef<HTMLButtonElement>(null);
+  const isDefault = isDefaultLook(look);
+
+  // Reset hides itself once the look is default, so focus has to land somewhere that stays.
+  const reset = () => {
+    setLook(DEFAULT_LOOK);
+    downloadRef.current?.focus();
+  };
 
   // WAI-ARIA tabs: arrows move and select, Home/End jump. No animation on switch.
   const onTabKey = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
@@ -158,14 +166,20 @@ export function Drawer({ icon, state = 'open', enter = false, onClose }: { icon:
         <div className="actions">
           <CopyButton className="action primary" text={customSvg(icon.svg, look).trimEnd()} label="Copy SVG" icon={CopyIcon} />
           <CopyButton text={jsxSnippet(icon.component, look)} label="Copy JSX" icon={CodeIcon} />
-          <button type="button" className="action square" aria-label="Download" onClick={() => downloadSvg(icon.name, customSvg(icon.svg, look))}>
+          <button ref={downloadRef} type="button" className="action square" aria-label="Download" onClick={() => downloadSvg(icon.name, customSvg(icon.svg, look))}>
             <DownloadIcon size={14} />
           </button>
-          {!isDefaultLook(look) && (
-            <button type="button" className="action square" aria-label="Reset" onClick={() => setLook(DEFAULT_LOOK)}>
-              <RefreshIcon size={14} />
-            </button>
-          )}
+          <button
+            type="button"
+            className={isDefault ? 'action square is-hidden' : 'action square'}
+            aria-label="Reset"
+            aria-hidden={isDefault || undefined}
+            tabIndex={isDefault ? -1 : undefined}
+            disabled={isDefault}
+            onClick={reset}
+          >
+            <RefreshIcon size={14} />
+          </button>
         </div>
       </aside>
     </>

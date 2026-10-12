@@ -55,4 +55,29 @@ describe('Drawer', () => {
     expect(document.querySelector('.preview svg')!.getAttribute('width')).toBe('16');
     expect(screen.getByRole('radio', { name: 'Default' }).getAttribute('aria-checked')).toBe('true');
   });
+
+  it('keeps Reset mounted but hidden and unfocusable while the look is default', () => {
+    setup();
+    const reset = document.querySelector<HTMLButtonElement>('button[aria-label="Reset"]')!;
+    expect(reset.classList.contains('is-hidden')).toBe(true);
+    expect(reset.getAttribute('aria-hidden')).toBe('true');
+    expect(reset.tabIndex).toBe(-1);
+    expect(reset.disabled).toBe(true);
+    fireEvent.change(screen.getByRole('slider', { name: 'Size' }), { target: { value: '32' } });
+    const live = screen.getByRole<HTMLButtonElement>('button', { name: 'Reset' });
+    expect(live).toBe(reset);
+    expect(live.classList.contains('is-hidden')).toBe(false);
+    expect(live.disabled).toBe(false);
+  });
+
+  it('moves focus to Download when Reset is activated', () => {
+    setup();
+    fireEvent.change(screen.getByRole('slider', { name: 'Size' }), { target: { value: '32' } });
+    const reset = screen.getByRole('button', { name: 'Reset' });
+    reset.focus();
+    expect(document.activeElement).toBe(reset);
+    fireEvent.click(reset);
+    expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Download' }));
+    expect(document.querySelector('.preview svg')!.getAttribute('width')).toBe('16');
+  });
 });

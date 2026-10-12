@@ -14,12 +14,19 @@ export function applyTheme(theme: Theme, root: HTMLElement = document.documentEl
   root.dataset.theme = theme;
 }
 
+/** Runs fn with transitions switched off, and back on after the new colours have painted. */
+export function withPausedTransitions(root: HTMLElement, fn: () => void): void {
+  root.classList.add('theme-switching');
+  fn();
+  requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('theme-switching')));
+}
+
 export function toggleTheme(root: HTMLElement = document.documentElement): Theme {
   const next: Theme = currentTheme(root) === 'dark' ? 'light' : 'dark';
-  root.classList.add('theme-switching');
-  applyTheme(next, root);
-  safeSet(THEME_KEY, next);
-  requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('theme-switching')));
+  withPausedTransitions(root, () => {
+    applyTheme(next, root);
+    safeSet(THEME_KEY, next);
+  });
   return next;
 }
 
@@ -28,7 +35,9 @@ export function watchSystemTheme(): () => void {
   if (typeof window.matchMedia !== 'function') return () => {};
   const query = window.matchMedia('(prefers-color-scheme: dark)');
   const onChange = () => {
-    if (parseTheme(safeGet(THEME_KEY)) === null) applyTheme(resolveTheme(null, query.matches));
+    if (parseTheme(safeGet(THEME_KEY)) !== null) return;
+    const root = document.documentElement;
+    withPausedTransitions(root, () => applyTheme(resolveTheme(null, query.matches), root));
   };
   query.addEventListener?.('change', onChange);
   return () => query.removeEventListener?.('change', onChange);

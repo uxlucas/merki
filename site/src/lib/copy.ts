@@ -44,12 +44,6 @@ export function useCopy(): { state: CopyState; copy: (text: string) => Promise<v
   return { state, copy };
 }
 
-/** The exact contents of packages/merki/svg/<name>.svg (mirrors withSize in scripts/lib/optimize.ts, plus its trailing newline). */
-export const packageSvg = (svg: string): string => `${svg.replace(/^<svg\b/, '<svg width="16" height="16"')}\n`;
-
-/** What Copy SVG puts on the clipboard: the package file without its trailing newline. */
-export const clipboardSvg = (svg: string): string => packageSvg(svg).trimEnd();
-
 /** What the drawer's Preview tab has set. `color: null` means currentColor. */
 export interface Look {
   color: string | null;
@@ -60,7 +54,7 @@ export const DEFAULT_LOOK: Look = { color: null, size: 16 };
 
 export const isDefaultLook = (look: Look): boolean => look.color === null && look.size === DEFAULT_LOOK.size;
 
-/** The SVG as shown: the package file when untouched, otherwise with the chosen size and colour baked in. */
+/** The SVG as shown: the exact contents of packages/merki/svg/<name>.svg when untouched (mirrors withSize in scripts/lib/optimize.ts, plus its trailing newline), otherwise with the chosen size and colour baked in. */
 export function customSvg(svg: string, look: Look): string {
   const sized = `${svg.replace(/^<svg\b/, `<svg width="${look.size}" height="${look.size}"`)}\n`;
   return look.color ? sized.replace(/currentColor/g, look.color) : sized;

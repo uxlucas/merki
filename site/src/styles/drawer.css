@@ -32,11 +32,13 @@
 .actions { display: flex; gap: 8px; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line2); }
 .action { flex: 1; display: inline-flex; gap: 7px; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 10px; padding: 8px 0; font-size: 13px; background: var(--card); }
 .action.square { flex: 0 0 40px; }
+.action.is-hidden { visibility: hidden; }
 .action.primary { background: var(--inv); color: var(--inv-fg); border-color: var(--inv); }
 @media (hover: hover) and (pointer: fine) { .action:not(.primary):hover { border-color: var(--fg3); } }
 
 .drawer[data-enter='true'] { animation: drawer-in 240ms var(--ease-out); }
 .drawer { transition: opacity 180ms var(--ease-in), transform 180ms var(--ease-in); will-change: transform; }
+.drawer[data-state='open'] { transition-timing-function: var(--ease-out); }
 .drawer[data-state='closing'] { opacity: 0; transform: translateX(8px); pointer-events: none; }
 @keyframes drawer-in { from { opacity: 0; transform: translateX(16px); } }
 @keyframes scrim-in { from { opacity: 0; } }
@@ -51,6 +53,7 @@
   .context { flex-wrap: wrap; }
   .scrim { transition: opacity 200ms var(--ease-in); }
   .scrim[data-enter='true'] { animation: scrim-in 280ms var(--ease-out); }
+  .scrim[data-state='open'] { transition-timing-function: var(--ease-out); }
   .scrim[data-state='closing'] { opacity: 0; pointer-events: none; }
   .drawer[data-enter='true'] { animation: sheet-in 280ms var(--ease-out); }
   .drawer { transition-duration: 200ms; }

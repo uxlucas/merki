@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { safeGet, safeSet } from './storage';
-import { THEME_KEY, parseTheme, resolveTheme, toggleTheme } from './theme';
+import { THEME_KEY, parseTheme, resolveTheme, toggleTheme, watchSystemTheme } from './theme';
 
 afterEach(() => {
   vi.restoreAllMocks();
@@ -54,6 +54,38 @@ describe('theme', () => {
     expect(document.documentElement.classList.contains('theme-switching')).toBe(true);
     frames.shift()!(0);
     frames.shift()!(0);
+    expect(document.documentElement.classList.contains('theme-switching')).toBe(false);
+    vi.unstubAllGlobals();
+  });
+
+  it('pauses transitions when the system theme changes and nothing is stored', () => {
+    const frames: FrameRequestCallback[] = [];
+    vi.stubGlobal('requestAnimationFrame', (cb: FrameRequestCallback) => frames.push(cb));
+    const listeners: Array<() => void> = [];
+    const query = { matches: true, addEventListener: (_: string, cb: () => void) => listeners.push(cb), removeEventListener: vi.fn() };
+    vi.stubGlobal('matchMedia', () => query);
+    document.documentElement.dataset.theme = 'light';
+    const stop = watchSystemTheme();
+    listeners[0]();
+    expect(document.documentElement.dataset.theme).toBe('dark');
+    expect(document.documentElement.classList.contains('theme-switching')).toBe(true);
+    frames.shift()!(0);
+    frames.shift()!(0);
+    expect(document.documentElement.classList.contains('theme-switching')).toBe(false);
+    stop();
+    expect(query.removeEventListener).toHaveBeenCalled();
+    vi.unstubAllGlobals();
+  });
+
+  it('ignores system changes once a theme is stored', () => {
+    const listeners: Array<() => void> = [];
+    const query = { matches: true, addEventListener: (_: string, cb: () => void) => listeners.push(cb), removeEventListener: vi.fn() };
+    vi.stubGlobal('matchMedia', () => query);
+    window.localStorage.setItem(THEME_KEY, 'light');
+    document.documentElement.dataset.theme = 'light';
+    watchSystemTheme();
+    listeners[0]();
+    expect(document.documentElement.dataset.theme).toBe('light');
     expect(document.documentElement.classList.contains('theme-switching')).toBe(false);
     vi.unstubAllGlobals();
   });

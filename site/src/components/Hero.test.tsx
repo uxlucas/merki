@@ -35,6 +35,23 @@ describe('Hero', () => {
     vi.stubGlobal('fetch', vi.fn(async () => ({ ok: true, status: 200, json: async () => ({ stargazers_count: 1234 }) })));
     render(<Hero />);
     expect(await screen.findByText('1.2k')).toBeTruthy();
+    expect(screen.getByRole('link', { name: 'GitHub , 1,234 stars' })).toBeTruthy();
+    expect(screen.getByText('1.2k').closest('.stars')!.getAttribute('aria-hidden')).toBe('true');
+  });
+
+  it('says "1 star" for a single star', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => ({ ok: true, status: 200, json: async () => ({ stargazers_count: 1 }) })));
+    render(<Hero />);
+    expect(await screen.findByRole('link', { name: /1 star$/ })).toBeTruthy();
+  });
+
+  it("holds the chip's place, hidden and unspoken, until the count arrives", () => {
+    vi.stubGlobal('fetch', vi.fn(() => new Promise(() => {})));
+    render(<Hero />);
+    const slot = document.querySelector('.stars-slot')!;
+    expect(slot.getAttribute('data-ready')).toBe('false');
+    expect(slot.getAttribute('aria-hidden')).toBe('true');
+    expect(slot.textContent).toBe('');
   });
 
   it('reads just "GitHub" when the repo is private', async () => {

@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { URL as NodeURL } from 'node:url';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { icons } from '../data/icons';
-import { DEFAULT_LOOK, clipboardSvg, copyText, customSvg, downloadSvg, isDefaultLook, jsxSnippet, packageSvg } from './copy';
+import { DEFAULT_LOOK, copyText, customSvg, downloadSvg, isDefaultLook, jsxSnippet } from './copy';
 
 const pkgSvg = (name: string) => readFileSync(new NodeURL(`../../../packages/merki/svg/${name}.svg`, import.meta.url), 'utf8');
 
@@ -15,8 +15,8 @@ afterEach(() => {
 describe('copy output', () => {
   it('matches the package SVG files byte for byte', () => {
     for (const icon of icons) {
-      expect(packageSvg(icon.svg), icon.name).toBe(pkgSvg(icon.name));
-      expect(clipboardSvg(icon.svg), icon.name).toBe(pkgSvg(icon.name).trimEnd());
+      expect(customSvg(icon.svg, DEFAULT_LOOK), icon.name).toBe(pkgSvg(icon.name));
+      expect(customSvg(icon.svg, DEFAULT_LOOK).trimEnd(), icon.name).toBe(pkgSvg(icon.name).trimEnd());
     }
   });
 

@@ -8,7 +8,15 @@ export function BackToTop({ watch }: { watch: string }) {
   useEffect(() => {
     const target = document.querySelector(watch);
     if (!target || typeof IntersectionObserver === 'undefined') return;
-    const observer = new IntersectionObserver(([entry]) => setVisible(!entry.isIntersecting));
+    const observer = new IntersectionObserver(([entry]) => {
+      const show = !entry.isIntersecting;
+      setVisible(show);
+      // A hidden button can't keep focus: hand it to the logo, where Back to top would have put it.
+      const active = document.activeElement;
+      if (!show && active instanceof HTMLElement && active.classList.contains('to-top')) {
+        document.querySelector<HTMLElement>('.logo')?.focus({ preventScroll: true });
+      }
+    });
     observer.observe(target);
     return () => observer.disconnect();
   }, [watch]);
