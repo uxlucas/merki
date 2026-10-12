@@ -1,0 +1,10 @@
+.construction { color: var(--fg); overflow: visible; }
+.c-grid line { stroke: var(--grid); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+.c-keylines { opacity: 0.55; transition: opacity 0.2s var(--ease); }
+.c-keylines[data-on='false'] { opacity: 0; }
+.c-keylines * { fill: none; stroke: var(--blue); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+.c-ink.pale { color: var(--line); }
+.c-centre * { fill: none !important; stroke: var(--fg) !important; stroke-width: 1px !important; vector-effect: non-scaling-stroke; opacity: 1 !important; }
+.c-handles line { stroke: var(--blue); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+.c-handles circle { fill: var(--blue); }
+.c-anchors rect { fill: var(--card); stroke: var(--blue); stroke-width: 1px; vector-effect: non-scaling-stroke; }
