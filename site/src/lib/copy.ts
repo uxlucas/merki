@@ -60,5 +60,6 @@ export function downloadSvg(name: string, contents: string, doc: Document = docu
   doc.body.append(anchor);
   anchor.click();
   anchor.remove();
-  url.revokeObjectURL(href);
+  // Revoking in the same tick can cancel the download in some browsers.
+  setTimeout(() => url.revokeObjectURL(href), 0);
 }

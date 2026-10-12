@@ -18,8 +18,9 @@ export function Home({ openIcon }: { openIcon: string | null }) {
 
   const open = (name: string) => {
     setCompact(true);
-    // Switching icons while open replaces, so Back always returns to the grid.
-    navigate(`/icons/${name}`, { replace: openIcon !== null, state: { fromGrid: true } });
+    // Switching icons while open replaces and keeps the entry's state, so Back/Close behaves as it did when the drawer opened.
+    if (openIcon !== null) navigate(`/icons/${name}`, { replace: true, state: window.history.state });
+    else navigate(`/icons/${name}`, { state: { fromGrid: true } });
   };
   const move = (name: string) => navigate(`/icons/${name}`, { replace: true, state: window.history.state });
 

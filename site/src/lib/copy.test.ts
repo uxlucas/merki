@@ -7,7 +7,10 @@ import { clipboardSvg, copyText, downloadSvg, jsxSnippet, packageSvg } from './c
 
 const pkgSvg = (name: string) => readFileSync(new NodeURL(`../../../packages/merki/svg/${name}.svg`, import.meta.url), 'utf8');
 
-afterEach(() => vi.restoreAllMocks());
+afterEach(() => {
+  vi.useRealTimers();
+  vi.restoreAllMocks();
+});
 
 describe('copy output', () => {
   it('matches the package SVG files byte for byte', () => {
@@ -49,6 +52,7 @@ describe('copyText', () => {
 
 describe('downloadSvg', () => {
   it('saves <name>.svg with the given contents', () => {
+    vi.useFakeTimers();
     const createObjectURL = vi.fn((_blob: Blob) => 'blob:x');
     const revokeObjectURL = vi.fn();
     const click = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {});
@@ -58,6 +62,8 @@ describe('downloadSvg', () => {
     expect(click).toHaveBeenCalled();
     const anchor = click.mock.contexts[0] as HTMLAnchorElement;
     expect(anchor.download).toBe('calendar.svg');
+    expect(revokeObjectURL).not.toHaveBeenCalled();
+    vi.runAllTimers();
     expect(revokeObjectURL).toHaveBeenCalledWith('blob:x');
   });
 });

@@ -3,8 +3,12 @@ import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/re
 import { afterEach, describe, expect, it } from 'vitest';
 import { App } from '../App';
 
+const clipboardDescriptor = Object.getOwnPropertyDescriptor(navigator, 'clipboard');
+
 afterEach(() => {
   cleanup();
+  if (clipboardDescriptor) Object.defineProperty(navigator, 'clipboard', clipboardDescriptor);
+  else delete (navigator as { clipboard?: unknown }).clipboard;
   window.history.replaceState(null, '', '/');
 });
 
@@ -41,6 +45,27 @@ describe('icon drawer on the home page', () => {
     expect(screen.getByRole('complementary', { name: 'bell icon' })).toBeTruthy();
     fireEvent.click(screen.getByRole('button', { name: 'Close' }));
     await waitFor(() => expect(window.location.pathname).toBe('/'));
+  });
+
+  it('closes to / after a direct visit and a click on another icon', async () => {
+    start('/icons/bell');
+    fireEvent.click(screen.getByRole('button', { name: 'calendar' }));
+    expect(window.location.pathname).toBe('/icons/calendar');
+    fireEvent.click(screen.getByRole('button', { name: 'Close' }));
+    await waitFor(() => expect(window.location.pathname).toBe('/'));
+    await waitFor(() => expect(screen.queryByRole('complementary', { name: 'calendar icon' })).toBeNull());
+  });
+
+  it('clears the search on the first Escape and closes on the second', async () => {
+    start('/');
+    fireEvent.click(screen.getByRole('button', { name: 'calendar' }));
+    const input = screen.getByRole('searchbox', { name: 'Search icons' }) as HTMLInputElement;
+    fireEvent.change(input, { target: { value: 'bell' } });
+    fireEvent.keyDown(input, { key: 'Escape' });
+    expect(input.value).toBe('');
+    expect(screen.getByRole('complementary', { name: 'calendar icon' })).toBeTruthy();
+    fireEvent.keyDown(document.body, { key: 'Escape' });
+    await waitFor(() => expect(screen.queryByRole('complementary', { name: 'calendar icon' })).toBeNull());
   });
 
   it('follows the arrow keys while open, without adding history entries', () => {
