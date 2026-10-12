@@ -43,18 +43,15 @@ function GitHubLink() {
     <a className="hero-link" href={LINKS.github} target="_blank" rel="noreferrer">
       <GitHubMark />
       <span className="label">GitHub</span>
-      {/* The slot is always there so the row doesn't shift when the count arrives. */}
-      <span className="stars-slot" data-ready={stars !== null} aria-hidden={stars === null || undefined}>
-        {stars !== null && (
-          <>
-            <span className="stars" aria-hidden="true">
-              <StarIcon size={12} />
-              {formatStars(stars)}
-            </span>
-            <span className="sr-only">{`, ${stars.toLocaleString('en-US')} ${stars === 1 ? 'star' : 'stars'}`}</span>
-          </>
-        )}
-      </span>
+      {stars !== null && (
+        <>
+          <span className="stars" aria-hidden="true">
+            <StarIcon size={12} />
+            {formatStars(stars)}
+          </span>
+          <span className="sr-only">{`, ${stars.toLocaleString('en-US')} ${stars === 1 ? 'star' : 'stars'}`}</span>
+        </>
+      )}
       <ArrowUpRightIcon size={14} className="trail" />
     </a>
   );

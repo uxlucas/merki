@@ -35,7 +35,5 @@ a.hero-link[href]:hover, button.hero-link:hover { border-color: var(--fg3); }
   .wall span { height: 48px; }
 }
 
-.stars-slot { display: inline-flex; align-items: center; min-width: 68px; }
-.stars-slot[data-ready='false'] { visibility: hidden; }
 .stars { display: inline-flex; gap: 4px; align-items: center; font-size: 12px; color: var(--fg2); background: var(--hov); border-radius: 999px; padding: 1px 8px; font-variant-numeric: tabular-nums; animation: stars-in 200ms var(--ease-out); }
 @keyframes stars-in { from { opacity: 0; } }
