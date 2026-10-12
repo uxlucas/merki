@@ -1,0 +1,44 @@
+// @vitest-environment jsdom
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { LINKS } from '../config';
+import { iconByName } from '../data/icons';
+import { Hero } from './Hero';
+import { WALL_HIGHLIGHTS } from './WallBand';
+
+afterEach(() => {
+  cleanup();
+  vi.restoreAllMocks();
+});
+
+describe('Hero', () => {
+  it('says what Merki is, in Lucas’s words', () => {
+    render(<Hero />);
+    expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('157 icons for software people use all day.');
+    expect(screen.getByText(/I wanted a set of icons that felt familiar/)).toBeTruthy();
+    expect(screen.getByText(/is a growing collection of bold, rounded icons for Figma and code/)).toBeTruthy();
+    expect(screen.getByRole('link', { name: /Brought to you by Lucas Lima/ }).getAttribute('href')).toBe(LINKS.portfolio);
+    expect(screen.getByText(/Crafted with/).textContent).toBe('Crafted with Claude Code and Figma');
+  });
+
+  it('links GitHub and shows Figma without a destination while it is null', () => {
+    render(<Hero />);
+    expect(screen.getByRole('link', { name: /GitHub/ }).getAttribute('href')).toBe(LINKS.github);
+    const figma = screen.getByText('Figma community file').closest('a')!;
+    expect(figma.hasAttribute('href')).toBe(LINKS.figma !== null);
+    expect(figma.getAttribute('aria-disabled')).toBe(LINKS.figma === null ? 'true' : null);
+  });
+
+  it('copies the install command and says so', async () => {
+    const writeText = vi.fn(async () => {});
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });
+    render(<Hero />);
+    fireEvent.click(screen.getByRole('button', { name: /Copy install command/ }));
+    await waitFor(() => expect(writeText).toHaveBeenCalledWith('npm i merki-icons'));
+    await screen.findByText('Copied');
+  });
+
+  it('highlights only real icons in the wall', () => {
+    for (const name of WALL_HIGHLIGHTS) expect(iconByName.has(name)).toBe(true);
+  });
+});

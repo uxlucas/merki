@@ -1,10 +1,11 @@
 import { LayoutGridIcon, PencilIcon } from 'merki-icons';
+import { Hero } from '../components/Hero';
 import { Layout } from '../components/Layout';
-import { icons } from '../data/icons';
+import { WallBand } from '../components/WallBand';
 
 export function Home({ openIcon }: { openIcon: string | null }) {
   return (
-    <Layout active="index" top={<h1 className="hero-title-placeholder">{`${icons.length} icons for software people use all day.`}</h1>}>
+    <Layout active="index" top={<><Hero /><WallBand /></>}>
       <section id="icons" className="sec" aria-labelledby="icons-title">
         <h2 className="sec-title" id="icons-title"><LayoutGridIcon size={14} className="glyph-blue" />Icons</h2>
       </section>

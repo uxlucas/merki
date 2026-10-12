@@ -1,0 +1,36 @@
+.hero { max-width: 948px; margin: 0 auto; padding: 60px 24px 36px; text-align: center; }
+.byline { display: inline-flex; gap: 8px; align-items: center; font-size: 13px; color: var(--fg3); margin-bottom: 22px; }
+.byline-name { display: inline-flex; gap: 6px; align-items: center; color: var(--fg); font-weight: 500; }
+.byline:hover .byline-name { text-decoration: underline; text-underline-offset: 3px; }
+.hero h1 { font-size: 58px; line-height: 1.05; letter-spacing: -0.04em; font-weight: 500; margin: 0 0 22px; }
+.hero-copy { max-width: 560px; margin: 0 auto; font-size: 16px; line-height: 1.65; }
+.hero-copy p { margin: 0 0 12px; color: var(--fg2); }
+.hero-copy strong { color: var(--fg); font-weight: 500; }
+.hero-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 26px 0 18px; }
+.hero-link { display: inline-flex; gap: 10px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; font-size: 14px; color: var(--fg); }
+.hero-link code { font-size: 13px; }
+.hero-link .lead { color: var(--fg2); }
+.hero-link .trail, .hero-link .trail-text { color: var(--fg3); }
+.hero-link .trail-text { font-size: 12px; }
+a.hero-link[href]:hover, button.hero-link:hover { border-color: var(--fg3); }
+.hero-link[aria-disabled='true'] { cursor: default; }
+.crafted { font-size: 13px; color: var(--fg3); margin: 0; }
+.crafted strong { color: var(--fg2); font-weight: 500; }
+
+.wallband { position: relative; max-width: 1068px; margin: 0 auto; padding: 12px 24px 0; height: 300px; overflow: hidden; }
+.wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); }
+.wall span { display: grid; place-items: center; height: 56px; color: var(--fg); }
+.wall .hl { color: var(--blue); }
+.wallband::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 150px; background: linear-gradient(transparent, var(--bg)); pointer-events: none; }
+
+@media (max-width: 767px) {
+  .hero { padding: 24px 16px; }
+  .hero h1 { font-size: 34px; letter-spacing: -0.035em; }
+  .hero h1 br { display: none; }
+  .hero-copy { font-size: 14.5px; }
+  .hero-links { flex-direction: column; align-items: stretch; }
+  .hero-link .label { flex: 1; text-align: left; }
+  .wallband { height: 220px; padding: 0 16px; }
+  .wall { grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); }
+  .wall span { height: 48px; }
+}
