@@ -13,6 +13,10 @@ import { useRouter } from '../lib/router';
 
 const fromGrid = () => Boolean((window.history.state as { fromGrid?: boolean } | null)?.fromGrid);
 
+const setScrollRestoration = (mode: ScrollRestoration) => {
+  if ('scrollRestoration' in window.history) window.history.scrollRestoration = mode;
+};
+
 export function Home({ openIcon }: { openIcon: string | null }) {
   const { navigate } = useRouter();
   const [query, setQuery] = useState('');
@@ -22,7 +26,12 @@ export function Home({ openIcon }: { openIcon: string | null }) {
   const open = (name: string) => {
     // Switching icons while open replaces and keeps the entry's state, so Back/Close behaves as it did when the drawer opened.
     if (openIcon !== null) navigate(`/icons/${name}`, { replace: true, state: window.history.state });
-    else navigate(`/icons/${name}`, { state: { fromGrid: true } });
+    else {
+      // Closing steps back to this entry. Stop the browser restoring the scroll saved here,
+      // so the page stays wherever the visitor scrolled while the drawer was open.
+      setScrollRestoration('manual');
+      navigate(`/icons/${name}`, { state: { fromGrid: true } });
+    }
   };
   const move = (name: string) => navigate(`/icons/${name}`, { replace: true, state: window.history.state });
 
@@ -30,7 +39,11 @@ export function Home({ openIcon }: { openIcon: string | null }) {
   const closing = useRef(false);
   useEffect(() => {
     closing.current = false;
+    // Back on the grid: let real page navigations restore scroll again.
+    if (!openIcon) setScrollRestoration('auto');
   }, [openIcon]);
+  // Leaving Home with the drawer open (e.g. a sidebar link) must not leave restoration off.
+  useEffect(() => () => setScrollRestoration('auto'), []);
 
   const close = useCallback(() => {
     if (closing.current) return;

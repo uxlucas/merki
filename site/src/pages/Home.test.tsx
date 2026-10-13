@@ -29,6 +29,20 @@ describe('icon drawer on the home page', () => {
     expect(screen.getByRole('complementary', { name: 'calendar icon' })).toBeTruthy();
   });
 
+  it('keeps the scroll position when the drawer closes', async () => {
+    // Closing steps back in history; the browser must not restore the scroll saved when the drawer opened.
+    // jsdom has no scrollRestoration, so give history the real browser's default.
+    Object.defineProperty(window.history, 'scrollRestoration', { value: 'auto', writable: true, configurable: true });
+    start('/');
+    expect(window.history.scrollRestoration).toBe('auto');
+    fireEvent.click(cell('calendar'));
+    expect(window.history.scrollRestoration).toBe('manual');
+    fireEvent.keyDown(document.body, { key: 'Escape' });
+    await waitFor(() => expect(window.location.pathname).toBe('/'));
+    // Back on the grid, real page navigations restore scroll again.
+    await waitFor(() => expect(window.history.scrollRestoration).toBe('auto'));
+  });
+
   it('closes with Escape and goes back to the home url', async () => {
     start('/');
     fireEvent.click(cell('calendar'));
