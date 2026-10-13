@@ -284,7 +284,7 @@ Settled with Lucas on 2026-10-13 (revised from the first draft of this section).
   - Each size is the 16px drawing scaled up as a whole, so strokes grow with it (1.5 → 1.875 → 2.25), and interior 1.25 lines and solid accents scale the same way. This is what the React package renders (§5, without `absoluteStrokeWidth`).
   - Strokes stay editable strokes, never outlined. `opacity="0.3"` solid shapes keep their opacity.
   - Colour: every stroke and every solid fill is bound to one colour variable, `icon`, in a collection "Merki" with two modes, Light `#18181b` and Dark `#e6e7eb`.
-  - Each component set's description: its tags, its aliases and its React name (`<CalendarIcon />`), so Assets-panel search finds it by any of them.
+  - Each component set's description: its tags, its aliases and its React name (`React: CalendarIcon`, without angle brackets, which Figma stores escaped), so Assets-panel search finds it by any of them.
   - Laid out in one Figma section per category, in `_set.json` order.
 - **Icons** (for browsing, like the site): one white card per category with its name and count, and the icons as **16px instances** of the component sets, each with its name under it in JetBrains Mono.
 - **Cover** (1920×960, also the Community thumbnail): the site's hero — Lucas's mark + "merki-icons" in JetBrains Mono, the headline "An icon library that obsesses over details" in Host Grotesk, the line "157 icons · 16 / 20 / 24 · MIT" (count from the data), and the icon wall fading in from the bottom with a few icons in the construction blue.
