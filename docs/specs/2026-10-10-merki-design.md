@@ -201,7 +201,7 @@ import { CalendarIcon } from 'merki-icons'
 3. **Wall band.** A wide grid of the set at 24px with a few icons in the accent blue, fading out at the bottom. It's decoration with a purpose: the set, seen at once.
 4. **The index** (gustavo layout), which starts right under the wall band:
    - **Sidebar** (no logo, since the top nav carries it): Index, Changelog; **Icons** (blue `layout-grid` glyph): All 157 + the ten categories; **Craft** (orange `pencil` glyph): the six cards; **Guide** (pink `book` glyph): Install, React, SVG, Accessibility. Inactive items light grey, the active one near-black. The sidebar is sticky and its links scroll to their sections.
-   - **Icons section:** a toolbar with search ("Search 157 icons", `/` hint) and a 16/20/24 segmented size switch. Below it, each category gets a heading with its count and a grid of **big icon cards**, 4 across (2 on phones): a tall white card per icon with the icon centred at the chosen size and its name in JetBrains Mono underneath. The open icon's card is outlined in ink. Clicking a card opens the drawer.
+   - **Icons section:** a toolbar with search ("Search 157 icons", `/` hint) and a 16/20/24 segmented size switch. Below it, each category gets a heading with its count and a grid of **compact square icon cards**, 7 across (3 on phones; revised 2026-10-13 from 4 big cards across): the icon centred at the chosen size and its name in JetBrains Mono underneath, truncated with the full name on hover. The open icon's card is outlined in ink. Clicking a card opens the drawer.
    - **Back to top:** a small round button, bottom right, shown once the hero is out of view; it scrolls to the top (instantly under reduced motion).
    - **Craft section:** the six live demo cards in a 2-column grid (below).
 
@@ -281,7 +281,16 @@ Routes: `/guide/install`, `/guide/react`, `/guide/svg`, `/guide/accessibility`, 
 ## 8. Versioning and release
 
 - `0.x` while building, `1.0.0` at launch. SemVer: added icon → minor; redrawn icon → minor, with a changelog line saying it looks different; renamed or removed icon → major.
-- `RELEASE.md` checklist:
+- `RELEASE.md` at the repo root holds both checklists below (added 2026-10-13). A release doesn't ship until every box in both is ticked.
+- **Quality review** (Lucas, before every release that adds or redraws icons):
+  - All icons reviewed at 16, 20 and 24 px.
+  - Optical sizing consistent across different silhouettes.
+  - Related families checked together, including statuses, arrows and user modifiers.
+  - Light and dark appearances validated.
+  - No SVG clipping, malformed paths or unexpected rendering differences.
+  - Consistent naming, viewBox, colour inheritance and React component behaviour.
+  - Accessible names documented for icon-only controls.
+- **Release steps:**
   1. lint + build + test pass
   2. bump version and `CHANGELOG.md`, tag `vX.Y.Z`
   3. Lucas runs `npm publish` (his account, 2FA)
@@ -301,7 +310,7 @@ Routes: `/guide/install`, `/guide/react`, `/guide/svg`, `/guide/accessibility`, 
 
 ## 10. Out of scope for v1
 
-Vue/Svelte/other framework packages, icon font, solid or duotone variants, a `strokeWidth` prop, dynamic `<Icon name>`, brand logos, an icon editor in the browser, automated releases, Code Connect.
+Other framework packages (see §12), icon font, solid or duotone variants, a `strokeWidth` prop, dynamic `<Icon name>`, brand logos, an icon editor in the browser, automated releases, Code Connect.
 
 ## 11. Open items (Lucas)
 
@@ -309,3 +318,19 @@ Vue/Svelte/other framework packages, icon font, solid or duotone variants, a `st
 - npm: `merki-icons` is claimed (done 2026-10-10).
 - Rename the folder `~/Desktop/arkan-icons` → `~/Desktop/merki` (between sessions, since this one runs inside it).
 - GitHub repo `uxlucas/merki` exists (done 2026-10-10). It stays private until launch, so the site's GitHub link only works once it goes public.
+
+## 12. Roadmap after 1.0 (added 2026-10-13)
+
+**More frameworks.** Every target is generated from the same framework-neutral icon data the React package uses; each one is a small runtime plus a generator template. Order by cost:
+1. **The web group, together:** Vue, Svelte, plain JS / Web Components, and possibly Solid and Astro. Same SVG, same props (size, color, absoluteStrokeWidth, title). The site gets a framework picker, and "Copy JSX" becomes "Copy for <framework>".
+2. **An MCP server** so AI agents can search and fetch Merki icons, built on the same data.
+3. **VS Code** (snippets or an icon picker) and **Angular**, which needs its own build tooling.
+4. **Native, only if people ask:** React Native (via react-native-svg; absoluteStrokeWidth computed by hand), Flutter and Jetpack Compose (shapes converted to Dart / Kotlin drawing code, separate publishing pipelines).
+
+The cost to weigh is maintenance: each target is another package to publish every release, with its own docs and issues.
+
+**More icons, as new categories.** Each is drawn, reviewed and released like the set (the §8 quality review applies):
+- **Media & playback**
+- **Commerce & logistics**
+- **Connectivity & infrastructure**
+- **Advanced text editing**
