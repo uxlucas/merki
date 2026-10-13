@@ -20,5 +20,5 @@ For any release that adds or redraws icons. Lucas does this pass in `/lab` (`npm
 - [ ] Version bumped in `packages/merki/package.json`, `CHANGELOG.md` updated, tag `vX.Y.Z` created.
 - [ ] Lucas runs `npm publish` from `packages/merki` (his account, 2FA).
 - [ ] GitHub release created with the SVG zip attached.
-- [ ] Figma sync run by Claude through the Figma connection and checked; Lucas publishes the team library and the Community update.
+- [ ] Figma sync run by Claude (see figma/README.md) and checked; Lucas publishes the team library and the Community update.
 - [ ] The site deploys from `main`. At the 1.0 launch only: remove the `X-Robots-Tag: noindex` header from `vercel.json`.
