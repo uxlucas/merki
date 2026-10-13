@@ -46,3 +46,15 @@ Task 10: fix wave 656b1af; minor (deferred): above ~1068px wide the theme toggle
 - sidebar can still clip below ~600px window height with no scroll affordance
 - Back-to-home scroll restoration (needs a real browser check); icon cells as links (bigger change); informational --fg3 text (.soon, .crafted, readouts) is Lucas's call.
 - craft toggle labels "Absolute stroke"/"Solid accents" don't contain the visible text (WCAG 2.5.3 nit)
+
+## From iteration 1 (2026-10-12)
+
+Before the GitHub repo goes public: nothing extra (the star chip's name and layout were fixed). Still open:
+
+- glitch only on hover, not focus-visible (decorative, as specified)
+- steps(2,end) gives stepped intermediate frames — check in the visual pass
+- empty-string cache reads as 0 (near-unreachable); cache tests don't seed garbage values; private-repo test asserts absence after a fixed sleep
+- .grid data-size now dead markup; selected+focused card gets border+shadow+outline (visual check); focused back-to-top can become aria-hidden if scrolled back to hero
+- theme-switch class removal can race on double toggle; watchSystemTheme flips without pausing transitions; test gaps (inert/aria-hidden while closing, Esc/Back/reopen during exit at Home level, stub cleanup on failure); .to-top :active scale snaps; .hero-link hover border instant; permanent will-change on drawer
+- hovered cell that loses selection fades its border (it's a hover-in); client-side nav straight into /icons/x has no enter (like a direct load)
+- Fonts aren't preloaded, so Host Grotesk may swap in on the headline (consider a preload before launch).
