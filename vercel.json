@@ -3,6 +3,13 @@
   "outputDirectory": "site/dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/guide",
+      "destination": "/guide/install",
+      "permanent": false
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
