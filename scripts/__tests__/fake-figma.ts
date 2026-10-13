@@ -17,7 +17,14 @@ export class FakeNode {
   parent: FakeNode | null = null;
   children: FakeNode[] = [];
   removed = false;
+  private shared = new Map<string, string>();
   constructor(public type: string) {}
+  getSharedPluginData(namespace: string, key: string): string {
+    return this.shared.get(`${namespace}/${key}`) ?? '';
+  }
+  setSharedPluginData(namespace: string, key: string, value: string) {
+    this.shared.set(`${namespace}/${key}`, value);
+  }
   appendChild(child: FakeNode) {
     child.parent?.children.splice(child.parent.children.indexOf(child), 1);
     child.parent = this;
@@ -64,9 +71,13 @@ export interface FakeFigma {
   figma: any;
   pages: () => FakeNode[];
   current: () => FakeNode;
+  /** Fonts listAvailableFontsAsync reports; only Inter to start, so pages fall back to it. */
+  fonts: { family: string; style: string }[];
+  /** Let `succeed` more SVG imports through, then make the next one throw (once). */
+  failSvgImport: (succeed: number) => void;
 }
 
-/** `svgs` lets a test see which drawing landed in a component: each import records its source in `svg`. */
+/** A fresh file with one blank page. */
 export function createFakeFigma(): FakeFigma {
   const root = new FakeNode('DOCUMENT');
   const first = new FakeNode('PAGE');
@@ -75,6 +86,16 @@ export function createFakeFigma(): FakeFigma {
   let current = first;
   const collections: any[] = [];
   const variables: any[] = [];
+  const fonts = [
+    { family: 'Inter', style: 'Regular' },
+    { family: 'Inter', style: 'Medium' },
+  ];
+  let svgImportsBeforeFailure: number | null = null;
+  const create = (type: string) => {
+    const node = new FakeNode(type);
+    current.appendChild(node);
+    return node;
+  };
 
   const figma = {
     root,
@@ -104,7 +125,27 @@ export function createFakeFigma(): FakeFigma {
       current.appendChild(f);
       return f;
     },
+    createRectangle() {
+      return create('RECTANGLE');
+    },
+    createEllipse() {
+      return create('ELLIPSE');
+    },
+    createText() {
+      return create('TEXT');
+    },
+    async listAvailableFontsAsync() {
+      return fonts.map((fontName) => ({ fontName }));
+    },
+    async loadFontAsync(font: { family: string; style: string }) {
+      if (!fonts.some((f) => f.family === font.family && f.style === font.style)) throw new Error(`font not available: ${font.family} ${font.style}`);
+    },
+    /** Each import records its source on the vector as `svg`, so a test can see which drawing landed in a component. */
     createNodeFromSvg(svg: string) {
+      if (svgImportsBeforeFailure !== null && svgImportsBeforeFailure-- === 0) {
+        svgImportsBeforeFailure = null;
+        throw new Error('svg import failed');
+      }
       const frame = new FakeNode('FRAME');
       frame.resizeWithoutConstraints(16, 16);
       const vector = new FakeNode('VECTOR');
@@ -166,5 +207,13 @@ export function createFakeFigma(): FakeFigma {
       },
     },
   };
-  return { figma, pages: () => root.children, current: () => current };
+  return {
+    figma,
+    pages: () => root.children,
+    current: () => current,
+    fonts,
+    failSvgImport(succeed: number) {
+      svgImportsBeforeFailure = succeed;
+    },
+  };
 }

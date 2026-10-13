@@ -84,7 +84,7 @@ export async function buildIconsPage(categories: { label: string; setNames: stri
   }
   column.x = 0;
   column.y = 0;
-  return { page: page.id, column: column.id, cards: categories.length, instances };
+  return { page: page.id, column: column.id, cards: categories.length, instances, fonts };
 }
 
 /** Cover, 1920×960 (also the Community thumbnail): the site's hero. */
@@ -165,7 +165,7 @@ export async function buildCover(data: { count: number; markSvg: string; wall: s
 
   cover.x = 0;
   cover.y = 0;
-  return { page: page.id, cover: cover.id, wall: data.wall.length, highlighted: data.highlight.length };
+  return { page: page.id, cover: cover.id, wall: data.wall.length, highlighted: data.highlight.length, fonts };
 }
 
 /** Construction: the 16px grid template (kept as one component, redrawn in place) and worked examples. */
@@ -244,7 +244,7 @@ export async function buildConstruction(data: { examples: string[] }) {
   page.appendChild(row);
   row.x = 400;
   row.y = 0;
-  return { page: page.id, template: template.id, examples: data.examples.length };
+  return { page: page.id, template: template.id, examples: data.examples.length, fonts };
 }
 
 /** Changelog: CHANGELOG.md as text blocks. */
@@ -253,7 +253,7 @@ export async function buildChangelog(blocks: { type: 'h' | 'p' | 'ul'; level?: n
   await figma.setCurrentPageAsync(page);
   clearPage(page);
   const fonts = await loadFonts();
-  const plain = (s: string) => s.replace(/\*\*|`/g, '');
+  const plain = (s: string) => s.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/\*\*|`/g, '');
   const column = autoLayout('VERTICAL', { name: 'Changelog', itemSpacing: 14, paddingTop: 48, paddingBottom: 48, paddingLeft: 48, paddingRight: 48 });
   column.counterAxisSizingMode = 'FIXED';
   column.resize(816, column.height);
@@ -273,5 +273,5 @@ export async function buildChangelog(blocks: { type: 'h' | 'p' | 'ul'; level?: n
   }
   column.x = 0;
   column.y = 0;
-  return { page: page.id, column: column.id, blocks: blocks.length };
+  return { page: page.id, column: column.id, blocks: blocks.length, fonts };
 }

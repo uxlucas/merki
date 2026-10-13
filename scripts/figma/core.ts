@@ -10,6 +10,9 @@ const COLLECTION = 'Merki';
 const VARIABLE = 'icon';
 const DEPRECATED = 'Deprecated';
 const GRID = { cols: 6, cellW: 136, cellH: 72, pad: 40, top: 64, gap: 120 };
+/** Shared plugin data on each variant: the fingerprint of the svg it was drawn from. */
+const PLUGIN_NS = 'merki';
+const SVG_KEY = 'svg';
 
 export const hex = (value: string) => ({
   r: parseInt(value.slice(1, 3), 16) / 255,
@@ -101,34 +104,43 @@ export function layoutVariants(set: any): void {
   set.resizeWithoutConstraints(x, 16 + Math.max(...set.children.map((c: any) => c.height)) + 16);
 }
 
-export function upsertIconSet(icon: any, sets: Map<string, any>, section: any, variable: any): { set: any; created: boolean } {
-  const existing = sets.get(icon.setName);
-  const variants = new Map<string, any>();
-  if (existing) for (const child of existing.children) if (child.type === 'COMPONENT') variants.set(child.name, child);
-  const fresh: any[] = [];
-  const components = SIZES.map((size) => {
-    const name = `Size=${size}`;
-    let component = variants.get(name);
-    if (!component) {
-      component = figma.createComponent();
-      component.name = name;
-      fresh.push(component);
-    }
-    drawInto(component, icon.svg, size, variable);
-    return component;
-  });
-  let set = existing;
+function emptyVariant(size: number): any {
+  const component = figma.createComponent();
+  component.name = `Size=${size}`;
+  return component;
+}
+
+/**
+ * One icon's set, updated in place. A new set is combined and named before anything is drawn, so a run cut
+ * short leaves a set the next run finds by name and finishes. A variant whose stored fingerprint matches its
+ * svg keeps its drawing (no change for the library publish, overrides kept).
+ */
+export function upsertIconSet(icon: any, sets: Map<string, any>, section: any, variable: any) {
+  let set = sets.get(icon.setName);
+  const created = !set;
   if (!set) {
-    set = figma.combineAsVariants(components, section);
+    set = figma.combineAsVariants(SIZES.map(emptyVariant), section);
     set.name = icon.setName;
     sets.set(icon.setName, set);
-  } else {
-    for (const component of fresh) set.appendChild(component);
-    if (set.parent !== section) section.appendChild(set);
+  } else if (set.parent !== section) section.appendChild(set);
+  const variants = new Map<string, any>();
+  for (const child of set.children) if (child.type === 'COMPONENT') variants.set(child.name, child);
+  const drawn = fingerprint(icon.svg);
+  let redrawn = 0;
+  for (const size of SIZES) {
+    let component = variants.get(`Size=${size}`);
+    if (!component) {
+      component = emptyVariant(size);
+      set.appendChild(component);
+    }
+    if (component.children.length && component.getSharedPluginData(PLUGIN_NS, SVG_KEY) === drawn) continue;
+    drawInto(component, icon.svg, size, variable);
+    component.setSharedPluginData(PLUGIN_NS, SVG_KEY, drawn);
+    redrawn += 1;
   }
   set.description = icon.description;
   layoutVariants(set);
-  return { set, created: !existing };
+  return { set, created, redrawn, unchanged: SIZES.length - redrawn };
 }
 
 function sizeSection(section: any, count: number): void {
@@ -149,10 +161,14 @@ export async function syncCategory(data: { id: string; label: string; previousLa
     page.appendChild(section);
   }
   let created = 0;
+  let redrawn = 0;
+  let unchanged = 0;
   const variantIds: string[] = [];
   data.icons.forEach((icon, index) => {
     const result = upsertIconSet(icon, sets, section, variable);
     if (result.created) created += 1;
+    redrawn += result.redrawn;
+    unchanged += result.unchanged;
     const at = gridPosition(index, GRID.cols);
     result.set.x = at.x;
     result.set.y = at.y;
@@ -162,7 +178,36 @@ export async function syncCategory(data: { id: string; label: string; previousLa
   const previous = data.previousLabel ? page.children.find((n: any) => n.type === 'SECTION' && n.name === data.previousLabel) : null;
   section.x = 0;
   section.y = previous ? previous.y + previous.height + GRID.gap : 0;
-  return { section: section.id, sets: data.icons.length, created, updated: data.icons.length - created, variantIds };
+  return { section: section.id, sets: data.icons.length, created, updated: data.icons.length - created, redrawn, unchanged, variantIds };
+}
+
+/** Read-only: what the Components page holds, for comparing one release's sync with the last. */
+export async function checkComponents() {
+  const page = pageByName('Components');
+  await figma.setCurrentPageAsync(page);
+  const sets = page.findAllWithCriteria({ types: ['COMPONENT_SET'] }).sort((a: any, b: any) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+  const isUnbound = (p: any) => p.type === 'SOLID' && !(p.boundVariables && p.boundVariables.color);
+  let variants = 0;
+  let unbound = 0;
+  let emptyVariants = 0;
+  const ids = sets.map((set: any) => {
+    const members = set.children.filter((c: any) => c.type === 'COMPONENT');
+    variants += members.length;
+    for (const variant of members) {
+      if (!variant.children.length) emptyVariants += 1;
+      for (const n of variant.findAll(() => true)) {
+        if (Array.isArray(n.strokes)) unbound += n.strokes.filter(isUnbound).length;
+        if (Array.isArray(n.fills)) unbound += n.fills.filter(isUnbound).length;
+      }
+    }
+    return [set.name, set.id, ...members.map((c: any) => c.id)];
+  });
+  const looseComponents = page.findAllWithCriteria({ types: ['COMPONENT'] }).filter((c: any) => !c.parent || c.parent.type !== 'COMPONENT_SET').length;
+  const sections = page.children
+    .filter((n: any) => n.type === 'SECTION')
+    .sort((a: any, b: any) => a.y - b.y)
+    .map((n: any) => n.name);
+  return { sets: sets.length, variants, unbound, emptyVariants, looseComponents, sections, idsFingerprint: fingerprint(ids) };
 }
 
 /** Sets the repo no longer has move to "Deprecated" (never deleted, so other files' instances keep working). */
