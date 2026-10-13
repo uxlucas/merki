@@ -19,6 +19,7 @@ describe('matchRoute', () => {
     expect(matchRoute('/icons/arrow-up/', names)).toEqual({ kind: 'icon', name: 'arrow-up' });
     expect(matchRoute('/guide/react', names)).toEqual({ kind: 'guide', slug: 'react' });
     expect(matchRoute('/changelog', names)).toEqual({ kind: 'changelog' });
+    expect(matchRoute('/privacy/', names)).toEqual({ kind: 'privacy' });
   });
 
   it('sends anything else to not found', () => {
@@ -31,7 +32,7 @@ describe('matchRoute', () => {
 });
 
 describe('allPaths', () => {
-  it('lists home, each icon, the guide and the changelog once', () => {
+  it('lists home, each icon, the guide, the changelog and privacy once', () => {
     expect(allPaths(['calendar', 'arrow-up'])).toEqual([
       '/',
       '/icons/calendar',
@@ -41,6 +42,7 @@ describe('allPaths', () => {
       '/guide/svg',
       '/guide/accessibility',
       '/changelog',
+      '/privacy',
     ]);
   });
 });

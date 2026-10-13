@@ -26,8 +26,21 @@ describe('render', () => {
     expect(render('/guide/react').html).toContain('<h1>React</h1>');
   });
 
-  it('lists 163 pages', () => {
-    expect(paths).toHaveLength(1 + 157 + 4 + 1);
+  it('renders the privacy page and links it from every page', () => {
+    const privacy = render('/privacy');
+    expect(privacy.status).toBe(200);
+    expect(privacy.html).toContain('<h1>Privacy</h1>');
+    expect(privacy.html).toContain('no cookies');
+    expect(privacy.head).toContain('<title>Privacy · Merki</title>');
+    for (const path of ['/', '/guide/react', '/icons/nope']) {
+      const html = render(path).html;
+      expect(html).toContain('href="/privacy"');
+      expect(html).toContain('href="https://github.com/uxlucas/merki/blob/main/LICENSE"');
+    }
+  });
+
+  it('lists 164 pages', () => {
+    expect(paths).toHaveLength(1 + 157 + 4 + 1 + 1);
     expect(new Set(paths).size).toBe(paths.length);
   });
 });

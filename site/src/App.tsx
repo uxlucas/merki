@@ -8,6 +8,7 @@ import { ChangelogPage } from './pages/Changelog';
 import { GuidePage } from './pages/Guide';
 import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
+import { PrivacyPage } from './pages/Privacy';
 
 function Shell() {
   const { path, hash, key } = useRouter();
@@ -33,6 +34,8 @@ function Shell() {
       return <GuidePage slug={route.slug} />;
     case 'changelog':
       return <ChangelogPage />;
+    case 'privacy':
+      return <PrivacyPage />;
     case 'notfound':
       return <NotFound missingIcon={route.missingIcon} />;
   }

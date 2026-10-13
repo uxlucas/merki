@@ -77,7 +77,7 @@ export function Hero() {
         <p>I wanted a set of icons that felt familiar, but had a little more personality. So I started drawing my own.</p>
         <p>
           <strong>merki-icons</strong> is a growing collection of bold, rounded icons for Figma and code. Open source and free to use
-          under the MIT License.
+          under the <a href={LINKS.license}>MIT License</a>.
         </p>
       </div>
       <div className="hero-links">

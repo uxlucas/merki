@@ -12,6 +12,7 @@ export type Route =
   | { kind: 'icon'; name: string }
   | { kind: 'guide'; slug: GuideSlug }
   | { kind: 'changelog' }
+  | { kind: 'privacy' }
   | { kind: 'notfound'; missingIcon?: string };
 
 export function normalizePath(path: string): string {
@@ -24,6 +25,7 @@ export function matchRoute(path: string, names: { has(name: string): boolean }):
   const p = normalizePath(path);
   if (p === '/') return { kind: 'home' };
   if (p === '/changelog') return { kind: 'changelog' };
+  if (p === '/privacy') return { kind: 'privacy' };
   const icon = /^\/icons\/([a-z0-9-]+)$/.exec(p);
   if (icon) return names.has(icon[1]) ? { kind: 'icon', name: icon[1] } : { kind: 'notfound', missingIcon: icon[1] };
   const guide = /^\/guide\/([a-z-]+)$/.exec(p);
@@ -33,7 +35,7 @@ export function matchRoute(path: string, names: { has(name: string): boolean }):
 }
 
 export function allPaths(names: Iterable<string>): string[] {
-  return ['/', ...[...names].map((name) => `/icons/${name}`), ...GUIDE_PAGES.map((g) => `/guide/${g.slug}`), '/changelog'];
+  return ['/', ...[...names].map((name) => `/icons/${name}`), ...GUIDE_PAGES.map((g) => `/guide/${g.slug}`), '/changelog', '/privacy'];
 }
 
 export interface Head {
@@ -63,6 +65,8 @@ export function headFor(route: Route, path: string, count: number, siteUrl: stri
     }
     case 'changelog':
       return { title: 'Changelog · Merki', description: 'What changed in Merki, release by release.', canonical };
+    case 'privacy':
+      return { title: 'Privacy · Merki', description: 'What this site keeps and who sees your visit: no cookies, no analytics.', canonical };
     case 'notfound':
       return { title: 'Not found · Merki', description: 'There is no page here.', canonical };
   }

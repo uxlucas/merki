@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from 'react';
-import { useRouter } from '../lib/router';
+import { LINKS } from '../config';
+import { Link, useRouter } from '../lib/router';
 import { Sidebar, type Active } from './Sidebar';
 import { TopNav } from './TopNav';
 
@@ -18,6 +19,11 @@ export function Layout({ active, top, children }: { active: Active; top?: ReactN
           {children}
         </main>
       </div>
+      <footer className="site-footer">
+        <span>© 2026 Lucas Lima</span>
+        <a href={LINKS.license}>MIT License</a>
+        <Link to="/privacy">Privacy</Link>
+      </footer>
     </>
   );
 }
