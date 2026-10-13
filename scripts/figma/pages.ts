@@ -54,7 +54,7 @@ export async function buildIconsPage(categories: { label: string; setNames: stri
     head.appendChild(text(category.label, fonts.head, 18, '#18181b'));
     head.appendChild(text(String(category.setNames.length), fonts.text, 14, '#a1a1aa'));
     card.appendChild(head);
-    const grid = autoLayout('HORIZONTAL', { name: 'Grid', itemSpacing: 8, counterAxisSpacing: 8, layoutWrap: 'WRAP' });
+    const grid = autoLayout('HORIZONTAL', { name: 'Grid', itemSpacing: 8, layoutWrap: 'WRAP', counterAxisSpacing: 8 });
     grid.primaryAxisSizingMode = 'FIXED';
     grid.resize(7 * 112 + 6 * 8, 112);
     // resize() fixes both axes; wrapped rows need the cross axis to grow.
@@ -71,10 +71,11 @@ export async function buildIconsPage(categories: { label: string; setNames: stri
       tile.strokeWeight = 1;
       tile.appendChild(variantOf(sets.get(setName), 16).createInstance());
       const label = text(name, fonts.mono, 11, '#71717a');
-      label.textAutoResize = 'NONE';
-      label.resize(96, 14);
+      label.textAutoResize = 'HEIGHT';
+      label.resize(96, label.height);
       label.textAlignHorizontal = 'CENTER';
       label.textTruncation = 'ENDING';
+      label.maxLines = 1;
       tile.appendChild(label);
       grid.appendChild(tile);
       instances += 1;
@@ -234,6 +235,8 @@ export async function buildConstruction(data: { examples: string[] }) {
     const icon = variantOf(sets.get(setName), 16).createInstance();
     icon.rescale(20);
     stage.appendChild(icon);
+    icon.x = 0;
+    icon.y = 0;
     cell.appendChild(stage);
     cell.appendChild(text(setName.split('/')[1], fonts.mono, 14, '#71717a'));
     row.appendChild(cell);
@@ -260,8 +263,8 @@ export async function buildChangelog(blocks: { type: 'h' | 'p' | 'ul'; level?: n
   page.appendChild(column);
   const add = (node: any) => {
     column.appendChild(node);
-    node.layoutSizingHorizontal = 'FILL';
     node.textAutoResize = 'HEIGHT';
+    node.layoutSizingHorizontal = 'FILL';
   };
   for (const block of blocks) {
     if (block.type === 'h') add(text(plain(block.text ?? ''), fonts.head, block.level === 1 ? 32 : block.level === 2 ? 22 : 16, '#18181b'));

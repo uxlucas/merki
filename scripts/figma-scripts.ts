@@ -39,7 +39,11 @@ export function buildScripts(): Script[] {
   /** A dataScript for the presentation pages: the pages runtime follows core. */
   const pageDataScript = (name: string, purpose: string, data: unknown, call: string): Script => dataScript(name, purpose, data, call, `${core}\n${pages}`);
 
-  const setNameOf = (name: string) => categories.flatMap((c) => c.icons).find((i) => i.name === name)!.setName;
+  const setNameOf = (name: string): string => {
+    const icon = categories.flatMap((c) => c.icons).find((i) => i.name === name);
+    if (!icon) throw new Error(`figma-scripts: no icon named ${name}`);
+    return icon.setName;
+  };
   const wall = categories.flatMap((c) => c.icons.map((i) => i.setName)).slice(0, 64);
 
   return [
