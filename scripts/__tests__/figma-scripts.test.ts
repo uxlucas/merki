@@ -18,6 +18,7 @@ describe('generated Figma scripts', () => {
       expect(s.code.length, s.name).toBeLessThan(50_000);
       expect(() => new AsyncFunction(s.code), s.name).not.toThrow();
       expect(s.code, s.name).not.toMatch(/^export /m);
+      expect(s.code, s.name).not.toMatch(/^\{\s*$/m);
       expect(s.code, s.name).not.toMatch(/setPluginData|loadAllPagesAsync|figma\.notify|closePlugin/);
     }
   });

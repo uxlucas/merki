@@ -30,7 +30,7 @@ export function toFigmaSvg(svg: string): string {
 
 export function figmaDescription(icon: SourceIcon): string {
   return [
-    `React: <${icon.component} />`,
+    `React: ${icon.component}`,
     icon.tags.length ? `Tags: ${icon.tags.join(', ')}` : null,
     icon.aliases.length ? `Aliases: ${icon.aliases.join(', ')}` : null,
   ]

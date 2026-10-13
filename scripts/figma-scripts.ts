@@ -8,7 +8,7 @@ const at = (path: string) => fileURLToPath(new URL(path, import.meta.url));
 /** Transpile a runtime file for inlining: no exports, no types, plain JS. */
 function runtime(file: string): string {
   const { code } = transformSync(readFileSync(at(file), 'utf8'), { loader: 'ts', format: 'esm', target: 'es2020' });
-  return code.replace(/^export /gm, '');
+  return code.replace(/^export \{[^}]*\};?\s*$/m, '').replace(/^export /gm, '');
 }
 
 export interface Script {

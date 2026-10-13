@@ -24,8 +24,14 @@ describe('toFigmaSvg', () => {
 describe('figmaDescription', () => {
   it('lists the React name, tags and aliases, skipping empty lines', () => {
     const d = figmaDescription({ name: 'x', component: 'XIcon', category: 'actions', tags: ['close', 'remove'], aliases: [], svg: '' });
-    expect(d).toBe('React: <XIcon />\nTags: close, remove');
-    expect(figmaDescription({ name: 'a', component: 'AIcon', category: 'data', tags: [], aliases: ['b'], svg: '' })).toBe('React: <AIcon />\nAliases: b');
+    expect(d).toBe('React: XIcon\nTags: close, remove');
+    expect(figmaDescription({ name: 'a', component: 'AIcon', category: 'data', tags: [], aliases: ['b'], svg: '' })).toBe('React: AIcon\nAliases: b');
+  });
+
+  it('has no angle brackets, which Figma escapes', () => {
+    for (const icon of figmaCategories(icons, order).flatMap((c) => c.icons)) {
+      expect(icon.description, icon.setName).not.toMatch(/[<>]/);
+    }
   });
 });
 
