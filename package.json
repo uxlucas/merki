@@ -17,6 +17,7 @@
     "build:icons": "tsx scripts/build.ts",
     "lint:icons": "tsx scripts/lint.ts",
     "sheet": "tsx scripts/sheet.ts",
+    "figma:scripts": "npm run build:icons && tsx scripts/figma-scripts.ts",
     "coverage": "tsx scripts/coverage.ts",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json"
