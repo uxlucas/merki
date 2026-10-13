@@ -10,3 +10,6 @@ site/dist-server/
 sheets/
 .superpowers/
 figma/out/
+packages/merki/README.md
+packages/merki/LICENSE
+release/
