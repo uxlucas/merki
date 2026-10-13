@@ -1,6 +1,7 @@
 import { mkdirSync, readFileSync, realpathSync, rmSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { transformSync } from 'esbuild';
+import { parseMarkdown } from '../site/src/lib/markdown.js';
 import { fingerprint } from './figma/core.js';
 import { figmaCategories, type SourceIcon } from './lib/figma-data.js';
 
@@ -25,15 +26,21 @@ export function buildScripts(): Script[] {
   const order = JSON.parse(readFileSync(at('../icons/_set.json'), 'utf8')) as Record<string, string[]>;
   const categories = figmaCategories(icons, order);
   const core = runtime('./figma/core.ts');
-  const script = (name: string, purpose: string, body: string, expected: string | null = null): Script => ({
+  const pages = runtime('./figma/pages.ts');
+  const script = (name: string, purpose: string, body: string, expected: string | null = null, prelude = core): Script => ({
     name,
     purpose,
-    code: `${core}\n${body}\n`,
+    code: `${prelude}\n${body}\n`,
     fingerprint: expected,
   });
   /** A script whose payload sits on one `const DATA = ...;` line and whose result carries the payload's fingerprint. */
-  const dataScript = (name: string, purpose: string, data: unknown, call: string): Script =>
-    script(name, purpose, `const DATA = ${JSON.stringify(data)};\nreturn { ...(await ${call}), fingerprint: fingerprint(DATA) };`, fingerprint(data));
+  const dataScript = (name: string, purpose: string, data: unknown, call: string, prelude = core): Script =>
+    script(name, purpose, `const DATA = ${JSON.stringify(data)};\nreturn { ...(await ${call}), fingerprint: fingerprint(DATA) };`, fingerprint(data), prelude);
+  /** A dataScript for the presentation pages: the pages runtime follows core. */
+  const pageDataScript = (name: string, purpose: string, data: unknown, call: string): Script => dataScript(name, purpose, data, call, `${core}\n${pages}`);
+
+  const setNameOf = (name: string) => categories.flatMap((c) => c.icons).find((i) => i.name === name)!.setName;
+  const wall = categories.flatMap((c) => c.icons.map((i) => i.setName)).slice(0, 64);
 
   return [
     script(
@@ -54,6 +61,30 @@ export function buildScripts(): Script[] {
       'Move component sets the repo no longer has into the Deprecated section.',
       categories.flatMap((c) => c.icons.map((i) => i.setName)),
       'deprecateMissing(DATA)',
+    ),
+    pageDataScript(
+      '30-icons',
+      'Rebuild the Icons page: a card per category with 16px instances and their names.',
+      categories.map((c) => ({ label: c.label, setNames: c.icons.map((i) => i.setName) })),
+      'buildIconsPage(DATA)',
+    ),
+    pageDataScript(
+      '40-cover',
+      'Rebuild the 1920x960 Cover: mark, headline, facts and the icon wall.',
+      { count: icons.length, markSvg: readFileSync(at('../figma/mark.svg'), 'utf8').trim(), wall, highlight: [9, 22, 37, 50].map((n) => wall[n]) },
+      'buildCover(DATA)',
+    ),
+    pageDataScript(
+      '50-construction',
+      'Redraw the Construction grid component in place and the worked examples.',
+      { examples: ['calendar', 'settings', 'bell'].map(setNameOf) },
+      'buildConstruction(DATA)',
+    ),
+    pageDataScript(
+      '60-changelog',
+      'Rebuild the Changelog page from CHANGELOG.md.',
+      parseMarkdown(readFileSync(at('../CHANGELOG.md'), 'utf8')),
+      'buildChangelog(DATA)',
     ),
   ];
 }

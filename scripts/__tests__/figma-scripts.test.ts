@@ -6,12 +6,14 @@ const AsyncFunction = Object.getPrototypeOf(async () => {}).constructor;
 const scripts = buildScripts();
 
 describe('generated Figma scripts', () => {
-  it('runs setup first, then one script per category, then deprecations', () => {
+  it('runs setup first, then one script per category, then deprecations, then the presentation pages', () => {
     const names = scripts.map((s) => s.name);
     expect(names[0]).toBe('00-setup');
     expect(names.filter((n) => n.startsWith('10-components-'))).toHaveLength(10);
     expect(names).toContain('20-deprecated');
     expect(names.indexOf('20-deprecated')).toBeGreaterThan(names.lastIndexOf('10-components-billing'));
+    const pages = ['30-icons', '40-cover', '50-construction', '60-changelog'];
+    expect(names.slice(names.indexOf('20-deprecated') + 1)).toEqual(pages);
   });
 
   it('keeps every script under the 50,000-character use_figma limit and compiling', () => {
