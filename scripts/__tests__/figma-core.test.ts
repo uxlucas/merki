@@ -15,6 +15,7 @@ const icon = (name: string, svg = '<svg width="16" height="16"><path d="M1 1" st
   category: 'objects',
   setName: `objects/${name}`,
   description: `React: ${pascal(name)}Icon`,
+  docsUrl: `https://merki.lucaslima.design/icons/${name}`,
   svg,
 });
 const OTHER_SVG = '<svg width="16" height="16"><path d="M2 2" stroke="#000000"/></svg>';
@@ -86,6 +87,14 @@ describe('syncCategory', () => {
     expect(again).toMatchObject({ sets: 2, created: 0, updated: 2, redrawn: 0, unchanged: 6 });
     expect(sets().map((s) => s.children.map((v) => v.children[0].id))).toEqual(drawings);
     expect(sets()[0].children[0].getSharedPluginData('merki', 'svg')).toBe(await stored(icon('calendar').svg));
+  });
+
+  it('links each set to its page on the site, and a changed link updates without a redraw', async () => {
+    await syncCategory(category([icon('calendar')]));
+    expect(sets()[0].documentationLinks).toEqual([{ uri: 'https://merki.lucaslima.design/icons/calendar' }]);
+    const moved = { ...icon('calendar'), docsUrl: 'https://example.test/icons/calendar' };
+    expect(await syncCategory(category([moved]))).toMatchObject({ redrawn: 0, unchanged: 3 });
+    expect(sets()[0].documentationLinks).toEqual([{ uri: 'https://example.test/icons/calendar' }]);
   });
 
   it('redraws only the variants of an icon whose svg changed', async () => {

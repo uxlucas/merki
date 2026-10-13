@@ -50,3 +50,11 @@ describe('figmaCategories', () => {
     expect(() => figmaCategories(icons, { ...order, navigation: ['nope'] })).toThrow(/nope/);
   });
 });
+
+describe('docsUrl', () => {
+  it('points each icon at its page on the site', () => {
+    const all = figmaCategories(icons, order).flatMap((c) => c.icons);
+    expect(all.find((i) => i.name === 'calendar')!.docsUrl).toBe('https://merki.lucaslima.design/icons/calendar');
+    for (const icon of all) expect(icon.docsUrl.endsWith(`/icons/${icon.name}`), icon.setName).toBe(true);
+  });
+});

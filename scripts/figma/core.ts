@@ -148,6 +148,8 @@ export function upsertIconSet(icon: any, sets: Map<string, any>, section: any, v
     redrawn += 1;
   }
   set.description = icon.description;
+  // Metadata only: never part of the drawing fingerprint, so a changed link redraws nothing.
+  set.documentationLinks = [{ uri: icon.docsUrl }];
   layoutVariants(set);
   return { set, created, redrawn, unchanged: SIZES.length - redrawn };
 }

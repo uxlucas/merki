@@ -34,7 +34,8 @@ function clearPage(page: any, keep: (node: any) => boolean = () => false): void 
 }
 
 /** Icons page: a white card per category, 16px instances with their names in mono (like the site). */
-export async function buildIconsPage(categories: { label: string; setNames: string[] }[]) {
+export async function buildIconsPage(data: { url: string; categories: { label: string; setNames: string[] }[] }) {
+  const { categories } = data;
   const sets = await setsFromComponentsPage();
   requireSets(sets, categories.flatMap((c) => c.setNames));
   const page = pageByName('Icons');
@@ -44,6 +45,10 @@ export async function buildIconsPage(categories: { label: string; setNames: stri
   const column = autoLayout('VERTICAL', { name: 'Icons', itemSpacing: 32, paddingTop: 64, paddingBottom: 64, paddingLeft: 64, paddingRight: 64 });
   column.fills = [solid('#fafafa')];
   page.appendChild(column);
+  const intro = autoLayout('VERTICAL', { name: 'Header', itemSpacing: 6 });
+  intro.appendChild(text('Merki Icons', fonts.head, 32, '#18181b'));
+  intro.appendChild(text(data.url, fonts.mono, 14, '#71717a'));
+  column.appendChild(intro);
   let instances = 0;
   for (const category of categories) {
     const card = autoLayout('VERTICAL', { name: category.label, itemSpacing: 16, paddingTop: 24, paddingBottom: 24, paddingLeft: 24, paddingRight: 24, cornerRadius: 16 });
@@ -88,7 +93,7 @@ export async function buildIconsPage(categories: { label: string; setNames: stri
 }
 
 /** Cover, 1920×960 (also the Community thumbnail): the site's hero. */
-export async function buildCover(data: { count: number; markSvg: string; wall: string[]; highlight: string[] }) {
+export async function buildCover(data: { count: number; url: string; markSvg: string; wall: string[]; highlight: string[] }) {
   const sets = await setsFromComponentsPage();
   requireSets(sets, data.wall);
   const page = pageByName('Cover');
@@ -162,6 +167,11 @@ export async function buildCover(data: { count: number; markSvg: string; wall: s
   cover.appendChild(facts);
   facts.x = (1920 - facts.width) / 2;
   facts.y = 476;
+
+  const address = text(data.url, fonts.mono, 20, '#a1a1aa');
+  cover.appendChild(address);
+  address.x = (1920 - address.width) / 2;
+  address.y = facts.y + facts.height + 16;
 
   cover.x = 0;
   cover.y = 0;

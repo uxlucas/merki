@@ -9,6 +9,7 @@ export class FakeNode {
   width = 0;
   height = 0;
   description = '';
+  documentationLinks: any[] = [];
   fills: any[] = [];
   strokes: any[] = [];
   opacity = 1;

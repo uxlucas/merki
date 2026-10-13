@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { transformSync } from 'esbuild';
 import { parseMarkdown } from '../site/src/lib/markdown.js';
 import { fingerprint } from './figma/core.js';
+import { SITE_URL } from '../site/src/config.js';
 import { figmaCategories, type SourceIcon } from './lib/figma-data.js';
 
 const at = (path: string) => fileURLToPath(new URL(path, import.meta.url));
@@ -25,6 +26,7 @@ export function buildScripts(): Script[] {
   const icons = JSON.parse(readFileSync(at('../site/src/data/icons.json'), 'utf8')) as SourceIcon[];
   const order = JSON.parse(readFileSync(at('../icons/_set.json'), 'utf8')) as Record<string, string[]>;
   const categories = figmaCategories(icons, order);
+  const siteHost = SITE_URL.replace(/^https?:\/\//, '');
   const core = runtime('./figma/core.ts');
   const pages = runtime('./figma/pages.ts');
   const script = (name: string, purpose: string, body: string, expected: string | null = null, prelude = core): Script => ({
@@ -74,14 +76,14 @@ export function buildScripts(): Script[] {
     ),
     pageDataScript(
       '30-icons',
-      'Rebuild the Icons page: a card per category with 16px instances and their names.',
-      categories.map((c) => ({ label: c.label, setNames: c.icons.map((i) => i.setName) })),
+      'Rebuild the Icons page: a header with the site address, then a card per category with 16px instances and their names.',
+      { url: siteHost, categories: categories.map((c) => ({ label: c.label, setNames: c.icons.map((i) => i.setName) })) },
       'buildIconsPage(DATA)',
     ),
     pageDataScript(
       '40-cover',
-      'Rebuild the 1920x960 Cover: mark, headline, facts and the icon wall.',
-      { count: icons.length, markSvg: readFileSync(at('../figma/mark.svg'), 'utf8').trim(), wall, highlight: [9, 22, 37, 50].map((n) => wall[n]) },
+      'Rebuild the 1920x960 Cover: mark, headline, facts, site address and the icon wall.',
+      { count: icons.length, url: siteHost, markSvg: readFileSync(at('../figma/mark.svg'), 'utf8').trim(), wall, highlight: [9, 22, 37, 50].map((n) => wall[n]) },
       'buildCover(DATA)',
     ),
     pageDataScript(
