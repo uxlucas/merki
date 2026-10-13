@@ -33,9 +33,15 @@ export function buildScripts(): Script[] {
     code: `${prelude}\n${body}\n`,
     fingerprint: expected,
   });
-  /** A script whose payload sits on one `const DATA = ...;` line and whose result carries the payload's fingerprint. */
-  const dataScript = (name: string, purpose: string, data: unknown, call: string, prelude = core): Script =>
-    script(name, purpose, `const DATA = ${JSON.stringify(data)};\nreturn { ...(await ${call}), fingerprint: fingerprint(DATA) };`, fingerprint(data), prelude);
+  /**
+   * A script whose payload sits on one `const DATA = ...;` line. It refuses to run when the payload's fingerprint
+   * differs from the one computed here (a mis-copied script), before any Figma call, and returns the fingerprint.
+   */
+  const dataScript = (name: string, purpose: string, data: unknown, call: string, prelude = core): Script => {
+    const expected = fingerprint(data);
+    const guard = `const EXPECTED = '${expected}';\nif (fingerprint(DATA) !== EXPECTED) throw new Error('Merki: data fingerprint mismatch — the script text was mis-copied. Re-copy the file; nothing was changed.');`;
+    return script(name, purpose, `const DATA = ${JSON.stringify(data)};\n${guard}\nreturn { ...(await ${call}), fingerprint: fingerprint(DATA) };`, expected, prelude);
+  };
   /** A dataScript for the presentation pages: the pages runtime follows core. */
   const pageDataScript = (name: string, purpose: string, data: unknown, call: string): Script => dataScript(name, purpose, data, call, `${core}\n${pages}`);
 
@@ -89,6 +95,11 @@ export function buildScripts(): Script[] {
       'Rebuild the Changelog page from CHANGELOG.md.',
       parseMarkdown(readFileSync(at('../CHANGELOG.md'), 'utf8')),
       'buildChangelog(DATA)',
+    ),
+    script(
+      '90-check',
+      'Read-only: count sets, variants, unbound paints, empty variants and loose components; list sections; fingerprint the ids.',
+      'return await checkComponents();',
     ),
   ];
 }
