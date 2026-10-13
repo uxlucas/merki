@@ -20,7 +20,7 @@ describe('Hero', () => {
     expect(screen.getByText(/I wanted a set of icons that felt familiar/)).toBeTruthy();
     expect(screen.getByText(/is a growing collection of bold, rounded icons for Figma and code/)).toBeTruthy();
     expect(screen.getByRole('link', { name: /Brought to you by Lucas Lima/ }).getAttribute('href')).toBe(LINKS.portfolio);
-    expect(screen.getByText(/Crafted with/).textContent).toBe('Crafted with Claude Code and Figma');
+    expect(screen.queryByText(/Crafted with/)).toBeNull();
   });
 
   it('links GitHub and shows Figma without a destination while it is null', () => {

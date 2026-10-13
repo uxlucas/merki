@@ -6,7 +6,7 @@
 .hero-copy { max-width: 560px; margin: 0 auto; font-size: 16px; line-height: 1.65; }
 .hero-copy p { margin: 0 0 12px; color: var(--fg2); }
 .hero-copy strong { color: var(--fg); font-weight: 500; }
-.hero-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 26px 0 18px; }
+.hero-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 26px 0 0; }
 .hero-link { display: inline-flex; gap: 10px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; font-size: 14px; color: var(--fg); }
 .hero-link code { font-size: 13px; }
 .hero-link .lead { color: var(--fg2); }
@@ -14,8 +14,6 @@
 .hero-link .trail-text { font-size: 12px; }
 a.hero-link[href]:hover, button.hero-link:hover { border-color: var(--fg3); }
 .hero-link[aria-disabled='true'] { cursor: default; }
-.crafted { font-size: 13px; color: var(--fg3); margin: 0; }
-.crafted strong { color: var(--fg2); font-weight: 500; }
 
 .wallband { position: relative; max-width: 1068px; margin: 0 auto; padding: 12px 24px 0; height: 300px; overflow: hidden; }
 .wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); }

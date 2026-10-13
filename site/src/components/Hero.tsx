@@ -85,9 +85,6 @@ export function Hero() {
         <FigmaLink />
         <GitHubLink />
       </div>
-      <p className="crafted">
-        Crafted with <strong>Claude Code</strong> and <strong>Figma</strong>
-      </p>
     </section>
   );
 }

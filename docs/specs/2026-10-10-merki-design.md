@@ -198,7 +198,6 @@ import { CalendarIcon } from 'merki-icons'
      >
      > **merki-icons** is a growing collection of bold, rounded icons for Figma and code. Open source and free to use under the MIT License.
    - Three equal links in a row: `npm i merki-icons` with a copy button · the full-colour Figma logo + "Figma community file" ↗ · the GitHub mark + "GitHub" + a star-count chip ↗. The star count is fetched in the browser from the GitHub API (cached for the session, faded in once loaded); nothing renders on the server. While the repo is private, or if the request fails, the chip is absent and the link reads "GitHub".
-   - "Crafted with **Claude Code** and **Figma**", small and grey.
 3. **Wall band.** A wide grid of the set at 24px with a few icons in the accent blue, fading out at the bottom. It's decoration with a purpose: the set, seen at once.
 4. **The index** (gustavo layout), which starts right under the wall band:
    - **Sidebar** (no logo, since the top nav carries it): Index, Changelog; **Icons** (blue `layout-grid` glyph): All 157 + the ten categories; **Craft** (orange `pencil` glyph): the six cards; **Guide** (pink `book` glyph): Install, React, SVG, Accessibility. Inactive items light grey, the active one near-black. The sidebar is sticky and its links scroll to their sections.
