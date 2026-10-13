@@ -189,7 +189,7 @@
     "note": "",
     "updatedAt": "2026-10-10T22:02:42.382Z"
   },
-  "collapse": {
+  "minimize": {
     "status": "ok",
     "note": "",
     "updatedAt": "2026-10-10T22:02:49.708Z"
@@ -204,7 +204,7 @@
     "note": "",
     "updatedAt": "2026-10-10T22:09:35.415Z"
   },
-  "expand": {
+  "maximize": {
     "status": "ok",
     "note": "",
     "updatedAt": "2026-10-10T22:09:39.657Z"
@@ -299,12 +299,12 @@
     "note": "approved in chat",
     "updatedAt": "2026-10-10T23:41:13.672Z"
   },
-  "info": {
+  "circle-info": {
     "status": "ok",
     "note": "approved in chat",
     "updatedAt": "2026-10-10T23:41:13.672Z"
   },
-  "help": {
+  "circle-help": {
     "status": "ok",
     "note": "approved in chat",
     "updatedAt": "2026-10-10T23:41:13.672Z"
@@ -369,7 +369,7 @@
     "note": "approved in chat",
     "updatedAt": "2026-10-11T04:13:26.667Z"
   },
-  "user-circle": {
+  "circle-user": {
     "status": "ok",
     "note": "approved in chat",
     "updatedAt": "2026-10-11T04:13:26.667Z"
@@ -684,7 +684,7 @@
     "note": "",
     "updatedAt": "2026-10-12T15:11:48.955Z"
   },
-  "list-bullet": {
+  "list-unordered": {
     "status": "ok",
     "note": "",
     "updatedAt": "2026-10-12T15:11:54.362Z"

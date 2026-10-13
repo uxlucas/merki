@@ -77,14 +77,14 @@ Checked against ~28 screens from 14 SaaS products on Mobbin (Linear, Notion, Str
 | category | # | icons |
 |---|---|---|
 | navigation | 22 | home, inbox, search, menu, sidebar, layout-grid, layout-list, chevron-up, chevron-down, chevron-left, chevron-right, chevrons-up-down, arrow-up, arrow-down, arrow-left, arrow-right, arrow-up-right, arrow-left-right†, more-horizontal, more-vertical, external-link, dashboard |
-| actions | 32 | plus, minus, x, check, pencil, square-pen†, trash, copy, undo, redo, refresh, sync†, download, upload, share, link, filter, sort, expand, collapse, archive, pin, star, bookmark, send, grip-vertical, heart, save, circle-plus, funnel, zoom-in, zoom-out |
-| status | 19 | circle-check, circle-x, circle-alert, triangle-alert, info, help, ban†, status-dashed, status-empty, status-half, loader, clock, history†, bell, bell-off, eye, eye-off, lock, unlock |
-| people | 11 | user, users, user-circle†, user-plus, user-check, user-arrow, building, log-in, log-out, shield, key |
+| actions | 32 | plus, minus, x, check, pencil, square-pen†, trash, copy, undo, redo, refresh, sync†, download, upload, share, link, filter, sort, maximize, minimize, archive, pin, star, bookmark, send, grip-vertical, heart, save, circle-plus, funnel, zoom-in, zoom-out |
+| status | 19 | circle-check, circle-x, circle-alert, triangle-alert, circle-info, circle-help, ban†, status-dashed, status-empty, status-half, loader, clock, history†, bell, bell-off, eye, eye-off, lock, unlock |
+| people | 11 | user, users, circle-user†, user-plus, user-check, user-arrow, building, log-in, log-out, shield, key |
 | objects | 18 | calendar, tag, flag, folder, folder-open, file, file-text, file-plus, book†, image, paperclip, package, layers, briefcase, target, diamond, map-pin, clipboard |
 | data | 13 | bar-chart, line-chart, pie-chart, trending-up, trending-down, activity, table, database, kanban, gauge, priority-low, priority-medium, priority-high |
 | communication | 9 | mail, message, messages, at-sign, phone, video, megaphone, smile, thumbs-up |
 | system | 18 | settings, sliders, toggle, palette†, sun, moon, monitor, smartphone, globe, plug, zap, workflow†, command, keyboard, sparkle, code, terminal, git-branch |
-| text | 11 | type, bold, italic, underline, strikethrough, list-bullet, list-ordered, square-check, quote, hash, align-left |
+| text | 11 | type, bold, italic, underline, strikethrough, list-unordered, list-ordered, square-check, quote, hash, align-left |
 | billing | 4 | credit-card, receipt, wallet, circle-dollar |
 
 `sync` was split from `refresh` at Lucas's review on 2026-10-10: refresh became a single clockwise arrow, and the two-arrow form moved to its own icon. Its † marks it as an addition after the first list, not a Mobbin find.
