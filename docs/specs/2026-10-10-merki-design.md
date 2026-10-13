@@ -213,7 +213,7 @@ import { CalendarIcon } from 'merki-icons'
   - one stage shared by three tabs:
     - **Preview** (default): the icon on a faint checker, with 8 colour swatches + the hex value and a 16–64px size slider
     - **Construction:** the icon over the 16px grid and the four keylines from §2, with Keylines and Points toggles (anchors and curve handles parsed from the icon's own SVG)
-    - **In context:** the icon in a menu row, a button and an input
+    - **In context:** the icon in a menu row, a labelled button and an icon-only toolbar (revised 2026-10-13: no search-field demo, since a field's leading icon should describe the field)
   - actions pinned at the bottom: **Copy SVG** (primary), **Copy JSX**, **Download**, plus a reset button that appears once the colour or size has changed
 - **Mobile (< 768px):** the drawer becomes a bottom sheet with the header, the stage, the tabs and the actions.
 - **Per-icon pages:** every `/icons/<name>` is prerendered as the home page with that icon's drawer open, with its own `<title>` and description, so it can be shared and indexed. On mobile it opens as the same bottom sheet over the home page (revised 2026-10-12: the sheet now holds the full tabbed drawer, so there is no separate full-page view).

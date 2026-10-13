@@ -17,10 +17,15 @@ const SWATCHES: Array<{ label: string; value: string | null }> = [
   { label: 'Violet', value: '#7c3aed' },
 ];
 const TABS = ['Preview', 'Construction', 'In context'] as const;
+
+/** The two toolbar icons around the current one, never repeating it. */
+const TOOLBAR_NEIGHBOURS = ['ArchiveIcon', 'PencilIcon', 'TrashIcon'];
+const neighboursOf = (component: string): string[] => TOOLBAR_NEIGHBOURS.filter((name) => name !== component).slice(0, 2);
 type Tab = (typeof TABS)[number];
 
 export function Drawer({ icon, state = 'open', enter = false, onClose }: { icon: SiteIcon; state?: 'open' | 'closing'; enter?: boolean; onClose: () => void }) {
   const id = useId();
+  const neighbours = neighboursOf(icon.component);
   const [tab, setTab] = useState<Tab>('Preview');
   const [look, setLook] = useState<Look>(DEFAULT_LOOK);
   const [keylines, setKeylines] = useState(true);
@@ -111,7 +116,12 @@ export function Drawer({ icon, state = 'open', enter = false, onClose }: { icon:
                 </div>
                 <div className="context-col">
                   <span className="ctx-btn"><Icon component={icon.component} />Action</span>
-                  <span className="ctx-input"><Icon component={icon.component} /><span>Search or type…</span></span>
+                  {/* An icon-only toolbar suits any icon; a field's leading icon should describe the field. */}
+                  <span className="ctx-toolbar">
+                    <span className="ctx-tool"><Icon component={neighbours[0]} /></span>
+                    <span className="ctx-tool is-current"><Icon component={icon.component} /></span>
+                    <span className="ctx-tool"><Icon component={neighbours[1]} /></span>
+                  </span>
                 </div>
               </div>
             )}
@@ -160,7 +170,7 @@ export function Drawer({ icon, state = 'open', enter = false, onClose }: { icon:
               <p className="tab-note">The 16px grid and the four keylines every icon is drawn on.</p>
             </>
           )}
-          {tab === 'In context' && <p className="tab-note">At 16px, where it will live: a menu row, a button, an input.</p>}
+          {tab === 'In context' && <p className="tab-note">At 16px, where it will live: a menu row, a button, a toolbar.</p>}
         </div>
 
         <div className="actions">

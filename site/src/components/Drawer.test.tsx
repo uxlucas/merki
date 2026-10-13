@@ -31,6 +31,17 @@ describe('Drawer', () => {
     expect(screen.getByRole('tabpanel').textContent).toContain('Inbox');
   });
 
+  it('shows the icon in a toolbar, never as a search field\'s icon', () => {
+    setup();
+    fireEvent.click(screen.getAllByRole('tab')[2]);
+    const panel = screen.getByRole('tabpanel');
+    expect(panel.textContent).not.toContain('Search or type');
+    const tools = panel.querySelectorAll('.ctx-toolbar .ctx-tool');
+    expect(tools).toHaveLength(3);
+    expect(tools[1].classList.contains('is-current')).toBe(true);
+    expect(tools[1].querySelector('svg')?.getAttribute('class')).toContain('merki-calendar');
+  });
+
   it('keeps each tab\'s controls inside its panel, and swatches follow Home and End', () => {
     setup();
     fireEvent.keyDown(screen.getByRole('radio', { name: 'Default' }), { key: 'End' });
