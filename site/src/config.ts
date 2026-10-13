@@ -18,6 +18,6 @@ export const LINKS: {
   github: 'https://github.com/uxlucas/merki',
   license: 'https://github.com/uxlucas/merki/blob/main/LICENSE',
   githubRepo: 'uxlucas/merki',
-  figma: null,
+  figma: 'https://www.figma.com/community/file/1691874322452534179',
   portfolio: 'https://lucaslima.design',
 };

@@ -55,7 +55,7 @@ The components use no hooks or context, so they work as React Server Components.
 
 ## Figma
 
-A Figma library with every icon at 16, 20 and 24 is on the Figma Community (link coming with the 1.0 release). <!-- figma-community-link -->
+A Figma library with every icon at 16, 20 and 24, with light and dark modes, is on the [Figma Community](https://www.figma.com/community/file/1691874322452534179).
 
 ## License
 
