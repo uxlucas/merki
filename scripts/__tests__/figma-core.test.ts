@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { deprecateMissing, ensureIconVariable, ensurePages, gridPosition, syncCategory } from '../figma/core.js';
+import { deprecateMissing, ensureIconVariable, fingerprint, ensurePages, gridPosition, syncCategory } from '../figma/core.js';
 import { createFakeFigma, type FakeFigma } from './fake-figma.js';
 
 let fake: FakeFigma;
@@ -113,5 +113,14 @@ describe('gridPosition', () => {
   it('lays sets out in rows of six', () => {
     expect(gridPosition(0, 6)).toEqual({ x: 40, y: 64 });
     expect(gridPosition(7, 6)).toEqual({ x: 40 + 136, y: 64 + 72 });
+  });
+});
+
+describe('fingerprint', () => {
+  it('is 8 hex chars, stable, and sensitive to a one-character change', () => {
+    const a = fingerprint({ d: 'M2.75 2.75' });
+    expect(a).toMatch(/^[0-9a-f]{8}$/);
+    expect(fingerprint({ d: 'M2.75 2.75' })).toBe(a);
+    expect(fingerprint({ d: 'M2.75 2.5' })).not.toBe(a);
   });
 });

@@ -1,6 +1,7 @@
 import { mkdirSync, readFileSync, realpathSync, rmSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { transformSync } from 'esbuild';
+import { fingerprint } from './figma/core.js';
 import { figmaCategories, type SourceIcon } from './lib/figma-data.js';
 
 const at = (path: string) => fileURLToPath(new URL(path, import.meta.url));
@@ -15,6 +16,8 @@ export interface Script {
   name: string;
   purpose: string;
   code: string;
+  /** Expected fingerprint of the embedded data; null when the script embeds none. */
+  fingerprint: string | null;
 }
 
 export function buildScripts(): Script[] {
@@ -22,7 +25,15 @@ export function buildScripts(): Script[] {
   const order = JSON.parse(readFileSync(at('../icons/_set.json'), 'utf8')) as Record<string, string[]>;
   const categories = figmaCategories(icons, order);
   const core = runtime('./figma/core.ts');
-  const script = (name: string, purpose: string, body: string): Script => ({ name, purpose, code: `${core}\n${body}\n` });
+  const script = (name: string, purpose: string, body: string, expected: string | null = null): Script => ({
+    name,
+    purpose,
+    code: `${core}\n${body}\n`,
+    fingerprint: expected,
+  });
+  /** A script whose payload sits on one `const DATA = ...;` line and whose result carries the payload's fingerprint. */
+  const dataScript = (name: string, purpose: string, data: unknown, call: string): Script =>
+    script(name, purpose, `const DATA = ${JSON.stringify(data)};\nreturn { ...(await ${call}), fingerprint: fingerprint(DATA) };`, fingerprint(data));
 
   return [
     script(
@@ -31,16 +42,18 @@ export function buildScripts(): Script[] {
       'const created = await ensurePages();\nconst variable = await ensureIconVariable();\nreturn { pages: figma.root.children.map((p) => p.name), createdPageIds: created, variableId: variable.id };',
     ),
     ...categories.map((category, index) =>
-      script(
+      dataScript(
         `10-components-${category.id}`,
         `Update or create the ${category.label} component sets on the Components page.`,
-        `const DATA = ${JSON.stringify({ id: category.id, label: category.label, previousLabel: index ? categories[index - 1].label : null, icons: category.icons })};\nreturn await syncCategory(DATA);`,
+        { id: category.id, label: category.label, previousLabel: index ? categories[index - 1].label : null, icons: category.icons },
+        'syncCategory(DATA)',
       ),
     ),
-    script(
+    dataScript(
       '20-deprecated',
       'Move component sets the repo no longer has into the Deprecated section.',
-      `return await deprecateMissing(${JSON.stringify(categories.flatMap((c) => c.icons.map((i) => i.setName)))});`,
+      categories.flatMap((c) => c.icons.map((i) => i.setName)),
+      'deprecateMissing(DATA)',
     ),
   ];
 }
@@ -52,6 +65,6 @@ if (isMain) {
   mkdirSync(out, { recursive: true });
   const scripts = buildScripts();
   for (const s of scripts) writeFileSync(`${out}/${s.name}.js`, s.code);
-  writeFileSync(`${out}/manifest.json`, `${JSON.stringify(scripts.map((s) => ({ file: `${s.name}.js`, purpose: s.purpose, chars: s.code.length })), null, 2)}\n`);
+  writeFileSync(`${out}/manifest.json`, `${JSON.stringify(scripts.map((s) => ({ file: `${s.name}.js`, purpose: s.purpose, chars: s.code.length, fingerprint: s.fingerprint })), null, 2)}\n`);
   console.log(`Wrote ${scripts.length} scripts to figma/out (largest ${Math.max(...scripts.map((s) => s.code.length))} chars).`);
 }

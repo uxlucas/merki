@@ -228,3 +228,14 @@ export function text(chars: string, font: any, size: number, color: string): any
   node.fills = [{ type: 'SOLID', color: hex(color) }];
   return node;
 }
+
+/** FNV-1a (32-bit) of the JSON text, as 8 hex digits. Scripts return it so a copy slip in their data shows up. */
+export function fingerprint(value: unknown): string {
+  const text = JSON.stringify(value);
+  let hash = 0x811c9dc5;
+  for (let i = 0; i < text.length; i += 1) {
+    hash ^= text.charCodeAt(i);
+    hash = Math.imul(hash, 0x01000193) >>> 0;
+  }
+  return hash.toString(16).padStart(8, '0');
+}

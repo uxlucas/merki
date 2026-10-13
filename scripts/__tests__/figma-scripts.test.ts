@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { fingerprint } from '../figma/core.js';
 import { buildScripts } from '../figma-scripts.js';
 
 const AsyncFunction = Object.getPrototypeOf(async () => {}).constructor;
@@ -31,8 +32,19 @@ describe('generated Figma scripts', () => {
 
   it('passes the full set list to the deprecation script', () => {
     const dep = scripts.find((s) => s.name === '20-deprecated')!;
-    const names = JSON.parse(dep.code.match(/deprecateMissing\((\[.*\])\)/)![1]) as string[];
+    const names = JSON.parse(dep.code.match(/^const DATA = (\[.*\]);$/m)![1]) as string[];
     expect(names).toHaveLength(157);
     expect(names).toContain('objects/calendar');
+  });
+
+  it('returns a fingerprint of the exact data embedded in each script', () => {
+    const withData = scripts.filter((s) => s.fingerprint !== null);
+    expect(withData.map((s) => s.name)).toContain('20-deprecated');
+    expect(scripts.find((s) => s.name === '00-setup')!.fingerprint).toBeNull();
+    for (const s of withData) {
+      const json = s.code.match(/^const DATA = (.*);$/m)![1];
+      expect(fingerprint(JSON.parse(json)), s.name).toBe(s.fingerprint);
+      expect(s.code, s.name).toContain('fingerprint: fingerprint(DATA)');
+    }
   });
 });
