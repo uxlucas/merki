@@ -28,7 +28,7 @@ Follow the error's `safeToRetryWithoutCanvasRead`. If it is `true`, run the same
 
 ## What a re-sync keeps
 
-A re-sync keeps every component set's and variant's node id, and leaves the drawing of an unchanged icon alone: each variant stores the fingerprint of the SVG it was drawn from (shared plugin data `merki`/`svg`). Checked on 2026-10-13: 157 sets and 471 variants, ids unchanged after a full re-sync. Instances in other files keep working.
+A re-sync keeps every component set's and variant's node id, and leaves the drawing of an unchanged icon alone: each variant stores the drawing version, the `icon` variable's id and the fingerprint of the SVG it was drawn from (shared plugin data `merki`/`svg`). Changing any of the three redraws the variant; bump `DRAW_VERSION` in `scripts/figma/core.ts` when the drawing code changes. The first sync after this was added redraws every variant once, because none has a stored value yet, so that library publish shows every set as changed. After that, unchanged icons report `redrawn: 0`. Checked on 2026-10-13: 157 sets and 471 variants, ids unchanged after a full re-sync. Instances in other files keep working.
 
 Component set descriptions read `React: CalendarIcon`, with no angle brackets: Figma stores them escaped.
 

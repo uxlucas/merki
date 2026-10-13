@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { checkComponents, deprecateMissing, ensureIconVariable, fingerprint, ensurePages, gridPosition, syncCategory } from '../figma/core.js';
+import { DRAW_VERSION, checkComponents, deprecateMissing, ensureIconVariable, fingerprint, ensurePages, gridPosition, syncCategory } from '../figma/core.js';
 import { createFakeFigma, type FakeFigma } from './fake-figma.js';
 
 let fake: FakeFigma;
@@ -19,6 +19,8 @@ const icon = (name: string, svg = '<svg width="16" height="16"><path d="M1 1" st
 });
 const OTHER_SVG = '<svg width="16" height="16"><path d="M2 2" stroke="#000000"/></svg>';
 const componentsPage = () => fake.pages().find((p) => p.name === 'Components')!;
+/** What a variant stores: the drawing version, the icon variable it is bound to, and the svg fingerprint. */
+const stored = async (svg: string) => `${DRAW_VERSION}:${(await ensureIconVariable()).id}:${fingerprint(svg)}`;
 const category = (icons: ReturnType<typeof icon>[], previousLabel: string | null = null) => ({ id: 'objects', label: 'Objects', previousLabel, icons });
 const sets = () => fake.pages().find((p) => p.name === 'Components')!.findAllWithCriteria({ types: ['COMPONENT_SET'] });
 
@@ -83,7 +85,7 @@ describe('syncCategory', () => {
     const again = await syncCategory(category([icon('calendar'), icon('tag')]));
     expect(again).toMatchObject({ sets: 2, created: 0, updated: 2, redrawn: 0, unchanged: 6 });
     expect(sets().map((s) => s.children.map((v) => v.children[0].id))).toEqual(drawings);
-    expect(sets()[0].children[0].getSharedPluginData('merki', 'svg')).toBe(fingerprint(icon('calendar').svg));
+    expect(sets()[0].children[0].getSharedPluginData('merki', 'svg')).toBe(await stored(icon('calendar').svg));
   });
 
   it('redraws only the variants of an icon whose svg changed', async () => {
@@ -92,7 +94,7 @@ describe('syncCategory', () => {
     const result = await syncCategory(category([icon('calendar', OTHER_SVG), icon('tag')]));
     expect(result).toMatchObject({ redrawn: 3, unchanged: 3 });
     expect((sets()[0].children[1].children[0] as any).svg).toContain('M2 2');
-    expect(sets()[0].children[1].getSharedPluginData('merki', 'svg')).toBe(fingerprint(OTHER_SVG));
+    expect(sets()[0].children[1].getSharedPluginData('merki', 'svg')).toBe(await stored(OTHER_SVG));
     expect(sets()[1].children.map((v) => v.children[0].id)).toEqual(tagDrawings);
   });
 
@@ -103,6 +105,40 @@ describe('syncCategory', () => {
     const result = await syncCategory(category([icon('calendar')]));
     expect(result).toMatchObject({ redrawn: 1, unchanged: 2 });
     expect(variant.children).toHaveLength(1);
+  });
+
+  it('redraws everything when the icon variable is recreated', async () => {
+    await syncCategory(category([icon('calendar')]));
+    const [old] = await fake.figma.variables.getLocalVariablesAsync();
+    old.name = 'retired';
+    const result = await syncCategory(category([icon('calendar')]));
+    expect(result).toMatchObject({ redrawn: 3, unchanged: 0 });
+    expect(sets()[0].children[0].children[0].strokes[0].boundVariables.color.id).not.toBe(old.id);
+  });
+
+  it('redraws a variant stored under an older drawing version', async () => {
+    await syncCategory(category([icon('calendar')]));
+    const variant = sets()[0].children[0];
+    variant.setSharedPluginData('merki', 'svg', (await stored(icon('calendar').svg)).replace(`${DRAW_VERSION}:`, `${DRAW_VERSION - 1}:`));
+    expect(await syncCategory(category([icon('calendar')]))).toMatchObject({ redrawn: 1, unchanged: 2 });
+    expect(variant.getSharedPluginData('merki', 'svg')).toBe(await stored(icon('calendar').svg));
+  });
+
+  it('clears the stored value before drawing, so a draw that fails midway is redrawn next run', async () => {
+    await syncCategory(category([icon('calendar')]));
+    const variables = fake.figma.variables;
+    const bind = variables.setBoundVariableForPaint;
+    variables.setBoundVariableForPaint = () => {
+      variables.setBoundVariableForPaint = bind;
+      throw new Error('bind failed');
+    };
+    await expect(syncCategory(category([icon('calendar', OTHER_SVG)]))).rejects.toThrow(/bind failed/);
+    const variant = sets()[0].children[0];
+    expect(variant.children).toHaveLength(1);
+    expect(variant.getSharedPluginData('merki', 'svg')).toBe('');
+    // Back to the first svg: the half-drawn variant must not be taken for it.
+    expect(await syncCategory(category([icon('calendar')]))).toMatchObject({ redrawn: 1, unchanged: 2 });
+    expect((variant.children[0] as any).svg).toContain('M1 1');
   });
 
   it('names a new set before drawing it, so an interrupted run leaves a set the next run repairs', async () => {

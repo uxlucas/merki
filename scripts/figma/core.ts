@@ -10,7 +10,7 @@ const COLLECTION = 'Merki';
 const VARIABLE = 'icon';
 const DEPRECATED = 'Deprecated';
 const GRID = { cols: 6, cellW: 136, cellH: 72, pad: 40, top: 64, gap: 120 };
-/** Shared plugin data on each variant: the fingerprint of the svg it was drawn from. */
+/** Shared plugin data on each variant: `DRAW_VERSION:variableId:svgFingerprint` of the drawing it holds. */
 const PLUGIN_NS = 'merki';
 const SVG_KEY = 'svg';
 
@@ -77,7 +77,14 @@ export function bindPaints(node: any, variable: any): number {
   return nodes.length;
 }
 
-/** Replace a variant's drawing with the 16px SVG rescaled to `size` (strokes scale with it). The component itself stays. */
+/** Version of the drawing algorithm below, stored with each variant's drawing. */
+export const DRAW_VERSION = 1;
+
+/**
+ * Bump DRAW_VERSION whenever this drawing changes (scaling, paints, binding): stored drawings from an older
+ * version are then redrawn on the next sync instead of being kept.
+ *
+ * Replace a variant's drawing with the 16px SVG rescaled to `size` (strokes scale with it). The component itself stays. */
 export function drawInto(component: any, svg: string, size: number, variable: any): void {
   for (const child of [...component.children]) child.remove();
   const art = figma.createNodeFromSvg(svg);
@@ -112,8 +119,8 @@ function emptyVariant(size: number): any {
 
 /**
  * One icon's set, updated in place. A new set is combined and named before anything is drawn, so a run cut
- * short leaves a set the next run finds by name and finishes. A variant whose stored fingerprint matches its
- * svg keeps its drawing (no change for the library publish, overrides kept).
+ * short leaves a set the next run finds by name and finishes. A variant whose stored value matches (same
+ * DRAW_VERSION, icon variable and svg) keeps its drawing (no change for the library publish, overrides kept).
  */
 export function upsertIconSet(icon: any, sets: Map<string, any>, section: any, variable: any) {
   let set = sets.get(icon.setName);
@@ -125,7 +132,7 @@ export function upsertIconSet(icon: any, sets: Map<string, any>, section: any, v
   } else if (set.parent !== section) section.appendChild(set);
   const variants = new Map<string, any>();
   for (const child of set.children) if (child.type === 'COMPONENT') variants.set(child.name, child);
-  const drawn = fingerprint(icon.svg);
+  const drawn = `${DRAW_VERSION}:${variable.id}:${fingerprint(icon.svg)}`;
   let redrawn = 0;
   for (const size of SIZES) {
     let component = variants.get(`Size=${size}`);
@@ -134,6 +141,8 @@ export function upsertIconSet(icon: any, sets: Map<string, any>, section: any, v
       set.appendChild(component);
     }
     if (component.children.length && component.getSharedPluginData(PLUGIN_NS, SVG_KEY) === drawn) continue;
+    // Cleared first: a draw that fails midway leaves no value, so the next run never skips it.
+    component.setSharedPluginData(PLUGIN_NS, SVG_KEY, '');
     drawInto(component, icon.svg, size, variable);
     component.setSharedPluginData(PLUGIN_NS, SVG_KEY, drawn);
     redrawn += 1;
